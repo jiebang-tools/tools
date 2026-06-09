@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>捷帮 - 免费在线小工具，快速解决问题</title>
+  <meta name="description" content="捷帮提供139+免费在线工具：AI文案生成、计算器、单位换算器、PDF文本提取、数据可视化、文字计数器、图片压缩、JSON格式化、Markdown编辑器等，无需注册即开即用，手机电脑都能用，数据本地处理保护隐私。">
+  <meta name="keywords" content="在线工具,文字计数,图片压缩,在线画板,简繁体转换,JSON格式化,Markdown编辑器,科学计算器,日期计算器,免费工具,文本加密,HTML预览,二维码识别">
+  <link rel="canonical" href="https://www.jiebang.site/">
+  <meta property="og:image" content="https://www.jiebang.site/icon-512.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="捷帮 - 免费在线小工具，快速解决问题">
+  <meta name="twitter:description" content="捷帮提供139+免费在线工具：PDF文本提取、数据可视化、文字计数器、图片压缩、在线画板、JSON格式化、Markdown编辑器等，无需注册，即开即用，支持手机和电脑，程序员开发调试必备。捷帮工具站提供更多免费在线工具。">
+  <meta name="twitter:image" content="https://www.jiebang.site/icon-512.png">
+  <meta property="og:title" content="捷帮 - 免费在线小工具">
+  <meta property="og:description" content="免费在线工具：文字计数器、颜色转换器、二维码生成器、密码生成器、单位换算器，无需注册即开即用。">
+  <meta property="og:url" content="https://www.jiebang.site/">
+  <meta property="og:type" content="website">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#5B5FC7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="捷帮">
+  <meta name="baidu-site-verification" content="codeva-jxz1UNTyGa" />
+  <meta name="google-site-verification" content="_cF6UA4_E8bSU-rkmcv6U3D7UKeuwBvWFIV94beCRB8" />
+  <link rel="stylesheet" href="css/style.css?v=20260608e">
+  <style>
+    /* 子分类标题 */
+    .subcat-header{font-size:0.95rem;font-weight:700;color:var(--primary);margin:20px 0 8px;padding:6px 0 6px 12px;border-left:3px solid var(--primary);background:linear-gradient(90deg,rgba(91,95,199,0.08) 0%,transparent 100%);display:none;letter-spacing:0.5px}
+    .subcat-header:first-child{margin-top:0}
+    [data-mode="category"] .subcat-header{display:block}
+    /* 概览模式隐藏原始卡片 */
+    [data-mode="overview"]>.tool-card{display:none!important}
+    /* 常用工具精选区样式 */
+    .cat-popular{background:linear-gradient(135deg,rgba(91,95,199,0.06) 0%,rgba(232,147,74,0.06) 100%);border-radius:12px;padding:16px 16px 12px;margin-bottom:24px}
+    .cat-popular .cat-section-title{font-size:1.15rem;margin-bottom:10px}
+    .cat-popular .cat-section-grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+    .cat-popular .tool-card{padding:16px 14px;border-color:var(--border)}
+    @media(prefers-color-scheme:dark){.cat-popular{background:linear-gradient(135deg,rgba(91,95,199,0.08) 0%,rgba(232,147,74,0.06) 100%)}}
+    body.dark .cat-popular{background:linear-gradient(135deg,rgba(91,95,199,0.08) 0%,rgba(232,147,74,0.06) 100%)}
+    [data-theme="dark"] .cat-popular{background:linear-gradient(135deg,rgba(91,95,199,0.08) 0%,rgba(232,147,74,0.06) 100%)}
+    [data-theme="dark"] .cat-popular .tool-card{background:var(--bg-white);border-color:var(--border)}
+    [data-theme="dark"] .cat-popular .tool-card h3{color:var(--text)}
+    [data-theme="dark"] .cat-popular .tool-card p{color:var(--text-light)}
+
+    /* 分类概览模式 */
+    .cat-section-title{font-size:1.1rem;font-weight:700;margin:0 0 12px;display:flex;align-items:center;gap:8px;cursor:pointer}
+    .cat-section-title .cat-count{font-size:0.8rem;font-weight:400;color:var(--text-light);background:var(--bg);padding:2px 8px;border-radius:10px}
+    .cat-section-title .cat-more{font-size:0.85rem;font-weight:400;color:var(--primary);margin-left:auto}
+    .cat-section-title:hover .cat-more{text-decoration:underline}
+    /* 收藏星标 */
+    .fav-star{position:absolute;top:6px;right:6px;width:24px;height:24px;background:none;border:none;cursor:pointer;font-size:14px;z-index:2;padding:0;line-height:1;opacity:0;transition:opacity .2s}
+    .tool-card:hover .fav-star,.fav-star.active{opacity:1}
+    .fav-star.active{opacity:1}
+    /* 概览网格 - 每个分类只展示N个 */
+    .cat-section{margin-bottom:20px;grid-column:1/-1}
+    .cat-section-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+    .cat-section-grid .tool-card{display:flex;align-items:center;gap:8px}
+    .cat-section-grid .tool-card .tool-icon{margin-bottom:0;flex-shrink:0}
+    /* 分类导航优化 */
+    .category-nav{flex-wrap:wrap;gap:4px!important}
+    .cat-btn{font-size:0.82rem;padding:6px 12px!important}
+    /* 暗色模式适配 */
+    @media(prefers-color-scheme:dark){
+      .subcat-header{background:linear-gradient(90deg,rgba(91,95,199,0.12) 0%,transparent 100%);color:var(--primary-light);border-left-color:var(--primary-light)}
+      .cat-section-title .cat-count{background:var(--bg);color:var(--text-light)}
+    }
+    body.dark .subcat-header{background:linear-gradient(90deg,rgba(91,95,199,0.12) 0%,transparent 100%);color:var(--primary-light);border-left-color:var(--primary-light)}
+    body.dark .cat-section-title .cat-count{background:var(--bg);color:var(--text-light)}
+    [data-theme="dark"] .cat-section-title .cat-count{background:var(--bg);color:var(--text-light)}
+    [data-theme="dark"] .cat-section-title{color:var(--text)}
+    [data-theme="dark"] .cat-section-title .cat-more{color:var(--primary-light)}
+    [data-theme="dark"] .subcat-header{background:linear-gradient(90deg,rgba(91,95,199,0.12) 0%,transparent 100%);color:var(--primary-light);border-left-color:var(--primary-light)}
+    @media(max-width:640px){
+      .subcat-header{display:none!important}
+      .cat-section{margin-bottom:16px;background:var(--bg-white);border-radius:16px;border:1px solid var(--border);padding:16px 14px 14px;box-shadow:0 1px 4px rgba(0,0,0,0.04);overflow:hidden}
+      .cat-section-title{font-size:1.05rem;font-weight:700;padding-bottom:10px;border-bottom:1px solid var(--border);margin:0 0 12px;display:flex;align-items:center;gap:6px;cursor:pointer}
+      .cat-section-title .cat-count{font-size:0.72rem;font-weight:400;color:var(--text-light);background:var(--bg);padding:2px 8px;border-radius:10px}
+      .cat-section-title .cat-more{font-size:0.82rem;font-weight:500;color:var(--primary);margin-left:auto}
+      .cat-section-grid{grid-template-columns:repeat(2,1fr)!important;gap:10px!important}
+      .cat-section-grid .tool-card{padding:14px 6px 12px;border-radius:12px}
+      .cat-section-grid .tool-card .tool-icon{width:42px;height:42px;font-size:20px;border-radius:12px;margin:0 auto 6px}
+      .cat-section-grid .tool-card h3{font-size:12px}
+      .cat-section-grid .tool-card p{display:none!important}
+      .cat-popular{padding:14px 12px 10px;border-radius:16px}
+      .cat-popular .cat-section-grid{grid-template-columns:repeat(2,1fr)!important;gap:10px!important}
+      .cat-popular .tool-card{padding:14px 6px 12px}
+      .tools-grid .tool-card p{display:none!important}.tools-grid .tool-card{padding:14px 8px 12px}.tools-grid .tool-card .tool-icon{width:40px;height:40px;font-size:20px;margin:0 auto 6px}.tools-grid .tool-card h3{margin-bottom:0}
+      [data-theme="dark"] .cat-section{background:var(--bg-white);border-color:var(--border)}
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "捷帮 - 免费在线工具箱",
+  "url": "https://www.jiebang.site",
+  "description": "捷帮提供139+免费在线工具，涵盖开发工具、文本处理、计算器、换算器、图片工具、日常工具等，无需注册即用。",
+  "publisher": {
+    "@type": "Organization",
+    "name": "捷帮",
+    "url": "https://www.jiebang.site"
+  }
+}
+  </script>
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "捷帮工具站是免费的吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "是的，捷帮所有工具完全免费，无需注册，无使用次数限制，不会在结果上加水印。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "捷帮的在线工具安全吗？会泄露我的数据吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "捷帮所有工具都在你的浏览器本地运行，图片、文本等数据不会上传到任何服务器。你的隐私完全得到保护，即使是证件照、密码等敏感数据也可以放心使用。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "捷帮有哪些在线工具？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "捷帮提供139+个免费在线工具，涵盖开发工具（JSON格式化、Base64编解码、正则测试、时间戳转换等）、文本处理（简繁转换、去重、大小写转换、拼音转换等）、图片工具（压缩、格式转换、加水印、裁剪、拼接等）和日常工具（二维码生成、密码生成、单位换算、倒计时等）。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "使用捷帮需要注册或下载吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "不需要。捷帮所有工具打开浏览器就能用，无需注册账号，无需下载安装任何软件，手机和电脑都可以直接使用。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "手机上可以用捷帮吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "可以。捷帮支持手机浏览器直接访问和使用，页面会自动适配手机屏幕，操作体验和电脑端一样流畅。"
+      }
+    }
+  ]
+}
+  </script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?fe11c4bd67c394bc89ee8f97d6ffa81a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+  <link rel="alternate" hreflang="zh" href="https://www.jiebang.site/">
+  <link rel="alternate" hreflang="en" href="https://www.jiebang.site/en/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiebang.site/">
+<script src="/geo-redirect.js"></script>
+  <script src="/dark-mode.js"></script>
+<script src="/monitor.js"></script>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="site-logo">
+        <span class="logo-icon">捷</span>
+        <span>捷帮</span>
+      </a>
+      <span class="site-slogan"快速帮你解决问题</span>
+      <button id="darkToggle" class="dark-toggle" onclick="toggleDarkMode()" title="切换夜间模式">🌙</button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>免费在线小工具</h1>
+    <p>无需注册，无需下载，打开即用。帮你快速搞定日常工作中的小问题。</p>
+    <div class="search-box">
+      <input type="text" id="tool-search" placeholder="搜索工具，如：JSON、二维码、MD5..." autocomplete="off">
+    </div>
+    <!-- 智能粘贴识别入口 -->
+    <div class="smart-paste-box" id="smartPasteBox">
+      <div class="smart-paste-label">📋 粘贴内容，自动识别跳转对应工具</div>
+      <textarea id="smartPasteInput" placeholder="粘贴任何内容试试：JSON、Base64、URL编码、Hash、时间戳、JWT..." rows="2"></textarea>
+      <div id="smartPasteResult" class="smart-paste-result" style="display:none"></div>
+    </div>
+  </section>
+
+  <!-- Category Nav -->
+  <!-- 导航链接区：桌面显示全部，手机端收进"更多"菜单 -->
+  <div class="guide-nav-bar">
+    <div class="guide-links">
+      <a href="learn/" class="guide-link">📚 教程指南</a>
+      <a href="ai-tools.html" class="guide-link">🤖 AI工具导航</a>
+      <a href="api-docs.html" class="guide-link">🛠️ 开发者API</a>
+    </div>
+    <div class="guide-more-wrap">
+      <button class="guide-more-btn" onclick="document.getElementById('guideMoreMenu').classList.toggle('show')">更多 ▾</button>
+      <div class="guide-more-menu" id="guideMoreMenu">
+        <a href="learn/">📚 教程指南</a>
+        <a href="ai-tools.html">🤖 AI工具导航</a>
+        <a href="api-docs.html">🛠️ 开发者API</a>
+      </div>
+    </div>
+    <a href="en/" onclick="localStorage.setItem('jiebang_lang','en');" class="lang-switch">🌐 EN</a>
+  </div>
+  <nav class="category-nav" id="mainNav">
+    <button class="cat-btn active" data-cat="all">🏠 全部</button>
+    <button class="cat-btn" data-cat="ai">🤖 AI</button>
+    <button class="cat-btn" data-cat="dev">💻 开发</button>
+    <button class="cat-btn" data-cat="text">📝 文本</button>
+    <button class="cat-btn" data-cat="calc">🔢 计算器</button>
+    <button class="cat-btn" data-cat="convert">📐 换算器</button>
+    <button class="cat-btn" data-cat="image">🖼️ 图片</button>
+    <button class="cat-btn" data-cat="daily">🧰 日常</button>
+    <button class="cat-btn" data-cat="fav">⭐ 收藏</button>
+  </nav>
+
+  <!-- Tools Grid -->
+  <section class="tools-section">
+    <div class="tools-grid">
+
+      <a href="tools/ai-copywriting.html" class="tool-card" data-cat="ai" data-keywords="AI文案生成 营销文案 广告语 朋友圈文案 文案创作 AI写作 智能文案">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;">✍️</div>
+        <h3>AI文案生成</h3>
+        <p>AI智能创作营销文案、广告语、爆款标题、高情商回复。</p>
+      </a>
+
+      <a href="tools/ai-naming.html" class="tool-card" data-cat="ai" data-keywords="AI取名 宝宝取名 起名 品牌命名 产品起名 店铺取名 智能起名">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#8b5cf6,#a78bfa);color:#fff;">🏷️</div>
+        <h3>AI取名</h3>
+        <p>AI智能起名，宝宝/品牌/产品/店铺一键生成寓意好名。</p>
+      </a>
+
+      <a href="tools/word-counter.html" class="tool-card" data-cat="text" data-keywords="文字计数 字数统计 字数计算 在线字数统计 论文字数">
+        <div class="tool-icon blue">🔢</div>
+        <h3>文字计数器</h3>
+        <p>快速统计字数、词数、句数、段落数，写论文写文案必备。</p>
+      </a>
+
+      <a href="tools/color-picker.html" class="tool-card" data-cat="daily" data-keywords="颜色转换 HEX RGB HSL 取色 配色">
+        <div class="tool-icon green">🎨</div>
+        <h3>颜色转换器</h3>
+        <p>HEX、RGB、HSL 互转，取色配色一步到位。</p>
+      </a>
+
+      <a href="tools/qrcode-generator.html" class="tool-card" data-cat="daily" data-keywords="二维码 生成 QR码 网址转二维码">
+        <div class="tool-icon yellow">📱</div>
+        <h3>二维码生成器</h3>
+        <p>输入文字或网址，一键生成二维码，支持自定义大小。</p>
+      </a>
+
+      <a href="tools/password-generator.html" class="tool-card" data-cat="daily" data-keywords="密码生成 随机密码 强密码 密码安全">
+        <div class="tool-icon purple">🔐</div>
+        <h3>密码生成器</h3>
+        <p>生成高强度随机密码，自定义长度和字符类型。</p>
+      </a>
+
+      <a href="tools/unit-converter.html" class="tool-card" data-cat="daily" data-keywords="单位换算 长度 重量 温度 面积 转换">
+        <div class="tool-icon cyan">📐</div>
+        <h3>单位换算器</h3>
+        <p>长度、重量、温度等常用单位快速换算。</p>
+      </a>
+
+      <a href="tools/json-formatter.html" class="tool-card" data-cat="dev" data-keywords="JSON 格式化 美化 压缩 验证 解析">
+        <div class="tool-icon orange">{ }</div>
+        <h3>JSON格式化</h3>
+        <p>JSON美化、压缩、验证，支持语法高亮和错误定位。</p>
+      </a>
+
+      <a href="tools/base64.html" class="tool-card" data-cat="dev" data-keywords="Base64 编码 解码 加密 解密">
+        <div class="tool-icon purple">🔐</div>
+        <h3>Base64编解码</h3>
+        <p>Base64编码和解码，一键复制结果。</p>
+      </a>
+
+      <a href="tools/url-encode.html" class="tool-card" data-cat="dev" data-keywords="URL 编码 解码 encode decode encodeURIComponent">
+        <div class="tool-icon blue">🔗</div>
+        <h3>URL编码解码</h3>
+        <p>URL编码和解码，支持encodeURIComponent。</p>
+      </a>
+
+      <a href="tools/regex-tester.html" class="tool-card" data-cat="dev" data-keywords="正则表达式 正则测试 正则匹配 regex regular">
+        <div class="tool-icon red">.*</div>
+        <h3>正则表达式测试</h3>
+        <p>实时匹配高亮，支持g/i/m修饰符。</p>
+      </a>
+
+      <a href="tools/timestamp.html" class="tool-card" data-cat="dev" data-keywords="时间戳 Unix timestamp 转换 北京时间 日期">
+        <div class="tool-icon green">🕐</div>
+        <h3>时间戳转换</h3>
+        <p>Unix时间戳与北京时间互转，实时显示当前时间戳。</p>
+      </a>
+
+      <a href="tools/base-converter.html" class="tool-card" data-cat="dev" data-keywords="进制转换 二进制 八进制 十进制 十六进制 2进制 16进制">
+        <div class="tool-icon cyan">📊</div>
+        <h3>进制转换器</h3>
+        <p>支持2-36进制任意转换，二进制、八进制、十进制、十六进制互转。</p>
+      </a>
+
+      <a href="tools/md5.html" class="tool-card" data-cat="dev" data-keywords="MD5 加密 哈希 hash 散列 32位 16位">
+        <div class="tool-icon red">🔒</div>
+        <h3>MD5加密</h3>
+        <p>计算文本的MD5哈希值，支持32位和16位格式，一键复制。</p>
+      </a>
+
+      <a href="tools/uuid-generator.html" class="tool-card" data-cat="dev" data-keywords="UUID 生成 GUID 唯一ID 随机ID">
+        <div class="tool-icon orange">🎲</div>
+        <h3>UUID生成器</h3>
+        <p>批量生成UUID v4，支持大小写和连字符格式，一键复制。</p>
+      </a>
+
+      <a href="tools/unicode-converter.html" class="tool-card" data-cat="dev" data-keywords="Unicode 编码 转换 中文 转码 \u">
+        <div class="tool-icon green">🌐</div>
+        <h3>Unicode转换</h3>
+        <p>中文与Unicode编码互转，支持\u格式和&#格式。</p>
+      </a>
+
+      <a href="tools/cron-generator.html" class="tool-card" data-cat="dev" data-keywords="Cron 表达式 定时任务 crontab 调度">
+        <div class="tool-icon yellow">⏰</div>
+        <h3>Cron生成器</h3>
+        <p>可视化生成和解析Cron表达式，显示下次执行时间。</p>
+      </a>
+
+      <a href="tools/json-yaml-converter.html" class="tool-card" data-cat="dev" data-keywords="JSON转YAML YAML转JSON JSON YAML转换 格式转换">
+        <div class="tool-icon blue">🔄</div>
+        <h3>JSON↔YAML互转</h3>
+        <p>JSON与YAML自动识别互转</p>
+      </a>
+      <a href="tools/cron-validator.html" class="tool-card" data-cat="dev" data-keywords="Cron表达式 定时任务 crontab Cron验证">
+        <div class="tool-icon blue">⏰</div>
+        <h3>Cron表达式验证</h3>
+        <p>解析Cron含义，显示下次执行时间</p>
+      </a>
+      <a href="tools/json-path.html" class="tool-card" data-cat="dev" data-keywords="JSONPath JSON Path查询 JSON路径 JSON数据提取">
+        <div class="tool-icon purple">🔍</div>
+        <h3>JSON Path查询</h3>
+        <p>JSONPath表达式测试，支持递归查找和条件过滤</p>
+      </a>
+      <a href="tools/chmod-calculator.html" class="tool-card" data-cat="dev" data-keywords="Chmod权限 Linux权限 文件权限 chmod 755 chmod 777 rwx">
+        <div class="tool-icon cyan">🐧</div>
+        <h3>Chmod权限计算器</h3>
+        <p>可视化设置Linux权限，数字与符号双向转换</p>
+      </a>
+      <a href="tools/batch-rename.html" class="tool-card" data-cat="dev" data-keywords="批量重命名 文件重命名 批量改名 添加前缀 添加后缀 序号编号">
+        <div class="tool-icon orange">📁</div>
+        <h3>批量文件重命名</h3>
+        <p>批量添加前缀后缀、序号、查找替换，生成命令</p>
+      </a>
+
+      <a href="tools/drawing-tool.html" class="tool-card" data-cat="image" data-keywords="在线画板 绘画 画图 涂鸦 画画 画笔">
+        <div class="tool-icon green">🖌️</div>
+        <h3>在线画板</h3>
+        <p>在线绘画涂鸦，支持画笔、橡皮擦，可保存为图片。</p>
+      </a>
+
+      <a href="tools/image-compress.html" class="tool-card" data-cat="image" data-keywords="图片压缩 图片减肥 压缩图片 图片大小 缩小图片">
+        <div class="tool-icon red">🗜️</div>
+        <h3>图片压缩</h3>
+        <p>在线压缩图片大小，调节质量，显示压缩前后对比。</p>
+      </a>
+
+      <a href="tools/image-convert.html" class="tool-card" data-cat="image" data-keywords="图片格式转换 PNG转JPG JPG转PNG WebP转换">
+        <div class="tool-icon orange">🔄</div>
+        <h3>图片格式转换</h3>
+        <p>PNG、JPG、WebP格式互转，纯浏览器处理。</p>
+      </a>
+
+      <a href="tools/image-watermark.html" class="tool-card" data-cat="image" data-keywords="图片水印 加水印 文字水印 批量水印">
+        <div class="tool-icon blue">💧</div>
+        <h3>图片加水印</h3>
+        <p>给图片添加文字水印，自定义位置、透明度和大小。</p>
+      </a>
+
+      <a href="tools/image-crop.html" class="tool-card" data-cat="image" data-keywords="图片裁剪 裁剪图片 图片尺寸 调整大小">
+        <div class="tool-icon purple">✂️</div>
+        <h3>图片裁剪</h3>
+        <p>按比例或自定义尺寸裁剪图片，支持常用比例。</p>
+      </a>
+
+      <a href="tools/chinese-convert.html" class="tool-card" data-cat="text" data-keywords="简繁体转换 简体转繁体 繁体转简体 简繁转换">
+        <div class="tool-icon cyan">简⇄繁</div>
+        <h3>简繁体转换</h3>
+        <p>简体繁体互转，自动识别输入语言，输入即转换。</p>
+      </a>
+
+      <a href="tools/text-deduplicate.html" class="tool-card" data-cat="text" data-keywords="文本去重 去除重复行 去重 删除重复行">
+        <div class="tool-icon orange">1️⃣</div>
+        <h3>文本去重</h3>
+        <p>粘贴即去重，自动去除重复行，支持排序和忽略大小写。</p>
+      </a>
+
+      <a href="tools/case-converter.html" class="tool-card" data-cat="text" data-keywords="大小写转换 大写 小写 首字母大写 英文大小写">
+        <div class="tool-icon blue">Aa</div>
+        <h3>大小写转换</h3>
+        <p>英文大小写一键切换，支持5种模式，输入即转换。</p>
+      </a>
+
+      <a href="tools/pinyin.html" class="tool-card" data-cat="text" data-keywords="汉字转拼音 拼音转换 中文转拼音 拼音 带声调">
+        <div class="tool-icon green">拼</div>
+        <h3>汉字转拼音</h3>
+        <p>中文转拼音，支持带声调、无声调、首字母模式。</p>
+      </a>
+
+      <a href="tools/remove-spaces.html" class="tool-card" data-cat="text" data-keywords="去除空行 去除空格 删除空行 清理文本 去除多余空格">
+        <div class="tool-icon red">🧹</div>
+        <h3>去除空行空格</h3>
+        <p>一键清理多余空行和空格，让文本干净整洁。</p>
+      </a>
+
+      <a href="tools/image-merge.html" class="tool-card" data-cat="image" data-keywords="图片拼接 拼接图片 多图拼接 长图拼接 合并图片">
+        <div class="tool-icon cyan">🖼️</div>
+        <h3>图片拼接</h3>
+        <p>横向纵向拼接多张图片，自定义间距和背景色。</p>
+      </a>
+
+      <a href="tools/image-to-base64.html" class="tool-card" data-cat="dev" data-keywords="图片转Base64 Base64图片 Data URI 图片编码">
+        <div class="tool-icon orange">🔢</div>
+        <h3>图片转Base64</h3>
+        <p>图片与Base64互转，支持Data URI格式，一键复制。</p>
+      </a>
+
+      <a href="tools/qrcode-reader.html" class="tool-card" data-cat="image" data-keywords="二维码识别 扫描二维码 识别二维码 二维码解码 QR码解析">
+        <div class="tool-icon green">📷</div>
+        <h3>二维码识别</h3>
+        <p>上传二维码图片自动识别内容，网址可一键打开。</p>
+      </a>
+
+      <a href="tools/html-encode.html" class="tool-card" data-cat="dev" data-keywords="HTML实体编码 HTML转义 HTML编码 HTML解码 XSS &amp; &lt; &gt;">
+        <div class="tool-icon purple">&lt;&gt;</div>
+        <h3>HTML实体编码</h3>
+        <p>HTML特殊字符转义与反转义，防止XSS攻击。</p>
+      </a>
+
+      <a href="tools/html-entity-encoder.html" class="tool-card" data-cat="dev" data-keywords="HTML实体编码 HTML转义 HTML编码 HTML解码 实体转换">
+        <div class="tool-icon blue">🔐</div>
+        <h3>HTML实体编解码</h3>
+        <p>HTML特殊字符编码/解码，支持命名实体和数字实体</p>
+      </a>
+
+      <a href="tools/css-gradient.html" class="tool-card" data-cat="dev" data-keywords="CSS渐变 渐变生成器 CSS3渐变 线性渐变 径向渐变 gradient 配色">
+        <div class="tool-icon blue">🎨</div>
+        <h3>CSS渐变生成器</h3>
+        <p>可视化创建线性/径向渐变，实时预览一键复制CSS。</p>
+      </a>
+
+      <a href="tools/jwt-decoder.html" class="tool-card" data-cat="dev" data-keywords="JWT解析 JWT解码 JWT Token JSON Web Token Token查看">
+        <div class="tool-icon yellow">🔑</div>
+        <h3>JWT解析</h3>
+        <p>可视化查看JWT的Header、Payload和Signature。</p>
+      </a>
+
+      <a href="tools/html-preview.html" class="tool-card" data-cat="dev" data-keywords="HTML预览 HTML编辑器 代码预览 在线HTML 实时预览">
+        <div class="tool-icon green">👁️</div>
+        <h3>HTML预览器</h3>
+        <p>左边写代码右边看效果，学习HTML和调试好帮手。</p>
+      </a>
+
+      <a href="tools/text-diff.html" class="tool-card" data-cat="dev" data-keywords="文本对比 文本比较 文本差异 diff比较 代码对比">
+        <div class="tool-icon red">⚖️</div>
+        <h3>文本对比</h3>
+        <p>比较两段文本差异，高亮显示新增和删除内容。</p>
+      </a>
+
+      <a href="tools/markdown-editor.html" class="tool-card" data-cat="dev" data-keywords="Markdown编辑器 Markdown预览 MD编辑器 Markdown在线 Markdown编写">
+        <div class="tool-icon orange">📝</div>
+        <h3>Markdown编辑器</h3>
+        <p>在线编写Markdown，实时预览渲染效果，工具栏辅助。</p>
+      </a>
+
+      <a href="tools/sql-formatter.html" class="tool-card" data-cat="dev" data-keywords="SQL格式化 SQL美化 SQL压缩 SQL格式 SQL编辑器">
+        <div class="tool-icon cyan">🗄️</div>
+        <h3>SQL格式化</h3>
+        <p>SQL语句美化压缩，关键词大写，一键复制。</p>
+      </a>
+
+      <a href="tools/text-encrypt.html" class="tool-card" data-cat="text" data-keywords="文本加密 AES加密 文本解密 在线加密 密码加密">
+        <div class="tool-icon purple">🛡️</div>
+        <h3>文本加密解密</h3>
+        <p>AES加密保护文本隐私，输入密码即可加密解密。</p>
+      </a>
+
+      <a href="tools/random-string.html" class="tool-card" data-cat="dev" data-keywords="随机字符串 随机生成 随机字符 随机数 生成随机码">
+        <div class="tool-icon yellow">🎲</div>
+        <h3>随机字符串生成</h3>
+        <p>自定义长度和字符类型，批量生成随机字符串。</p>
+      </a>
+
+      <a href="tools/text-replace.html" class="tool-card" data-cat="text" data-keywords="文本替换 查找替换 批量替换 正则替换 文本查找">
+        <div class="tool-icon blue">🔄</div>
+        <h3>文本替换</h3>
+        <p>批量查找替换文本，支持正则表达式，实时预览。</p>
+      </a>
+
+      <a href="tools/text-sort.html" class="tool-card" data-cat="text" data-keywords="文本排序 行排序 升序排序 降序排序 随机排序 文本整理">
+        <div class="tool-icon orange">📊</div>
+        <h3>文本排序</h3>
+        <p>多种排序方式：升序、降序、随机、按长度，支持去重。</p>
+      </a>
+
+      <a href="tools/char-frequency.html" class="tool-card" data-cat="text" data-keywords="字符频率 字符统计 频率统计 文本分析 字频统计">
+        <div class="tool-icon green">📈</div>
+        <h3>字符频率统计</h3>
+        <p>统计每个字符出现次数和占比，可视化图表展示。</p>
+      </a>
+
+      <a href="tools/date-calculator.html" class="tool-card" data-cat="daily" data-keywords="日期计算 天数计算 日期间隔 日期推算 相差几天 日期加减">
+        <div class="tool-icon red">📅</div>
+        <h3>日期计算器</h3>
+        <p>计算日期间隔天数，日期加减推算，详细年月日。</p>
+      </a>
+
+      <a href="tools/calculator.html" class="tool-card" data-cat="daily" data-keywords="计算器 科学计算器 在线计算 数学计算 函数计算">
+        <div class="tool-icon cyan">🧮</div>
+        <h3>科学计算器</h3>
+        <p>基础运算+科学函数，sin/cos/log/幂运算，支持键盘。</p>
+      </a>
+
+      <a href="tools/countdown.html" class="tool-card" data-cat="daily" data-keywords="倒计时 倒计时器 在线计时 秒表 计时器 番茄钟">
+        <div class="tool-icon purple">⏱️</div>
+        <h3>倒计时器</h3>
+        <p>倒计时+秒表双模式，预设快捷按钮，到时提醒。</p>
+      </a>
+
+      <a href="tools/world-clock.html" class="tool-card" data-cat="daily" data-keywords="世界时钟 全球时间 时区对照 城市时间 国际时间 时差">
+        <div class="tool-icon blue">🌍</div>
+        <h3>世界时钟</h3>
+        <p>查看全球主要城市当前时间，实时刷新时差对照。</p>
+      </a>
+
+      <a href="tools/timezone-converter.html" class="tool-card" data-cat="daily" data-keywords="时区转换 世界时间 时区查询 国际时间">
+        <div class="tool-icon green">🌍</div>
+        <h3>时区转换器</h3>
+        <p>全球300+城市时区转换</p>
+      </a>
+
+      <a href="tools/number-to-chinese.html" class="tool-card" data-cat="text" data-keywords="数字转中文 中文大写 金额大写 大写金额 壹贰叁肆伍">
+        <div class="tool-icon yellow">壹</div>
+        <h3>数字转中文大写</h3>
+        <p>数字转中文大写，金额模式带元角分，财务必备。</p>
+      </a>
+
+      <a href="tools/hash-calculator.html" class="tool-card" data-cat="dev" data-keywords="Hash计算 SHA256 SHA1 MD5 哈希值 散列值">
+        <div class="tool-icon red">#️⃣</div>
+        <h3>Hash计算</h3>
+        <p>同时计算MD5/SHA-1/SHA-256/SHA-512哈希值。</p>
+      </a>
+
+      <a href="tools/csv-to-json.html" class="tool-card" data-cat="dev" data-keywords="CSV转JSON CSV转换 CSV解析 表格转JSON CSV to JSON">
+        <div class="tool-icon green">📋</div>
+        <h3>CSV转JSON</h3>
+        <p>CSV数据转JSON格式，支持自定义分隔符和表头。</p>
+      </a>
+
+      <a href="tools/json-to-csv.html" class="tool-card" data-cat="dev" data-keywords="JSON转CSV JSON转换 JSON to CSV 导出CSV JSON表格">
+        <div class="tool-icon orange">📄</div>
+        <h3>JSON转CSV</h3>
+        <p>JSON数组转CSV表格，方便导入Excel，支持下载。</p>
+      </a>
+
+      <a href="tools/color-palette.html" class="tool-card" data-cat="daily" data-keywords="配色方案 颜色搭配 配色生成 互补色 类似色 调色板">
+        <div class="tool-icon purple">🎨</div>
+        <h3>颜色方案生成</h3>
+        <p>基于主色生成和谐配色，互补色/类似色/三角色。</p>
+      </a>
+
+      <a href="tools/file-size-converter.html" class="tool-card" data-cat="daily" data-keywords="文件大小转换 存储单位换算 KB转MB MB转GB 字节转换">
+        <div class="tool-icon cyan">💾</div>
+        <h3>文件大小转换</h3>
+        <p>B/KB/MB/GB/TB互转，支持1024和1000两种标准。</p>
+      </a>
+
+      <a href="tools/pdf-extract.html" class="tool-card" data-cat="daily" data-keywords="PDF提取 PDF转文字 PDF文本 提取PDF内容 PDF阅读 PDF解析">
+        <div class="tool-icon red">📄</div>
+        <h3>PDF文本提取</h3>
+        <p>上传PDF自动提取文字，纯浏览器处理保护隐私。</p>
+      </a>
+
+      <a href="tools/pdf-toolkit.html" class="tool-card" data-cat="daily" data-keywords="PDF合并 PDF拆分 PDF旋转 合并PDF 拆分PDF 旋转PDF PDF工具 PDF处理">
+        <div class="tool-icon purple">📑</div>
+        <h3>PDF工具箱</h3>
+        <p>合并、拆分、旋转、提取页面，纯浏览器处理免上传。</p>
+      </a>
+
+      <a href="tools/data-chart.html" class="tool-card" data-cat="daily" data-keywords="数据可视化 图表生成 柱状图 折线图 饼图 数据图表 在线图表">
+        <div class="tool-icon green">📊</div>
+        <h3>数据可视化图表</h3>
+        <p>粘贴数据一键生成柱状图/折线图/饼图，可下载图片。</p>
+      </a>
+
+      <a href="tools/bmi-calculator.html" class="tool-card" data-cat="daily" data-keywords="BMI计算器 BMI指数 身体质量指数 体重计算 健康计算">
+        <div class="tool-icon" style="background:#e0f2fe;color:#0369a1;">⚖️</div>
+        <h3>BMI计算器</h3>
+        <p>输入身高体重计算BMI，判断体重是否正常。</p>
+      </a>
+
+      <a href="tools/loan-calculator.html" class="tool-card" data-cat="daily" data-keywords="贷款计算器 房贷计算器 车贷计算器 月供计算 等额本息 等额本金">
+        <div class="tool-icon" style="background:#fef3c7;color:#92400e;">🏦</div>
+        <h3>贷款计算器</h3>
+        <p>房贷车贷月供计算，支持等额本息和等额本金。</p>
+      </a>
+
+      <a href="tools/color-converter.html" class="tool-card" data-cat="dev" data-keywords="颜色转换 HEX转RGB RGB转HSL 颜色格式 颜色代码转换">
+        <div class="tool-icon" style="background:#fce7f3;color:#be185d;">🎨</div>
+        <h3>颜色格式转换</h3>
+        <p>HEX/RGB/HSL颜色值互转，实时预览颜色。</p>
+      </a>
+
+      <a href="tools/yaml-formatter.html" class="tool-card" data-cat="dev" data-keywords="YAML格式化 YAML转JSON YAML解析 YAML验证">
+        <div class="tool-icon blue">📄</div>
+        <h3>YAML格式化</h3>
+        <p>YAML转JSON，格式化验证，开发者必备。</p>
+      </a>
+
+      <a href="tools/xml-formatter.html" class="tool-card" data-cat="dev" data-keywords="XML格式化 XML美化 XML压缩 XML验证">
+        <div class="tool-icon blue">📋</div>
+        <h3>XML格式化</h3>
+        <p>XML美化、压缩、验证，一键格式化。</p>
+      </a>
+
+      <a href="tools/css-formatter.html" class="tool-card" data-cat="dev" data-keywords="CSS格式化 CSS美化 CSS压缩 CSS代码格式化">
+        <div class="tool-icon blue">🎯</div>
+        <h3>CSS格式化</h3>
+        <p>CSS代码美化、压缩，前端开发者必备。</p>
+      </a>
+
+      <a href="tools/js-formatter.html" class="tool-card" data-cat="dev" data-keywords="JS格式化 JavaScript美化 JS压缩 JS代码格式化">
+        <div class="tool-icon blue">⚡</div>
+        <h3>JS格式化</h3>
+        <p>JavaScript代码美化、压缩，调试必备。</p>
+      </a>
+
+      <a href="tools/http-status-codes.html" class="tool-card" data-cat="dev" data-keywords="HTTP状态码 HTTP状态码查询 HTTP代码大全 200 404 500">
+        <div class="tool-icon blue">🔍</div>
+        <h3>HTTP状态码查询</h3>
+        <p>1xx-5xx状态码大全，搜索查询秒出结果。</p>
+      </a>
+
+      <a href="tools/user-agent-parser.html" class="tool-card" data-cat="dev" data-keywords="User-Agent解析 UA检测 浏览器识别 设备信息">
+        <div class="tool-icon blue">🖥️</div>
+        <h3>User-Agent解析</h3>
+        <p>识别浏览器、操作系统、设备类型等信息。</p>
+      </a>
+
+      <a href="tools/keyboard-code.html" class="tool-card" data-cat="dev" data-keywords="键盘按键码 KeyCode keyCode查询 键盘码表 JS keyCode">
+        <div class="tool-icon blue">⌨️</div>
+        <h3>键盘按键码查询</h3>
+        <p>按下任意键显示keyCode等信息，前端开发参考。</p>
+      </a>
+
+      <a href="tools/meta-tag-extractor.html" class="tool-card" data-cat="dev" data-keywords="Meta信息提取 网页标题提取 SEO分析 Meta标签">
+        <div class="tool-icon blue">🏷️</div>
+        <h3>网页Meta提取</h3>
+        <p>提取网页标题、描述、关键词等元信息。</p>
+      </a>
+
+      <a href="tools/morse-code.html" class="tool-card" data-cat="text" data-keywords="摩尔斯电码 摩斯密码 Morse编码 Morse解码 电码转换">
+        <div class="tool-icon" style="background:#ede9fe;color:#6d28d9;">📡</div>
+        <h3>摩尔斯电码</h3>
+        <p>文字与摩尔斯码互转，支持播放声音。</p>
+      </a>
+
+      <a href="tools/text-to-speech.html" class="tool-card" data-cat="text" data-keywords="文字转语音 TTS 在线朗读 语音合成 文字朗读">
+        <div class="tool-icon" style="background:#fce7f3;color:#be185d;">🔊</div>
+        <h3>文字转语音</h3>
+        <p>浏览器TTS朗读文字，支持语速音调调节。</p>
+      </a>
+
+      <a href="tools/forbidden-word-checker.html" class="tool-card" data-cat="text" data-keywords="敏感词终结者 禁止词检测 敏感词检测 小红书违禁词 抖音敏感词 内容审核 违规词检测">
+        <div class="tool-icon" style="background:#fee2e2;color:#dc2626;">🚫</div>
+        <h3>敏感词终结者</h3>
+        <p>检测小红书/抖音敏感词，内容创作者必备。</p>
+      </a>
+
+      <a href="tools/text-translation.html" class="tool-card" data-cat="text" data-keywords="文本翻译 在线翻译 免费翻译 多语言翻译 中英翻译">
+        <div class="tool-icon" style="background:#dbeafe;color:#1d4ed8;">🌐</div>
+        <h3>文本翻译</h3>
+        <p>中英日韩等14种语言互译，免费无需注册。</p>
+      </a>
+
+      <a href="tools/image-stitch.html" class="tool-card" data-cat="image" data-keywords="图片拼接 长图拼接 多图拼接 在线拼图 图片合并">
+        <div class="tool-icon green">🖼️</div>
+        <h3>图片拼接</h3>
+        <p>多张图片横向/纵向拼接成长图，一键下载。</p>
+      </a>
+
+      <a href="tools/image-bg-remove.html" class="tool-card" data-cat="image" data-keywords="图片去背景 抠图 去背景 智能抠图 在线抠图">
+        <div class="tool-icon green">✂️</div>
+        <h3>图片去背景</h3>
+        <p>AI智能抠图，一键去除图片背景。</p>
+      </a>
+
+      <a href="tools/screen-detector.html" class="tool-card" data-cat="dev" data-keywords="屏幕检测 屏幕分辨率 显示器信息 DPR检测 设备像素比">
+        <div class="tool-icon blue">📱</div>
+        <h3>屏幕信息检测</h3>
+        <p>检测分辨率、DPR、色深等屏幕信息。</p>
+      </a>
+
+
+      <a href="tools/overtime-calculator.html" class="tool-card" data-cat="daily" data-keywords="加班费计算器 加班工资计算 法定节假日加班 周末加班 工作日加班">
+        <div class="tool-icon red">⏰</div>
+        <h3>加班费计算器</h3>
+        <p>按劳动法计算1.5/2/3倍加班工资，支持多条记录。</p>
+      </a>
+      <a href="tools/salary-calculator.html" class="tool-card" data-cat="daily" data-keywords="薪资到手计算器 税后工资计算 五险一金计算 个税计算 实发工资">
+        <div class="tool-icon green">💰</div>
+        <h3>薪资到手计算器</h3>
+        <p>输入月薪自动扣除五险一金和个税，看实际到手多少。</p>
+      </a>
+      <a href="tools/street-stall-pricing.html" class="tool-card" data-cat="daily" data-keywords="摆摊定价 摆摊利润计算 地摊定价 摆摊成本 夜市定价">
+        <div class="tool-icon orange">🏪</div>
+        <h3>摆摊定价神器</h3>
+        <p>输入成本和目标利润，一键算出合理售价和利润率。</p>
+      </a>
+      <a href="tools/copybook-generator.html" class="tool-card" data-cat="text" data-keywords="字帖生成器 书法字帖 田字格练字 米字格字帖 在线字帖">
+        <div class="tool-icon purple">✍️</div>
+        <h3>字帖生成器</h3>
+        <p>输入文字生成田字格/米字格字帖，打印即练字。</p>
+      </a>
+
+      <a href="tools/fancy-text-generator.html" class="tool-card" data-cat="text" data-keywords="花式字体生成器 特殊字体 个性字体 艺术字 花样字 字体转换 花体字">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#f472b6,#ec4899);color:#fff;">✨</div>
+        <h3>花式字体生成器</h3>
+        <p>15+种花式字体，一键复制到社交媒体。</p>
+      </a>
+
+      <a href="tools/lorem-ipsum-generator.html" class="tool-card" data-cat="text" data-keywords="Lorem Ipsum生成器 占位文本 假文生成器 填充文本 网页设计 排版">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#a78bfa,#7c3aed);color:#fff;">📝</div>
+        <h3>Lorem Ipsum生成器</h3>
+        <p>生成占位文本，自定义段落/句子/单词数。</p>
+      </a>
+
+      <!-- 新增计算器工具 -->
+      <a href="tools/age-calculator.html" class="tool-card" data-cat="daily" data-keywords="年龄计算器 年龄 生日计算 周岁计算 精确年龄 出生日期">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;">🎂</div>
+        <h3>年龄计算器</h3>
+        <p>输入生日精确计算年龄，显示下次生日倒计时。</p>
+      </a>
+
+      <a href="tools/percentage-calculator.html" class="tool-card" data-cat="daily" data-keywords="百分比计算器 百分比 百分率 增长率 打折计算 比例计算">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#10b981,#059669);color:#fff;">%</div>
+        <h3>百分比计算器</h3>
+        <p>X是Y的百分之几、X的Y%是多少，增长率计算。</p>
+      </a>
+
+      <a href="tools/mortgage-calculator.html" class="tool-card" data-cat="daily" data-keywords="房贷计算器 贷款计算器 月供计算 房贷 商业贷款 还款计划">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;">🏠</div>
+        <h3>房贷计算器</h3>
+        <p>等额本息/等额本金，计算月供和还款计划。</p>
+      </a>
+
+      <a href="tools/discount-calculator.html" class="tool-card" data-cat="daily" data-keywords="折扣计算器 打折计算 优惠计算 满减计算 促销计算 省钱">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#ec4899,#db2777);color:#fff;">🏷️</div>
+        <h3>折扣计算器</h3>
+        <p>计算折后价，支持多级折扣叠加。</p>
+      </a>
+
+      <a href="tools/tip-calculator.html" class="tool-card" data-cat="daily" data-keywords="小费计算器 AA计算 分摊计算 聚餐计算 服务费计算">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#14b8a6,#0d9488);color:#fff;">💵</div>
+        <h3>小费计算器</h3>
+        <p>输入账单金额和小费比例，计算每人应付。</p>
+      </a>
+
+      <a href="tools/compound-interest-calculator.html" class="tool-card" data-cat="daily" data-keywords="复利计算器 复利 投资计算 理财计算 存款利息 年化收益">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed);color:#fff;">📈</div>
+        <h3>复利计算器</h3>
+        <p>计算复利收益，支持按月/按年复利。</p>
+      </a>
+
+      <a href="tools/bmr-calculator.html" class="tool-card" data-cat="daily" data-keywords="BMR计算器 基础代谢率 代谢计算 卡路里需求 基础代谢">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#06b6d4,#0891b2);color:#fff;">🔥</div>
+        <h3>BMR计算器</h3>
+        <p>计算基础代谢率，了解身体最低热量需求。</p>
+      </a>
+
+      <a href="tools/calorie-calculator.html" class="tool-card" data-cat="daily" data-keywords="卡路里计算器 热量计算 每日所需热量 减肥计算 健身饮食">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#f97316,#ea580c);color:#fff;">🍽️</div>
+        <h3>卡路里计算器</h3>
+        <p>根据活动量计算每日所需热量。</p>
+      </a>
+
+      <a href="tools/body-fat-calculator.html" class="tool-card" data-cat="daily" data-keywords="体脂率计算器 体脂 体脂率 脂肪率 身体脂肪 减肥 健身">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#84cc16,#65a30d);color:#fff;">💪</div>
+        <h3>体脂率计算器</h3>
+        <p>使用美国海军体脂公式计算体脂率。</p>
+      </a>
+
+      <a href="tools/ideal-weight-calculator.html" class="tool-card" data-cat="daily" data-keywords="理想体重计算器 标准体重 健康体重 目标体重 减肥目标">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#a855f7,#9333ea);color:#fff;">⚖️</div>
+        <h3>理想体重计算器</h3>
+        <p>计算理想体重范围，设定健康目标。</p>
+      </a>
+
+      <!-- 新增加换算工具 -->
+      <a href="tools/currency-converter.html" class="tool-card" data-cat="daily" data-keywords="货币换算器 汇率转换 美元换算 外汇计算 币种转换">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;">💱</div>
+        <h3>货币换算器</h3>
+        <p>支持美元、欧元、人民币等主流货币换算。</p>
+      </a>
+
+      <a href="tools/temperature-converter.html" class="tool-card" data-cat="daily" data-keywords="温度换算器 摄氏度转换 华氏度转换 开尔文 温度单位">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;">🌡️</div>
+        <h3>温度换算器</h3>
+        <p>摄氏、华氏、开尔文三种温度单位互转。</p>
+      </a>
+
+      <a href="tools/length-converter.html" class="tool-card" data-cat="daily" data-keywords="长度换算器 单位换算 米转换英尺 英寸厘米换算 公里英里">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#64748b,#475569);color:#fff;">📏</div>
+        <h3>长度换算器</h3>
+        <p>米、英尺、英寸、厘米等长度单位互转。</p>
+      </a>
+
+      <a href="tools/weight-converter.html" class="tool-card" data-cat="daily" data-keywords="重量换算器 千克磅转换 磅盎司 克换算 体重单位">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#78716c,#57534e);color:#fff;">⚖️</div>
+        <h3>重量换算器</h3>
+        <p>千克、磅、盎司、克等重量单位互转。</p>
+      </a>
+
+      <a href="tools/area-converter.html" class="tool-card" data-cat="daily" data-keywords="面积换算器 平方米平方英尺 英亩转换 公顷换算 房产面积">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);color:#fff;">🏗️</div>
+        <h3>面积换算器</h3>
+        <p>平方米、平方英尺、英亩等面积单位互转。</p>
+      </a>
+
+      <a href="tools/volume-converter.html" class="tool-card" data-cat="daily" data-keywords="体积换算器 升加仑转换 毫升换算 立方米 液体单位">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#14b8a6,#0d9488);color:#fff;">🧪</div>
+        <h3>体积换算器</h3>
+        <p>升、加仑、毫升等体积单位互转。</p>
+      </a>
+
+      <a href="tools/speed-converter.html" class="tool-card" data-cat="daily" data-keywords="速度换算器 公里每小时转换 迈速转换 米每秒 节速">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#f43f5e,#e11d48);color:#fff;">🚀</div>
+        <h3>速度换算器</h3>
+        <p>km/h、mph、m/s等速度单位互转。</p>
+      </a>
+
+      <a href="tools/data-storage-converter.html" class="tool-card" data-cat="daily" data-keywords="数据存储换算器 字节换算 KB MB GB转换 文件大小 流量换算">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#6366f1,#4f46e5);color:#fff;">💾</div>
+        <h3>数据存储换算器</h3>
+        <p>字节、KB、MB、GB等数据单位互转。</p>
+      </a>
+
+      <a href="tools/code-screenshot.html" class="tool-card" data-cat="dev" data-keywords="代码截图 代码美化 代码图片 Code Screenshot 代码分享 语法高亮">
+        <div class="tool-icon cyan">📸</div>
+        <h3>代码截图</h3>
+        <p>代码变美图，6种主题+3种窗口样式，一键导出高清PNG。</p>
+      </a>
+
+      <a href="tools/exif-cleaner.html" class="tool-card" data-cat="image" data-keywords="EXIF清除 EXIF查看 隐私清除 照片定位清除 图片元数据 EXIF信息">
+        <div class="tool-icon red">🛡️</div>
+        <h3>EXIF信息清除</h3>
+        <p>查看照片隐藏信息，一键清除GPS定位等隐私数据。</p>
+      </a>
+
+      <a href="tools/social-image-resizer.html" class="tool-card" data-cat="image" data-keywords="社交图片裁剪 小红书封面 抖音封面 微信头像 Instagram尺寸 YouTube缩略图">
+        <div class="tool-icon orange">📐</div>
+        <h3>社交平台图片裁剪</h3>
+        <p>一键裁剪小红书/抖音/微信/Ins等平台封面尺寸。</p>
+      </a>
+
+      <a href="tools/api-tester.html" class="tool-card" data-cat="dev" data-keywords="API调试 API测试 HTTP请求 接口测试 REST API GET POST">
+        <div class="tool-icon green">🔌</div>
+        <h3>API调试工具</h3>
+        <p>在线测试API接口，支持GET/POST/PUT/DELETE，实时查看响应。</p>
+      </a>
+
+      <a href="tools/agent-task-board.html" class="tool-card" data-cat="dev" data-keywords="AI Agent任务看板 Agent协作 多智能体管理 AI任务分配 任务看板 看板工具">
+        <div class="tool-icon purple">🤖</div>
+        <h3>AI Agent任务看板</h3>
+        <p>可视化多智能体任务管理看板，创建、分配、追踪Agent协作任务。</p>
+      </a>
+
+      <a href="tools/watermark-remover.html" class="tool-card" data-cat="image" data-keywords="去水印 视频去水印 抖音水印去除 快手水印去除 壁纸去水印 视频片尾裁剪 图片水印清除">
+        <div class="tool-icon red">🧹</div>
+        <h3>图片视频水印清除</h3>
+        <p>一键去除抖音快手水印，裁掉片尾品牌，支持图片和视频。</p>
+      </a>
+
+      <a href="tools/stopwatch.html" class="tool-card" data-cat="game" data-keywords="在线秒表 计时器 跑步计时 毫秒计时 圈数记录">
+        <div class="tool-icon blue">⏱️</div>
+        <h3>在线秒表</h3>
+        <p>精确到毫秒的计时器，支持记录圈数</p>
+      </a>
+      <a href="tools/pomodoro.html" class="tool-card" data-cat="game" data-keywords="番茄钟 番茄工作法 专注力 时间管理 专注计时">
+        <div class="tool-icon red">🍅</div>
+        <h3>番茄钟</h3>
+        <p>25分钟工作+5分钟休息，提升专注力</p>
+      </a>
+      <a href="tools/dice-roller.html" class="tool-card" data-cat="game" data-keywords="掷骰子 骰子 随机数 桌游骰子 概率">
+        <div class="tool-icon green">🎲</div>
+        <h3>掷骰子</h3>
+        <p>支持1-6个骰子，动画效果+统计</p>
+      </a>
+      <a href="tools/coin-flip.html" class="tool-card" data-cat="game" data-keywords="抛硬币 翻硬币 正反面 随机决定">
+        <div class="tool-icon yellow">🪙</div>
+        <h3>抛硬币</h3>
+        <p>3D翻转动画，正反面统计</p>
+      </a>
+      <a href="tools/reaction-test.html" class="tool-card" data-cat="game" data-keywords="反应测试 反应速度 反应时间 手速测试">
+        <div class="tool-icon purple">⚡</div>
+        <h3>反应速度测试</h3>
+        <p>5轮测试取平均，精确到毫秒</p>
+      </a>
+      <a href="tools/typing-test.html" class="tool-card" data-cat="game" data-keywords="打字测试 打字速度 WPM 键盘练习 打字准确率">
+        <div class="tool-icon blue">⌨️</div>
+        <h3>打字速度测试</h3>
+        <p>30秒/60秒模式，显示WPM和准确率</p>
+      </a>
+      <a href="tools/minesweeper.html" class="tool-card" data-cat="game" data-keywords="扫雷 地雷 经典游戏 逻辑游戏 益智">
+        <div class="tool-icon green">💣</div>
+        <h3>扫雷游戏</h3>
+        <p>经典扫雷，9×9/16×16两种难度</p>
+      </a>
+      <a href="tools/2048.html" class="tool-card" data-cat="game" data-keywords="2048 合并游戏 数字游戏 益智游戏 滑动">
+        <div class="tool-icon orange">🔢</div>
+        <h3>2048游戏</h3>
+        <p>经典2048数字合并，键盘+触摸支持</p>
+      </a>
+
+      <a href="tools/random-number-generator.html" class="tool-card" data-cat="game" data-keywords="随机数生成器 随机数 随机抽取 抽签 随机选号 不重复">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff;">🎯</div>
+        <h3>随机数生成器</h3>
+        <p>自定义范围生成随机数，支持不重复模式。</p>
+      </a>
+
+      <a href="tools/love-calculator.html" class="tool-card" data-cat="game" data-keywords="爱情计算器 缘分测试 配对测试 爱情指数 缘分计算器">
+        <div class="tool-icon" style="background:linear-gradient(135deg,#f43f5e,#e11d48);color:#fff;">💕</div>
+        <h3>爱情计算器</h3>
+        <p>输入两个名字测试缘分指数，趣味分享。</p>
+      </a>
+
+      <div class="no-result" id="no-result" style="display:none;">
+        <p>没有找到相关工具 😅</p>
+        <p class="no-result-hint">试试其他关键词，如：JSON、二维码、MD5</p>
+      </div>
+
+    </div>
+  </section>
+
+    <!-- Share Section -->
+  <section class="share-section">
+    <h2 class="section-title">分享给朋友</h2>
+    <p>扫一扫二维码，直接访问捷帮工具站</p>
+    <div class="share-qr">
+      <div id="site-qrcode"></div>
+      <p class="share-tip">长按或截图保存分享</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>&copy; 2026 捷帮 JieBang.tools — 免费在线工具站</p>
+      <div class="footer-links">
+        <a href="about.html">关于我们</a>
+        <span>|</span>
+        <a href="privacy.html">隐私政策</a>
+        <span>|</span>
+        <a href="disclaimer.html">免责声明</a>
+        <span>|</span>
+        <a href="contact.html">联系我们</a>
+        <span>|</span>
+        <a href="learn/">教程指南</a>
+        <span>|</span>
+        <a href="api-docs.html">开发者API</a>
+        <span>|</span>
+        <a href="https://www.jiebang.site/sitemap.xml">网站地图</a>
+        <span>|</span>
+        <a href="en/" onclick="localStorage.setItem('jiebang_lang','en');">English</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script>
+    new QRCode(document.getElementById("site-qrcode"), {
+      text: "https://www.jiebang.site",
+      width: 160,
+      height: 160,
+      colorDark: "#333333",
+      colorLight: "#ffffff",
+      correctLevel: QRCode.CorrectLevel.M
+    });
+
+    // 收藏本站提示
+    (function() {
+      var shown = sessionStorage.getItem('bookmark_shown');
+      if (shown) return;
+
+      var ua = navigator.userAgent;
+      var isMobile = /iPhone|iPad|iPod|Android/i.test(ua);
+      var isIOS = /iPhone|iPad|iPod/i.test(ua);
+      var isAndroid = /Android/i.test(ua);
+      var isChrome = /Chrome/i.test(ua) && !/\bMQQBrowser\b/i.test(ua) && !/\bUCBrowser\b/i.test(ua) && !/\bBaidu\b/i.test(ua) && !/\bBIDUBrowser\b/i.test(ua);
+
+      var bar = document.createElement('div');
+      bar.id = 'bookmark-bar';
+
+      var content = '';
+      var isQQBrowser = /\bMQQBrowser\b/i.test(ua);
+      var isUCBrowser = /\bUCBrowser\b/i.test(ua);
+      var isBaiduBrowser = /\bBaidu\b/i.test(ua) || /\bBIDUBrowser\b/i.test(ua);
+      var isHuaweiBrowser = /\bHuaweiBrowser\b/i.test(ua);
+      var isSamsungBrowser = /\bSamsungBrowser\b/i.test(ua);
+
+      if (isMobile) {
+        if (isIOS) {
+          content = '<div class="bm-mobile"><div class="bm-text">⭐ 添加捷帮到桌面，像App一样打开</div><div class="bm-steps"><span class="bm-step">① 点底部 <b class="bm-icon">⬆️</b> 分享按钮</span><span class="bm-step">② 选 <b>添加到主屏幕</b></span></div></div>';
+        } else if (isQQBrowser) {
+          content = '<div class="bm-mobile"><div class="bm-text">⭐ 收藏捷帮，下次打开更方便</div><div class="bm-steps"><span class="bm-step">① 点右上角 <b class="bm-icon">⋯</b> 菜单</span><span class="bm-step">② 点 <b>☆收藏该网页</b></span></div><div class="bm-alt">💡 想添加到桌面？先收藏 → 我的收藏 → 长按捷帮 → 发送到桌面（需登录）</div></div>';
+        } else if (isUCBrowser) {
+          content = '<div class="bm-mobile"><div class="bm-text">⭐ 收藏捷帮，下次打开更方便</div><div class="bm-steps"><span class="bm-step">① 点底部 <b class="bm-icon">⋯</b> 菜单</span><span class="bm-step">② 选 <b>收藏书签</b></span></div><div class="bm-alt">💡 想添加到桌面？收藏后→书签管理→长按→发送至桌面</div></div>';
+        } else if (isBaiduBrowser) {
+          content = '<div class="bm-mobile"><div class="bm-text">⭐ 收藏捷帮，下次打开更方便</div><div class="bm-steps"><span class="bm-step">① 点右上角 <b class="bm-icon">⋯</b> 菜单</span><span class="bm-step">② 点 <b>☆收藏该网页</b></span></div><div class="bm-alt">💡 想添加到桌面？先收藏 → 我的收藏 → 长按 → 发送到桌面</div></div>';
+        } else if (isHuaweiBrowser) {
+          content = '<div class="bm-mobile"><div class="bm-text">⭐ 添加捷帮到桌面，像App一样打开</div><div class="bm-steps"><span class="bm-step">① 点右下角 <b class="bm-icon">⋮</b> 菜单</span><span class="bm-step">② 选 <b>添加至桌面</b></span></div></div>';
+        } else if (isChrome) {
+          content = '<div class="bm-mobile"><div class="bm-text">⭐ 添加捷帮到桌面，像App一样打开</div><div class="bm-steps"><span class="bm-step">① 点右上角 <b class="bm-icon">⋮</b> 菜单</span><span class="bm-step">② 选 <b>添加到主屏幕</b></span></div></div>';
+        } else {
+          content = '<div class="bm-mobile"><div class="bm-text">⭐ 收藏捷帮，下次打开更方便</div><div class="bm-steps"><span class="bm-step">① 点浏览器 <b>菜单</b></span><span class="bm-step">② 选 <b>收藏/添加书签</b></span></div><div class="bm-tip">💡 想添加到桌面？推荐用 Chrome 浏览器打开，支持像App一样添加</div></div>';
+        }
+      } else {
+        content = '<span>⭐ 收藏捷帮，下次使用更方便！</span><span class="bm-shortcut">按 <kbd>Ctrl</kbd>+<kbd>D</kbd> 收藏</span>';
+      }
+
+      bar.innerHTML = content + '<button onclick="closeBookmarkBar()" class="bm-close">✕</button>';
+
+      var style = document.createElement('style');
+      style.textContent = '#bookmark-bar{position:fixed;top:0;left:0;right:0;background:#fff;border-bottom:1px solid #E5E7EB;padding:12px 20px;display:flex;align-items:center;justify-content:center;z-index:9999;box-shadow:0 2px 8px rgba(0,0,0,0.08);font-size:14px;animation:slideDown .3s ease;gap:12px;flex-wrap:wrap}@keyframes slideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}.bm-close{background:none;border:none;font-size:18px;cursor:pointer;color:#6B7280;flex-shrink:0;line-height:1;padding:4px}.bm-mobile{text-align:center;width:100%}.bm-text{font-size:14px;margin-bottom:8px}.bm-steps{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}.bm-step{background:rgba(91,95,199,0.08);padding:6px 12px;border-radius:6px;font-size:13px;color:#3F42A8}.bm-icon{font-size:16px}.bm-shortcut{margin-left:8px;color:#6B7280}.bm-shortcut kbd{background:#F3F4F6;border:1px solid #D1D5DB;border-radius:4px;padding:2px 6px;font-size:12px;font-family:inherit}.bm-tip{margin-top:8px;font-size:12px;color:#6B7280}.bm-alt{margin-top:6px;font-size:11px;color:var(--primary);background:rgba(91,95,199,0.1);padding:4px 10px;border-radius:4px;line-height:1.5}';
+      document.head.appendChild(style);
+      document.body.prepend(bar);
+      document.body.style.paddingTop = bar.offsetHeight + 'px';
+
+      sessionStorage.setItem('bookmark_shown', '1');
+    })();
+
+    function closeBookmarkBar() {
+      var bar = document.getElementById('bookmark-bar');
+      if (bar) bar.remove();
+      document.body.style.paddingTop = '0';
+    }
+
+    // 注册 Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js').catch(function(){});
+    }
+
+    // PWA 安装提示
+    (function() {
+      var deferredPrompt = null;
+      var installBar = null;
+
+      // 拦截 beforeinstallprompt 事件
+      window.addEventListener('beforeinstallprompt', function(e) {
+        e.preventDefault();
+        deferredPrompt = e;
+        showInstallBar();
+      });
+
+      function showInstallBar() {
+        if (document.getElementById('pwa-install-bar')) return;
+
+        installBar = document.createElement('div');
+        installBar.id = 'pwa-install-bar';
+        installBar.innerHTML = '<div class="pwa-install-content"><span class="pwa-install-icon">📱</span><span>安装捷帮到桌面，像App一样随时使用！</span><button onclick="installPWA()" class="pwa-install-btn">安装</button><button onclick="dismissInstallBar()" class="pwa-dismiss-btn">✕</button></div>';
+
+        var style = document.createElement('style');
+        style.textContent = '#pwa-install-bar{position:fixed;bottom:0;left:0;right:0;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;padding:12px 16px;z-index:10000;box-shadow:0 -2px 12px rgba(0,0,0,0.15);animation:slideUp .4s ease}.pwa-install-content{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;max-width:600px;margin:0 auto;font-size:14px}.pwa-install-icon{font-size:20px}.pwa-install-btn{background:#fff;color:var(--primary);border:none;padding:8px 20px;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s}.pwa-install-btn:hover{background:#F3F4F6;transform:scale(1.05)}.pwa-dismiss-btn{background:none;border:none;color:rgba(255,255,255,0.7);font-size:16px;cursor:pointer;padding:4px 8px}.pwa-dismiss-btn:hover{color:#fff}@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}';
+        document.head.appendChild(style);
+        document.body.appendChild(installBar);
+      }
+
+      window.installPWA = function() {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(function(choiceResult) {
+          if (choiceResult.outcome === 'accepted') {
+            // 安装成功，隐藏提示
+            dismissInstallBar();
+          }
+          deferredPrompt = null;
+        });
+      };
+
+      window.dismissInstallBar = function() {
+        var bar = document.getElementById('pwa-install-bar');
+        if (bar) bar.remove();
+        localStorage.setItem('pwa_install_dismissed', Date.now().toString());
+      };
+
+      // 检查是否已安装（已安装则不提示）
+      window.addEventListener('appinstalled', function() {
+        dismissInstallBar();
+        deferredPrompt = null;
+      });
+    })();
+
+    // Edge侧边栏模式适配
+    (function() {
+      // 检测是否在侧边栏中运行
+      if (window.matchMedia('(display-mode: window-controls-overlay)').matches || 
+          document.documentElement.dataset.sidebar) {
+        document.body.classList.add('sidebar-mode');
+      }
+
+      // 监听显示模式变化
+      window.matchMedia('(display-mode: window-controls-overlay)').addEventListener('change', function(e) {
+        document.body.classList.toggle('sidebar-mode', e.matches);
+      });
+
+      // 添加侧边栏模式样式
+      var sidebarStyle = document.createElement('style');
+      sidebarStyle.textContent = 'body.sidebar-mode .site-header{padding:8px 12px}body.sidebar-mode .hero{padding:16px 12px}body.sidebar-mode .hero h1{font-size:1.2rem}body.sidebar-mode .hero p{font-size:0.85rem}body.sidebar-mode .share-section{display:none}body.sidebar-mode .site-footer{padding:12px}body.sidebar-mode .category-nav{padding:8px}body.sidebar-mode .tools-grid{grid-template-columns:1fr;gap:8px;padding:8px 12px}body.sidebar-mode .tool-card{padding:10px}body.sidebar-mode .tool-card h3{font-size:0.9rem}body.sidebar-mode .tool-card p{font-size:0.75rem}';
+      document.head.appendChild(sidebarStyle);
+    })();
+
+    // ===== 新版分类导航系统 =====
+    (function(){
+      // 1. 工具重分类映射（把计算器/换算器从daily挪到新分类）
+      var RECLASSIFY = {
+        'tools/calculator.html':'calc','tools/bmi-calculator.html':'calc',
+        'tools/loan-calculator.html':'calc','tools/overtime-calculator.html':'calc',
+        'tools/salary-calculator.html':'calc','tools/street-stall-pricing.html':'calc',
+        'tools/age-calculator.html':'calc','tools/percentage-calculator.html':'calc',
+        'tools/mortgage-calculator.html':'calc','tools/discount-calculator.html':'calc',
+        'tools/tip-calculator.html':'calc','tools/compound-interest-calculator.html':'calc',
+        'tools/bmr-calculator.html':'calc','tools/calorie-calculator.html':'calc',
+        'tools/body-fat-calculator.html':'calc','tools/ideal-weight-calculator.html':'calc',
+        'tools/unit-converter.html':'convert','tools/file-size-converter.html':'convert',
+        'tools/currency-converter.html':'convert','tools/temperature-converter.html':'convert',
+        'tools/length-converter.html':'convert','tools/weight-converter.html':'convert',
+        'tools/area-converter.html':'convert','tools/volume-converter.html':'convert',
+        'tools/speed-converter.html':'convert','tools/data-storage-converter.html':'convert'
+      };
+
+      // 2. 子分类映射
+      var SUBCATS = {
+        'tools/ai-copywriting.html':'AI创作','tools/ai-naming.html':'AI创作',
+        'tools/base64.html':'编码解码','tools/url-encode.html':'编码解码',
+        'tools/html-encode.html':'编码解码','tools/html-entity-encoder.html':'编码解码',
+        'tools/unicode-converter.html':'编码解码','tools/image-to-base64.html':'编码解码',
+        'tools/jwt-decoder.html':'编码解码','tools/uuid-generator.html':'编码解码',
+        'tools/json-formatter.html':'JSON/XML','tools/json-yaml-converter.html':'JSON/XML',
+        'tools/json-path.html':'JSON/XML','tools/csv-to-json.html':'JSON/XML',
+        'tools/json-to-csv.html':'JSON/XML','tools/yaml-formatter.html':'JSON/XML',
+        'tools/xml-formatter.html':'JSON/XML',
+        'tools/css-formatter.html':'代码格式化','tools/js-formatter.html':'代码格式化',
+        'tools/sql-formatter.html':'代码格式化','tools/markdown-editor.html':'代码格式化',
+        'tools/html-preview.html':'代码格式化','tools/code-screenshot.html':'代码格式化',
+        'tools/batch-rename.html':'代码格式化','tools/text-diff.html':'代码格式化',
+        'tools/md5.html':'加密哈希','tools/hash-calculator.html':'加密哈希',
+        'tools/random-string.html':'加密哈希',
+        'tools/regex-tester.html':'正则/转换','tools/timestamp.html':'正则/转换',
+        'tools/base-converter.html':'正则/转换','tools/chmod-calculator.html':'正则/转换',
+        'tools/cron-generator.html':'Cron任务','tools/cron-validator.html':'Cron任务',
+        'tools/css-gradient.html':'Web开发','tools/color-converter.html':'Web开发',
+        'tools/screen-detector.html':'Web开发',
+        'tools/http-status-codes.html':'网络工具','tools/user-agent-parser.html':'网络工具',
+        'tools/keyboard-code.html':'网络工具','tools/meta-tag-extractor.html':'网络工具',
+        'tools/api-tester.html':'网络工具',
+        'tools/word-counter.html':'文本处理','tools/chinese-convert.html':'文本处理',
+        'tools/text-deduplicate.html':'文本处理','tools/case-converter.html':'文本处理',
+        'tools/pinyin.html':'文本处理','tools/remove-spaces.html':'文本处理',
+        'tools/text-replace.html':'文本处理','tools/text-sort.html':'文本处理',
+        'tools/char-frequency.html':'文本处理',
+        'tools/text-encrypt.html':'翻译/语音','tools/text-translation.html':'翻译/语音',
+        'tools/text-to-speech.html':'翻译/语音',
+        'tools/morse-code.html':'文本生成','tools/number-to-chinese.html':'文本生成',
+        'tools/copybook-generator.html':'文本生成',
+        'tools/forbidden-word-checker.html':'内容检测',
+        'tools/image-compress.html':'图片处理','tools/image-convert.html':'图片处理',
+        'tools/image-watermark.html':'图片处理','tools/image-crop.html':'图片处理',
+        'tools/image-merge.html':'图片处理','tools/qrcode-reader.html':'图片处理',
+        'tools/image-stitch.html':'图片处理','tools/image-bg-remove.html':'图片处理',
+        'tools/exif-cleaner.html':'图片处理','tools/social-image-resizer.html':'图片处理',
+        'tools/watermark-remover.html':'图片处理',
+        'tools/drawing-tool.html':'图片工具',
+        'tools/calculator.html':'数学计算','tools/age-calculator.html':'数学计算',
+        'tools/percentage-calculator.html':'数学计算',
+        'tools/bmi-calculator.html':'健康计算','tools/bmr-calculator.html':'健康计算',
+        'tools/calorie-calculator.html':'健康计算','tools/body-fat-calculator.html':'健康计算',
+        'tools/ideal-weight-calculator.html':'健康计算',
+        'tools/loan-calculator.html':'金融计算','tools/mortgage-calculator.html':'金融计算',
+        'tools/compound-interest-calculator.html':'金融计算',
+        'tools/discount-calculator.html':'金融计算','tools/tip-calculator.html':'金融计算',
+        'tools/overtime-calculator.html':'生活计算','tools/salary-calculator.html':'生活计算',
+        'tools/street-stall-pricing.html':'生活计算',
+        'tools/unit-converter.html':'单位换算','tools/temperature-converter.html':'单位换算',
+        'tools/length-converter.html':'单位换算','tools/weight-converter.html':'单位换算',
+        'tools/area-converter.html':'单位换算','tools/volume-converter.html':'单位换算',
+        'tools/speed-converter.html':'单位换算',
+        'tools/currency-converter.html':'货币换算',
+        'tools/file-size-converter.html':'数据换算','tools/data-storage-converter.html':'数据换算',
+        'tools/qrcode-generator.html':'二维码/密码','tools/password-generator.html':'二维码/密码',
+        'tools/date-calculator.html':'时间工具','tools/countdown.html':'时间工具',
+        'tools/world-clock.html':'时间工具','tools/timezone-converter.html':'时间工具',
+        'tools/color-picker.html':'颜色工具','tools/color-palette.html':'颜色工具',
+        'tools/pdf-extract.html':'数据工具','tools/data-chart.html':'数据工具',
+        'tools/stopwatch.html':'效率工具','tools/pomodoro.html':'效率工具',
+        'tools/dice-roller.html':'趣味游戏','tools/coin-flip.html':'趣味游戏',
+        'tools/reaction-test.html':'趣味游戏','tools/typing-test.html':'趣味游戏',
+        'tools/minesweeper.html':'趣味游戏','tools/2048.html':'趣味游戏'
+      };
+
+      // 3. 分类信息（名称、图标、概览展示数、子分类顺序）
+      var CAT_INFO = {
+        ai: {name:'🤖 AI工具', icon:'🤖', overview:2, subcatOrder:['AI创作']},
+        dev: {name:'💻 开发工具', icon:'💻', overview:6, subcatOrder:['编码解码','JSON/XML','代码格式化','加密哈希','正则/转换','Cron任务','Web开发','网络工具']},
+        text: {name:'📝 文本工具', icon:'📝', overview:6, subcatOrder:['文本处理','文本生成','翻译/语音','内容检测']},
+        calc: {name:'🔢 计算器', icon:'🔢', overview:6, subcatOrder:['数学计算','金融计算','健康计算','生活计算']},
+        convert: {name:'📐 换算器', icon:'📐', overview:6, subcatOrder:['单位换算','货币换算','数据换算']},
+        image: {name:'🖼️ 图片工具', icon:'🖼️', overview:6, subcatOrder:['图片处理','图片工具']},
+        daily: {name:'🧰 日常工具', icon:'🧰', overview:6, subcatOrder:['二维码/密码','时间工具','颜色工具','数据工具']},
+        game: {name:'🎮 娱乐工具', icon:'🎮', overview:4, subcatOrder:['趣味游戏','效率工具']}
+      };
+      var CAT_ORDER = ['ai','dev','text','calc','convert','image','daily','game'];
+
+      // 4. 收藏 & 最近使用（localStorage）
+      var FAV_KEY = 'jiebang_favs';
+      var RECENT_KEY = 'jiebang_recent';
+      var MAX_RECENT = 12;
+
+      function getFavs(){ try{return JSON.parse(localStorage.getItem(FAV_KEY))||[];}catch(e){return [];} }
+      function setFavs(arr){ localStorage.setItem(FAV_KEY, JSON.stringify(arr)); }
+      function toggleFav(href){
+        var favs = getFavs();
+        var idx = favs.indexOf(href);
+        if(idx > -1) favs.splice(idx,1); else favs.push(href);
+        setFavs(favs);
+        updateStars();
+      }
+      function isFav(href){ return getFavs().indexOf(href) > -1; }
+
+      function getRecent(){ try{return JSON.parse(localStorage.getItem(RECENT_KEY))||[];}catch(e){return [];} }
+      function addRecent(href){
+        var r = getRecent().filter(function(h){return h!==href;});
+        r.unshift(href);
+        if(r.length > MAX_RECENT) r = r.slice(0, MAX_RECENT);
+        localStorage.setItem(RECENT_KEY, JSON.stringify(r));
+      }
+      // 记录工具点击
+      document.addEventListener('click', function(e){
+        var card = e.target.closest('.tool-card');
+        if(card && card.href) addRecent(card.getAttribute('href'));
+      });
+
+      // 5. 初始化：重分类 + 加子分类 + 加收藏星标
+      var toolCards = document.querySelectorAll('.tool-card');
+      var gridEl = document.querySelector('.tools-grid');
+
+      toolCards.forEach(function(card){
+        var href = card.getAttribute('href')||'';
+        // 重分类
+        if(RECLASSIFY[href]) card.setAttribute('data-cat', RECLASSIFY[href]);
+        // 子分类
+        if(SUBCATS[href]) card.setAttribute('data-subcat', SUBCATS[href]);
+        // 加收藏星标按钮
+        card.style.position = 'relative';
+        var star = document.createElement('button');
+        star.className = 'fav-star' + (isFav(href) ? ' active' : '');
+        star.innerHTML = isFav(href) ? '★' : '☆';
+        star.setAttribute('data-href', href);
+        star.title = '收藏/取消收藏';
+        star.addEventListener('click', function(e){
+          e.preventDefault(); e.stopPropagation();
+          var h = this.getAttribute('data-href');
+          toggleFav(h);
+          this.innerHTML = isFav(h) ? '★' : '☆';
+          this.classList.toggle('active', isFav(h));
+          // 如果当前在收藏视图或概览模式，刷新
+          if(currentCat === 'fav' || currentCat === 'all') filterTools();
+        });
+        card.appendChild(star);
+      });
+
+      function updateStars(){
+        toolCards.forEach(function(card){
+          var star = card.querySelector('.fav-star');
+          if(star){
+            var h = star.getAttribute('data-href');
+            star.innerHTML = isFav(h) ? '★' : '☆';
+            star.classList.toggle('active', isFav(h));
+          }
+        });
+      }
+
+      // 6. 导航状态
+      var catBtns = document.querySelectorAll('.cat-btn');
+      var noResult = document.getElementById('no-result');
+      var searchInput = document.getElementById('tool-search');
+      var currentCat = 'all';
+
+      catBtns.forEach(function(btn){
+        btn.addEventListener('click', function(){
+          catBtns.forEach(function(b){b.classList.remove('active');});
+          btn.classList.add('active');
+          currentCat = btn.getAttribute('data-cat');
+          filterTools();
+        });
+      });
+
+      if(searchInput){
+        searchInput.addEventListener('input', function(){ filterTools(); });
+      }
+
+      // 7. 核心过滤函数
+      function filterTools(){
+        var query = searchInput ? searchInput.value.trim().toLowerCase() : '';
+        var isSearch = query.length > 0;
+
+        // 清理之前的子分类头和概览结构
+        gridEl.querySelectorAll('.subcat-header, .cat-section, .cat-section-title').forEach(function(el){el.remove();});
+        // 恢复卡片到grid
+        toolCards.forEach(function(card){ card.style.display = ''; });
+
+        if(currentCat === 'fav'){
+          // ===== 收藏模式 =====
+          gridEl.setAttribute('data-mode','category');
+          var favs = getFavs();
+          var visibleCount = 0;
+          toolCards.forEach(function(card){
+            var href = card.getAttribute('href')||'';
+            var isF = isFav(href);
+            var matchSearch = !query || (card.getAttribute('data-keywords')||'').toLowerCase().indexOf(query) > -1 || (card.querySelector('h3')?card.querySelector('h3').textContent.toLowerCase():'').indexOf(query) > -1;
+            if(isF && matchSearch){ card.style.display = ''; visibleCount++; }
+            else { card.style.display = 'none'; }
+          });
+          if(visibleCount === 0){
+            // 没有收藏，显示提示
+            var tip = document.createElement('div');
+            tip.className = 'subcat-header';
+            tip.style.display = 'block';
+            tip.style.borderLeft = 'none';
+            tip.style.background = 'none';
+            tip.innerHTML = '还没有收藏任何工具，点击工具卡片右上角 ☆ 即可收藏';
+            gridEl.insertBefore(tip, gridEl.firstChild);
+          }
+          if(noResult) noResult.style.display = visibleCount === 0 && query ? '' : 'none';
+          return;
+        }
+
+        if(isSearch){
+          // ===== 搜索模式 =====
+          gridEl.setAttribute('data-mode','search');
+          var visibleCount = 0;
+          toolCards.forEach(function(card){
+            var cardCat = card.getAttribute('data-cat');
+            var keywords = (card.getAttribute('data-keywords')||'').toLowerCase();
+            var title = card.querySelector('h3') ? card.querySelector('h3').textContent.toLowerCase() : '';
+            var matchCat = currentCat === 'all' || cardCat === currentCat;
+            var matchSearch = keywords.indexOf(query) > -1 || title.indexOf(query) > -1;
+            if(matchCat && matchSearch){ card.style.display = ''; visibleCount++; }
+            else { card.style.display = 'none'; }
+          });
+          if(noResult) noResult.style.display = visibleCount === 0 ? '' : 'none';
+          return;
+        }
+
+        if(currentCat === 'all'){
+          // ===== 全部 - 概览模式 =====
+          gridEl.setAttribute('data-mode','overview');
+          renderOverview();
+          return;
+        }
+
+        // ===== 单分类模式（带子分类头） =====
+        gridEl.setAttribute('data-mode','category');
+        var catCards = [];
+        toolCards.forEach(function(card){
+          if(card.getAttribute('data-cat') === currentCat) catCards.push(card);
+        });
+        // 按子分类分组
+        var groups = {};
+        var subcatOrder = CAT_INFO[currentCat] ? CAT_INFO[currentCat].subcatOrder : [];
+        catCards.forEach(function(card){
+          var sc = card.getAttribute('data-subcat') || '其他';
+          if(!groups[sc]) groups[sc] = [];
+          groups[sc].push(card);
+        });
+        // 隐藏不在当前分类的卡片
+        toolCards.forEach(function(card){
+          card.style.display = card.getAttribute('data-cat') === currentCat ? '' : 'none';
+        });
+        // 插入子分类头
+        var allSubcats = subcatOrder.slice();
+        Object.keys(groups).forEach(function(k){ if(allSubcats.indexOf(k)===-1) allSubcats.push(k); });
+        var firstCard = catCards[0];
+        allSubcats.forEach(function(sc){
+          if(!groups[sc]) return;
+          var header = document.createElement('div');
+          header.className = 'subcat-header';
+          header.textContent = sc + '（' + groups[sc].length + '）';
+          if(firstCard) gridEl.insertBefore(header, groups[sc][0]);
+        });
+        if(noResult) noResult.style.display = catCards.length === 0 ? '' : 'none';
+      }
+
+      // 8. 默认常用推荐（未收藏时显示）
+      var DEFAULT_POPULAR = [
+        'tools/json-formatter.html','tools/base64.html','tools/timestamp.html',
+        'tools/word-counter.html','tools/qrcode-generator.html','tools/password-generator.html',
+        'tools/image-compress.html','tools/unit-converter.html','tools/calculator.html',
+        'tools/color-picker.html','tools/md5.html','tools/url-encode.html'
+      ];
+
+      // 9. 概览模式渲染
+      function renderOverview(){
+        // 隐藏所有卡片
+        toolCards.forEach(function(card){ card.style.display = 'none'; });
+
+        // === 我的常用工具区 ===
+        var favs = getFavs();
+        var popHrefs = favs.length > 0 ? favs.slice(0, 12) : DEFAULT_POPULAR;
+        var isCustom = favs.length > 0;
+
+        var popSection = document.createElement('div');
+        popSection.className = 'cat-section cat-popular';
+        var popTitle = document.createElement('div');
+        popTitle.className = 'cat-section-title';
+        popTitle.innerHTML = (isCustom ? '📌 我的常用' : '🔥 常用工具') +
+          ' <span class="cat-count">' + (isCustom ? '自定义' : '精选') + '</span>' +
+          (isCustom ? ' <span style="font-size:0.78rem;color:var(--text-light);font-weight:400">点⭐收藏添加，再点移除</span>' : ' <span style="font-size:0.78rem;color:var(--text-light);font-weight:400">点⭐收藏自定义你的常用工具</span>');
+        popSection.appendChild(popTitle);
+        var popGrid = document.createElement('div');
+        popGrid.className = 'cat-section-grid';
+        popHrefs.forEach(function(href){
+          var card = null;
+          toolCards.forEach(function(c){ if(c.getAttribute('href')===href) card=c; });
+          if(!card) return;
+          var clone = card.cloneNode(true);
+          clone.style.display = ''; clone.querySelectorAll('p').forEach(function(p){p.remove();});
+          var star = clone.querySelector('.fav-star');
+          if(star){
+            star.addEventListener('click', function(e){
+              e.preventDefault(); e.stopPropagation();
+              var h = this.getAttribute('data-href');
+              toggleFav(h);
+              this.innerHTML = isFav(h) ? '★' : '☆';
+              this.classList.toggle('active', isFav(h));
+              // 重新渲染概览以更新常用区
+              setTimeout(function(){ filterTools(); }, 100);
+            });
+          }
+          clone.addEventListener('click', function(){ addRecent(clone.getAttribute('href')); });
+          popGrid.appendChild(clone);
+        });
+        popSection.appendChild(popGrid);
+        gridEl.appendChild(popSection);
+
+        // === 分类区域 ===
+        CAT_ORDER.forEach(function(cat){
+          var info = CAT_INFO[cat];
+          if(!info) return;
+          var catCards = [];
+          toolCards.forEach(function(card){
+            if(card.getAttribute('data-cat') === cat) catCards.push(card);
+          });
+          if(catCards.length === 0) return;
+
+          // 创建分类区域
+          var section = document.createElement('div');
+          section.className = 'cat-section';
+
+          // 分类标题
+          var title = document.createElement('div');
+          title.className = 'cat-section-title';
+          title.innerHTML = info.icon + ' ' + info.name.replace(info.icon+' ','') +
+            ' <span class="cat-count">' + catCards.length + '</span>' +
+            ' <span class="cat-more">查看全部 →</span>';
+          title.addEventListener('click', function(){
+            catBtns.forEach(function(b){b.classList.remove('active');});
+            var btn = document.querySelector('.cat-btn[data-cat="'+cat+'"]');
+            if(btn) btn.classList.add('active');
+            currentCat = cat;
+            filterTools();
+            window.scrollTo({top:0, behavior:'smooth'});
+          });
+          section.appendChild(title);
+
+          // 卡片网格容器
+          var grid = document.createElement('div');
+          grid.className = 'cat-section-grid';
+
+          // 只展示前N个工具卡片
+          catCards.slice(0, info.overview).forEach(function(card){
+            var clone = card.cloneNode(true);
+            clone.style.display = ''; clone.querySelectorAll('p').forEach(function(p){p.remove();});
+            // 修复收藏按钮事件
+            var star = clone.querySelector('.fav-star');
+            if(star){
+              star.addEventListener('click', function(e){
+                e.preventDefault(); e.stopPropagation();
+                var h = this.getAttribute('data-href');
+                toggleFav(h);
+                this.innerHTML = isFav(h) ? '★' : '☆';
+                this.classList.toggle('active', isFav(h));
+              });
+            }
+            // 点击记录最近使用
+            clone.addEventListener('click', function(){
+              addRecent(clone.getAttribute('href'));
+            });
+            grid.appendChild(clone);
+          });
+
+          section.appendChild(grid);
+          gridEl.appendChild(section);
+        });
+      }
+
+      // 9. 初始渲染
+      filterTools();
+    })();
+
+    // 回到顶部按钮
+    var backToTop = document.createElement('button');
+    backToTop.id = 'back-to-top';
+    backToTop.textContent = '↑';
+    backToTop.title = '回到顶部';
+    var bttStyle = document.createElement('style');
+    bttStyle.textContent = '#back-to-top{position:fixed;bottom:88px;right:24px;width:44px;height:44px;border-radius:50%;background:var(--primary);color:#fff;border:none;font-size:20px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);z-index:999;display:none;transition:opacity .3s,transform .3s}#back-to-top:hover{background:var(--primary-dark);transform:scale(1.1)}@media(max-width:480px){#back-to-top{bottom:72px;right:16px;width:40px;height:40px;font-size:18px}}';
+    document.head.appendChild(bttStyle);
+    document.body.appendChild(backToTop);
+
+    window.addEventListener('scroll', function() {
+      backToTop.style.display = window.scrollY > 400 ? 'block' : 'none';
+    });
+
+    backToTop.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ===== 智能粘贴识别 =====
+    var spInput = document.getElementById('smartPasteInput');
+    var spResult = document.getElementById('smartPasteResult');
+    var spTimer = null;
+    if (spInput) {
+      spInput.addEventListener('input', function() {
+        clearTimeout(spTimer);
+        spTimer = setTimeout(function() { smartPasteDetect(); }, 300);
+      });
+      spInput.addEventListener('paste', function() {
+        setTimeout(function() { smartPasteDetect(); }, 100);
+      });
+    }
+    function smartPasteDetect() {
+      var val = spInput.value.trim();
+      if (!val) { spResult.style.display='none'; return; }
+      var suggestions = [];
+      // JSON检测
+      if ((val.startsWith('{') && val.endsWith('}')) || (val.startsWith('[') && val.endsWith(']'))) {
+        try { JSON.parse(val); suggestions.push({type:'JSON',url:'/tools/json-formatter.html',icon:'📋'}); } catch(e){}
+      }
+      // Base64检测
+      if (/^[A-Za-z0-9+/=\s]{4,}$/.test(val) && val.length % 4 <= 1 && val.length >= 8) {
+        suggestions.push({type:'Base64',url:'/tools/base64.html',icon:'🔐'});
+      }
+      // URL编码检测
+      if (/%[0-9A-Fa-f]{2}/.test(val)) {
+        suggestions.push({type:'URL编码',url:'/tools/url-encode.html',icon:'🔗'});
+      }
+      // JWT检测
+      if (/^eyJ[A-Za-z0-9_-]+\.eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(val)) {
+        suggestions.push({type:'JWT',url:'/tools/jwt-decoder.html',icon:'🔑'});
+      }
+      // 时间戳检测
+      if (/^\d{10}$/.test(val) || /^\d{13}$/.test(val)) {
+        var ts = parseInt(val);
+        if (ts > 1000000000 && ts < 20000000000) {
+          suggestions.push({type:'时间戳',url:'/tools/timestamp.html',icon:'🕐'});
+        }
+      }
+      // MD5/Hash检测
+      if (/^[a-f0-9]{32}$/.test(val) || /^[a-f0-9]{40}$/.test(val) || /^[a-f0-9]{64}$/.test(val)) {
+        suggestions.push({type:'Hash',url:'/tools/hash-calculator.html',icon:'#️⃣'});
+      }
+      // HTML实体检测
+      if (/&#\d+;|&\w+;/.test(val)) {
+        suggestions.push({type:'HTML实体',url:'/tools/html-entity-encoder.html',icon:'📄'});
+      }
+      // Unicode检测
+      if (/\\u[0-9a-fA-F]{4}/.test(val)) {
+        suggestions.push({type:'Unicode',url:'/tools/unicode-converter.html',icon:'🌐'});
+      }
+      // YAML检测
+      if (val.includes(':\n') || val.includes(': ') && !val.startsWith('{') && !val.startsWith('<')) {
+        if (/^[a-zA-Z_][\w]*:/.test(val.split('\n')[0])) {
+          suggestions.push({type:'YAML',url:'/tools/yaml-formatter.html',icon:'📝'});
+        }
+      }
+      // XML检测
+      if (val.startsWith('<') && val.endsWith('>') && val.includes('</')) {
+        suggestions.push({type:'XML',url:'/tools/xml-formatter.html',icon:'📄'});
+      }
+      // URL检测
+      if (/^https?:\/\//.test(val)) {
+        suggestions.push({type:'URL',url:'/tools/url-encode.html',icon:'🌐'});
+      }
+      // 颜色值检测
+      if (/^#[0-9a-fA-F]{3,8}$/.test(val) || /^rgb/.test(val)) {
+        suggestions.push({type:'颜色',url:'/tools/color-picker.html',icon:'🎨'});
+      }
+      // Cron检测
+      if (/^(\S+\s+){4,6}\S+$/.test(val) && val.split(/\s+/).length >= 5 && val.split(/\s+/).length <= 7) {
+        suggestions.push({type:'Cron',url:'/tools/cron-validator.html',icon:'⏰'});
+      }
+      // 兜底：没识别出来，提示搜索
+      if (suggestions.length === 0) {
+        suggestions.push({type:'搜索',url:'javascript:document.getElementById("tool-search").value="'+encodeURIComponent(val.substring(0,30))+'";filterTools();document.getElementById("tool-search").focus();',icon:'🔍'});
+      }
+      var html = '';
+      suggestions.forEach(function(s) {
+        html += '<a class="sp-chip" href="'+s.url+'">'+s.icon+' '+s.type+'</a>';
+      });
+      spResult.innerHTML = html;
+      spResult.style.display = 'flex';
+    }
+  </script>
+
+
+  <!-- 百度自动推送 -->
+  <script>
+  (function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+  <!-- 360自动收录 -->
+  <script>
+  (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?07ce40a6f8df17323104dbf0f5c0946f":"https://jspassport.ssl.qhimg.com/11.0.1.js?07ce40a6f8df17323104dbf0f5c0946f";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+  })();
+  </script>
+
+
+
+  <!-- 点击外部关闭"更多"菜单 -->
+  <script>
+  document.addEventListener('click', function(e) {
+    var menu = document.getElementById('guideMoreMenu');
+    var btn = document.querySelector('.guide-more-btn');
+    if (menu && !menu.contains(e.target) && !btn.contains(e.target)) {
+      menu.classList.remove('show');
+    }
+  });
+  </script>
+  <!-- 反馈浮动按钮 -->
+  <div class="feedback-fab">
+    <button class="feedback-btn" onclick="openFeedback()" title="意见反馈">💬</button>
+  </div>
+  <div class="feedback-modal" id="feedbackModal">
+    <div class="feedback-modal-content">
+      <button class="feedback-close" onclick="closeFeedback()">&times;</button>
+      <h3>意见反馈</h3>
+      <p class="feedback-subtitle">告诉我们您需要什么工具，或使用中遇到的问题</p>
+      <textarea id="feedbackText" placeholder="请输入您的建议或遇到的问题..."></textarea>
+      <input type="text" id="feedbackContact" placeholder="联系方式（选填，方便我们回复您）">
+      <div class="feedback-actions">
+        <button class="btn-cancel" onclick="closeFeedback()">取消</button>
+        <button class="btn-submit" onclick="submitFeedback()">提交</button>
+      </div>
+    </div>
+  </div>
+  <script>
+  function openFeedback(){document.getElementById('feedbackModal').classList.add('active');document.getElementById('feedbackText').focus()}
+  function closeFeedback(){document.getElementById('feedbackModal').classList.remove('active')}
+  document.getElementById('feedbackModal').addEventListener('click',function(e){if(e.target===this)closeFeedback()});
+  function submitFeedback(){
+    var text=document.getElementById('feedbackText').value.trim();
+    if(!text){alert('请输入反馈内容');return}
+    var contact=document.getElementById('feedbackContact').value.trim();
+    var page=location.pathname;
+    var subject=encodeURIComponent('捷帮工具站-用户反馈');
+    var body=encodeURIComponent('页面：'+page+'\n反馈：'+text+(contact?'\n联系方式：'+contact:''));
+    window.location.href='mailto:ajie-jiebang@coze.email?subject='+subject+'&body='+body;
+    closeFeedback();
+    if(typeof showToast==='function')showToast('感谢您的反馈！');
+  }
+  </script>
+
+</body>
+</html>

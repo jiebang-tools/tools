@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JieBang - Free Online Tools, Solve Problems Fast</title>
+  <meta name="description" content="JieBang offers 130+ free online tools: JSON formatter, image compressor, QR code generator, password generator, color picker, Markdown editor, and more. No registration required. Works on mobile and desktop. All data processed locally for privacy.">
+  <meta name="keywords" content="online tools,free tools,JSON formatter,image compressor,QR code generator,password generator,color picker,Markdown editor,text tools,developer tools">
+  <link rel="canonical" href="https://www.jiebang.site/en/">
+  <meta property="og:image" content="https://www.jiebang.site/icon-512.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="JieBang - Free Online Tools">
+  <meta name="twitter:description" content="130+ free online tools. No registration, no uploads, instant results. Developer tools, text tools, image tools, and more.">
+  <meta name="twitter:image" content="https://www.jiebang.site/icon-512.png">
+  <meta property="og:title" content="JieBang - Free Online Tools, Solve Problems Fast">
+  <meta property="og:description" content="130+ free online tools for developers, designers, and everyone. No signup required. Data stays in your browser.">
+  <meta property="og:url" content="https://www.jiebang.site/en/">
+  <meta property="og:type" content="website">
+  <link rel="alternate" hreflang="zh" href="https://www.jiebang.site/">
+  <link rel="alternate" hreflang="en" href="https://www.jiebang.site/en/">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiebang.site/">
+  <link rel="manifest" href="../manifest.json">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <meta name="theme-color" content="#5B5FC7">
+  <link rel="stylesheet" href="../css/style.css?v=20260608e">
+  <style>
+    .subcat-header{font-size:0.95rem;font-weight:700;color:var(--primary);margin:20px 0 8px;padding:6px 0 6px 12px;border-left:3px solid var(--primary);background:linear-gradient(90deg,rgba(91,95,199,0.08) 0%,transparent 100%);display:none;letter-spacing:0.5px}
+    .subcat-header:first-child{margin-top:0}
+    [data-mode="category"] .subcat-header{display:block}
+    [data-mode="overview"]>.tool-card{display:none!important}
+    .cat-popular{background:linear-gradient(135deg,rgba(91,95,199,0.06) 0%,rgba(232,147,74,0.06) 100%);border-radius:12px;padding:16px 16px 12px;margin-bottom:24px}
+    .cat-popular .cat-section-title{font-size:1.15rem;margin-bottom:10px}
+    .cat-popular .cat-section-grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+    .cat-popular .tool-card{padding:16px 14px;border-color:var(--border)}
+    @media(prefers-color-scheme:dark){.cat-popular{background:linear-gradient(135deg,rgba(91,95,199,0.08) 0%,rgba(232,147,74,0.06) 100%)}}
+    body.dark .cat-popular{background:linear-gradient(135deg,rgba(91,95,199,0.08) 0%,rgba(232,147,74,0.06) 100%)}
+    [data-theme="dark"] .cat-popular{background:linear-gradient(135deg,rgba(91,95,199,0.08) 0%,rgba(232,147,74,0.06) 100%)}
+    [data-theme="dark"] .cat-popular .tool-card{background:var(--bg-white);border-color:var(--border)}
+    [data-theme="dark"] .cat-popular .tool-card h3{color:var(--text)}
+    [data-theme="dark"] .cat-popular .tool-card p{color:var(--text-light)}
+
+    .cat-section{margin-bottom:20px;grid-column:1/-1}
+    .cat-section-title{font-size:1.1rem;font-weight:700;margin:0 0 12px;display:flex;align-items:center;gap:8px;cursor:pointer}
+    .cat-section-title .cat-count{font-size:0.8rem;font-weight:400;color:var(--text-light);background:var(--bg);padding:2px 8px;border-radius:10px}
+    .cat-section-title .cat-more{font-size:0.85rem;font-weight:400;color:var(--primary);margin-left:auto}
+    .cat-section-title:hover .cat-more{text-decoration:underline}
+    .fav-star{position:absolute;top:6px;right:6px;width:24px;height:24px;background:none;border:none;cursor:pointer;font-size:14px;z-index:2;padding:0;line-height:1;opacity:0;transition:opacity .2s}
+    .tool-card:hover .fav-star,.fav-star.active{opacity:1}
+    .fav-star.active{opacity:1}
+    .cat-section-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+    .cat-section-grid .tool-card{display:flex;align-items:center;gap:8px}
+    .cat-section-grid .tool-card .tool-icon{margin-bottom:0;flex-shrink:0}
+    .category-nav{flex-wrap:wrap;gap:4px!important}
+    .cat-btn{font-size:0.82rem;padding:6px 12px!important}
+    @media(prefers-color-scheme:dark){
+      .subcat-header{background:linear-gradient(90deg,rgba(91,95,199,0.12) 0%,transparent 100%);color:var(--primary-light);border-left-color:var(--primary-light)}
+      .cat-section-title .cat-count{background:var(--bg);color:var(--text-light)}
+    }
+    body.dark .subcat-header{background:linear-gradient(90deg,rgba(91,95,199,0.12) 0%,transparent 100%);color:var(--primary-light);border-left-color:var(--primary-light)}
+    body.dark .cat-section-title .cat-count{background:var(--bg);color:var(--text-light)}
+    [data-theme="dark"] .cat-section-title .cat-count{background:var(--bg);color:var(--text-light)}
+    [data-theme="dark"] .cat-section-title{color:var(--text)}
+    [data-theme="dark"] .cat-section-title .cat-more{color:var(--primary-light)}
+    [data-theme="dark"] .subcat-header{background:linear-gradient(90deg,rgba(91,95,199,0.12) 0%,transparent 100%);color:var(--primary-light);border-left-color:var(--primary-light)}
+    @media(max-width:640px){
+      .search-box input{font-size:16px;padding:14px 20px;border-radius:12px}
+      .subcat-header{display:none!important}
+      .cat-section{margin-bottom:16px;background:var(--bg-white);border-radius:16px;border:1px solid var(--border);padding:16px 14px 14px;box-shadow:0 1px 4px rgba(0,0,0,0.04);overflow:hidden}
+      .cat-section-title{font-size:1.05rem;font-weight:700;padding-bottom:10px;border-bottom:1px solid var(--border);margin:0 0 12px;display:flex;align-items:center;gap:6px;cursor:pointer}
+      .cat-section-title .cat-count{font-size:0.72rem;font-weight:400;color:var(--text-light);background:var(--bg);padding:2px 8px;border-radius:10px}
+      .cat-section-title .cat-more{font-size:0.82rem;font-weight:500;color:var(--primary);margin-left:auto}
+      .cat-section-grid{grid-template-columns:repeat(2,1fr)!important;gap:10px!important}
+      .cat-section-grid .tool-card{padding:14px 6px 12px;border-radius:12px}
+      .cat-section-grid .tool-card .tool-icon{width:42px;height:42px;font-size:20px;border-radius:12px;margin:0 auto 6px}
+      .cat-section-grid .tool-card h3{font-size:12px}
+      .cat-section-grid .tool-card p{display:none!important}
+      .cat-popular{padding:14px 12px 10px;border-radius:16px}
+      .cat-popular .cat-section-grid{grid-template-columns:repeat(2,1fr)!important;gap:10px!important}
+      .cat-popular .tool-card{padding:14px 6px 12px}
+      .tools-grid .tool-card p{display:none!important}.tools-grid .tool-card{padding:14px 8px 12px}.tools-grid .tool-card .tool-icon{width:40px;height:40px;font-size:20px;margin:0 auto 6px}.tools-grid .tool-card h3{margin-bottom:0}
+      [data-theme="dark"] .cat-section{background:var(--bg-white);border-color:var(--border)}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "JieBang - Free Online Tools",
+    "url": "https://www.jiebang.site/en/",
+    "description": "130+ free online tools for developers, designers, and everyone. No signup required.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "JieBang",
+      "url": "https://www.jiebang.site"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is JieBang free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, all JieBang tools are completely free with no registration required, no usage limits, and no watermarks on results."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data safe with JieBang?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "All JieBang tools run locally in your browser. Your images, text, and other data are never uploaded to any server. Your privacy is fully protected."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What tools does JieBang offer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "JieBang provides 130+ free online tools covering developer tools (JSON formatter, Base64 encode/decode, regex tester, timestamp converter), text tools (case converter, deduplication, find & replace), image tools (compress, convert, crop, watermark), and daily tools (QR code generator, password generator, unit converter, countdown timer)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to sign up to use JieBang?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. All JieBang tools work directly in your browser without any registration, login, or software download. Just open and use on any device."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .hero { text-align: center; padding: 40px 20px 20px; }
+    .hero h1 { font-size: 2rem; color: var(--primary, #5B5FC7); margin-bottom: 8px; }
+    .hero p { color: var(--text-light, #6E6E80); font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+    .search-box { max-width: 480px; margin: 0 auto; }
+    .search-box input { width: 100%; padding: 14px 20px; border: none; border-radius: 50px; font-size: 15px; background: rgba(255,255,255,0.95); color: var(--text, #2D2D3A); outline: none; box-shadow: 0 4px 15px rgba(0,0,0,0.15); transition: box-shadow 0.2s; }
+    .search-box input:focus { box-shadow: 0 4px 20px rgba(0,0,0,0.25); }
+    .search-box input::placeholder { color: #9CA3AF; }
+    [data-theme="dark"] .search-box input { background: rgba(38,38,47,0.95); color: #D8D8E0; }
+    [data-theme="dark"] .search-box input::placeholder { color: #606070; }
+
+    .tool-card { transition: transform 0.15s; }
+    .tool-card:hover { transform: translateY(-2px); }
+  </style>
+<script src="/geo-redirect.js"></script>
+  <script src="/dark-mode.js"></script>
+<script src="/monitor.js"></script>
+</head>
+<body>
+  <div class="guide-nav-bar">
+    <div class="guide-links">
+      <a href="learn/" class="guide-link">📚 Guides</a>
+      <a href="api-docs.html" class="guide-link">🛠️ API</a>
+    </div>
+    <div class="guide-more-wrap">
+      <button class="guide-more-btn" onclick="document.getElementById('guideMoreMenu').classList.toggle('show')">More ▾</button>
+      <div class="guide-more-menu" id="guideMoreMenu">
+        <a href="learn/">📚 Guides</a>
+        <a href="api-docs.html">🛠️ API</a>
+      </div>
+    </div>
+    <button class="dark-toggle" onclick="toggleDarkMode()" title="Toggle dark mode">🌙</button>
+    <a href="../" onclick="localStorage.setItem('jiebang_lang','zh');" class="lang-switch">🌐 中文</a>
+  </div>
+
+  <div class="hero">
+    <h1>🔧 JieBang Tools</h1>
+    <p>130+ free online tools. No signup, no uploads, instant results. Your data stays in your browser.</p>
+    <div class="search-box">
+      <input type="text" id="tool-search" placeholder="Search tools, e.g. JSON, QR Code, MD5..." autocomplete="off">
+    </div>
+  </div>
+
+  <nav class="category-nav" id="mainNav">
+    <button class="cat-btn active" data-cat="all">🏠 All</button>
+    <button class="cat-btn" data-cat="ai">🤖 AI</button>
+    <button class="cat-btn" data-cat="dev">💻 Developer</button>
+    <button class="cat-btn" data-cat="text">📝 Text</button>
+    <button class="cat-btn" data-cat="calc">🔢 Calculator</button>
+    <button class="cat-btn" data-cat="convert">📐 Converter</button>
+    <button class="cat-btn" data-cat="image">🖼️ Image</button>
+    <button class="cat-btn" data-cat="daily">🧰 Daily</button>
+    <button class="cat-btn" data-cat="fav">⭐ Favorites</button>
+  </nav>
+
+  <div class="tools-grid">
+
+    <!-- AI Tools -->
+    <a href="tools/ai-copywriting.html" class="tool-card" data-cat="ai" data-keywords="AI slogan generator marketing tagline catchphrase advertising copy AI writing">
+      <div class="tool-icon purple">✨</div>
+      <h3>AI Slogan Generator</h3>
+      <p>Generate catchy slogans and marketing taglines</p>
+    </a>
+    <a href="tools/ai-naming.html" class="tool-card" data-cat="ai" data-keywords="AI brand name generator business naming startup name product naming">
+      <div class="tool-icon purple">🏷️</div>
+      <h3>AI Brand Namer</h3>
+      <p>Generate creative brand and business names</p>
+    </a>
+
+    <!-- Developer Tools -->
+    <a href="tools/json-formatter.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon orange">{ }</div>
+      <h3>JSON Formatter</h3>
+      <p>Beautify, validate, and minify JSON</p>
+    </a>
+    <a href="tools/base64.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon purple">🔐</div>
+      <h3>Base64 Encode/Decode</h3>
+      <p>Encode or decode Base64 strings</p>
+    </a>
+    <a href="tools/url-encode.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon blue">🔗</div>
+      <h3>URL Encode/Decode</h3>
+      <p>Encode or decode URL components</p>
+    </a>
+    <a href="tools/regex-tester.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon red">.*</div>
+      <h3>Regex Tester</h3>
+      <p>Test regular expressions with live matching</p>
+    </a>
+    <a href="tools/timestamp.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon green">🕐</div>
+      <h3>Timestamp Converter</h3>
+      <p>Convert Unix timestamps to dates and back</p>
+    </a>
+    <a href="tools/css-formatter.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon blue">🎯</div>
+      <h3>CSS Formatter</h3>
+      <p>Beautify or minify CSS code</p>
+    </a>
+    <a href="tools/css-gradient.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon blue">🎨</div>
+      <h3>CSS Gradient Generator</h3>
+      <p>Create CSS gradient code visually</p>
+    </a>
+    <a href="tools/js-formatter.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon blue">⚡</div>
+      <h3>JS Formatter</h3>
+      <p>Beautify or minify JavaScript</p>
+    </a>
+    <a href="tools/sql-formatter.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon cyan">🗄️</div>
+      <h3>SQL Formatter</h3>
+      <p>Beautify SQL queries with highlighting</p>
+    </a>
+    <a href="tools/xml-formatter.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon blue">📋</div>
+      <h3>XML Formatter</h3>
+      <p>Beautify or minify XML code</p>
+    </a>
+    <a href="tools/json-yaml-converter.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon blue">🔄</div>
+      <h3>JSON ↔ YAML Converter</h3>
+      <p>Convert between JSON and YAML formats</p>
+    </a>
+    <a href="tools/cron-validator.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon blue">⏰</div>
+      <h3>Cron Expression Parser</h3>
+      <p>Parse and explain cron expressions</p>
+    </a>
+    <a href="tools/html-entity-encoder.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon blue">🔐</div>
+      <h3>HTML Entity Encoder</h3>
+      <p>Encode or decode HTML entities</p>
+    </a>
+    <a href="tools/yaml-formatter.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon blue">📄</div>
+      <h3>YAML Formatter</h3>
+      <p>Format YAML and convert to JSON</p>
+    </a>
+    <a href="tools/jwt-decoder.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon yellow">🔑</div>
+      <h3>JWT Decoder</h3>
+      <p>Decode and inspect JWT tokens</p>
+    </a>
+    <a href="tools/markdown-editor.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon orange">📝</div>
+      <h3>Markdown Editor</h3>
+      <p>Write Markdown with live preview</p>
+    </a>
+    <a href="tools/html-encode.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon purple">&lt;&gt;</div>
+      <h3>HTML Entity Encoder</h3>
+      <p>Encode or decode HTML entities</p>
+    </a>
+    <a href="tools/html-preview.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon green">👁️</div>
+      <h3>HTML Preview</h3>
+      <p>Live HTML/CSS/JS preview</p>
+    </a>
+    <a href="tools/http-status-codes.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon blue">🔍</div>
+      <h3>HTTP Status Codes</h3>
+      <p>Look up HTTP response codes</p>
+    </a>
+    <a href="tools/keyboard-code.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon blue">⌨️</div>
+      <h3>KeyCode Reference</h3>
+      <p>JavaScript keyboard event codes</p>
+    </a>
+    <a href="tools/cron-generator.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon yellow">⏰</div>
+      <h3>Cron Generator</h3>
+      <p>Build cron expressions visually</p>
+    </a>
+    <a href="tools/meta-tag-extractor.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon blue">🏷️</div>
+      <h3>Meta Tag Extractor</h3>
+      <p>Extract website meta information</p>
+    </a>
+    <a href="tools/user-agent-parser.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon blue">🖥️</div>
+      <h3>User-Agent Parser</h3>
+      <p>Detect browser and device info</p>
+    </a>
+    <a href="tools/unicode-converter.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon green">🌐</div>
+      <h3>Unicode Converter</h3>
+      <p>Encode/decode Unicode characters</p>
+    </a>
+    <a href="tools/hash-calculator.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon red">#️⃣</div>
+      <h3>Hash Calculator</h3>
+      <p>MD5, SHA1, SHA256 hash generator</p>
+    </a>
+    <a href="tools/md5.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon red">🔒</div>
+      <h3>MD5 Generator</h3>
+      <p>Calculate MD5 checksums</p>
+    </a>
+    <a href="tools/csv-to-json.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon green">📋</div>
+      <h3>CSV ↔ JSON Converter</h3>
+      <p>Convert between CSV and JSON formats</p>
+    </a>
+    <a href="tools/json-to-csv.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon orange">📄</div>
+      <h3>JSON ↔ CSV Converter</h3>
+      <p>Convert JSON data to CSV format</p>
+    </a>
+
+    <!-- Text Tools -->
+    <a href="tools/word-counter.html" class="tool-card" data-cat="text">
+      <div class="tool-icon blue">🔢</div>
+      <h3>Word Counter</h3>
+      <p>Count words, characters, sentences</p>
+    </a>
+    <a href="tools/case-converter.html" class="tool-card" data-cat="text">
+      <div class="tool-icon blue">Aa</div>
+      <h3>Case Converter</h3>
+      <p>Convert text to upper/lower/title case</p>
+    </a>
+    <a href="tools/remove-spaces.html" class="tool-card" data-cat="text">
+      <div class="tool-icon red">🧹</div>
+      <h3>Remove Spaces</h3>
+      <p>Clean up extra whitespace</p>
+    </a>
+    <a href="tools/text-replace.html" class="tool-card" data-cat="text">
+      <div class="tool-icon blue">🔄</div>
+      <h3>Find & Replace</h3>
+      <p>Batch find and replace with regex</p>
+    </a>
+    <a href="tools/text-deduplicate.html" class="tool-card" data-cat="text">
+      <div class="tool-icon orange">1️⃣</div>
+      <h3>Remove Duplicates</h3>
+      <p>Remove duplicate lines from text</p>
+    </a>
+    <a href="tools/text-diff.html" class="tool-card" data-cat="text">
+      <div class="tool-icon red">⚖️</div>
+      <h3>Text Diff</h3>
+      <p>Compare two texts side by side</p>
+    </a>
+    <a href="tools/text-sort.html" class="tool-card" data-cat="text">
+      <div class="tool-icon orange">📊</div>
+      <h3>Text Sorter</h3>
+      <p>Sort lines alphabetically or numerically</p>
+    </a>
+    <a href="tools/char-frequency.html" class="tool-card" data-cat="text">
+      <div class="tool-icon green">📈</div>
+      <h3>Character Frequency</h3>
+      <p>Count character occurrences</p>
+    </a>
+    <a href="tools/text-encrypt.html" class="tool-card" data-cat="text">
+      <div class="tool-icon purple">🛡️</div>
+      <h3>Text Encrypt/Decrypt</h3>
+      <p>AES/DES encryption with password</p>
+    </a>
+    <a href="tools/text-to-speech.html" class="tool-card" data-cat="text">
+      <div class="tool-icon blue">🔊</div>
+      <h3>Text to Speech</h3>
+      <p>Read text aloud with browser TTS</p>
+    </a>
+    <a href="tools/text-translation.html" class="tool-card" data-cat="text">
+      <div class="tool-icon blue">🌐</div>
+      <h3>Text Translation</h3>
+      <p>Translate text between languages</p>
+    </a>
+    <a href="tools/morse-code.html" class="tool-card" data-cat="text">
+      <div class="tool-icon blue">📡</div>
+      <h3>Morse Code</h3>
+      <p>Encode/decode Morse code</p>
+    </a>
+
+    <a href="tools/fancy-text-generator.html" class="tool-card" data-cat="text">
+      <div class="tool-icon" style="background:linear-gradient(135deg,#f472b6,#ec4899);color:#fff;">✨</div>
+      <h3>Fancy Text Generator</h3>
+      <p>15+ stylish fonts, copy &amp; paste anywhere</p>
+    </a>
+
+    <a href="tools/lorem-ipsum-generator.html" class="tool-card" data-cat="text">
+      <div class="tool-icon" style="background:linear-gradient(135deg,#a78bfa,#7c3aed);color:#fff;">📝</div>
+      <h3>Lorem Ipsum Generator</h3>
+      <p>Generate placeholder text with custom options</p>
+    </a>
+
+    <!-- Image Tools -->
+    <a href="tools/image-compress.html" class="tool-card" data-cat="image">
+      <div class="tool-icon red">🗜️</div>
+      <h3>Image Compressor</h3>
+      <p>Compress JPG/PNG/WebP locally</p>
+    </a>
+    <a href="tools/image-convert.html" class="tool-card" data-cat="image">
+      <div class="tool-icon orange">🔄</div>
+      <h3>Image Format Converter</h3>
+      <p>Convert between JPG, PNG, WebP, BMP</p>
+    </a>
+    <a href="tools/image-crop.html" class="tool-card" data-cat="image">
+      <div class="tool-icon purple">✂️</div>
+      <h3>Image Cropper</h3>
+      <p>Crop images to any size</p>
+    </a>
+    <a href="tools/image-watermark.html" class="tool-card" data-cat="image">
+      <div class="tool-icon blue">💧</div>
+      <h3>Image Watermark</h3>
+      <p>Add text watermarks to images</p>
+    </a>
+    <a href="tools/image-merge.html" class="tool-card" data-cat="image">
+      <div class="tool-icon cyan">🖼️</div>
+      <h3>Image Merger</h3>
+      <p>Combine multiple images into one</p>
+    </a>
+    <a href="tools/image-stitch.html" class="tool-card" data-cat="image">
+      <div class="tool-icon green">🖼️</div>
+      <h3>Image Stitcher</h3>
+      <p>Stitch images into long vertical</p>
+    </a>
+    <a href="tools/image-to-base64.html" class="tool-card" data-cat="image">
+      <div class="tool-icon orange">🔢</div>
+      <h3>Image to Base64</h3>
+      <p>Convert images to Base64 strings</p>
+    </a>
+    <a href="tools/image-bg-remove.html" class="tool-card" data-cat="image">
+      <div class="tool-icon green">✂️</div>
+      <h3>Background Remover</h3>
+      <p>Remove image backgrounds with AI</p>
+    </a>
+    <a href="tools/drawing-tool.html" class="tool-card" data-cat="image">
+      <div class="tool-icon green">🖌️</div>
+      <h3>Online Drawing Tool</h3>
+      <p>Draw and sketch in your browser</p>
+    </a>
+    <a href="tools/color-picker.html" class="tool-card" data-cat="image">
+      <div class="tool-icon green">🎨</div>
+      <h3>Color Picker</h3>
+      <p>Pick colors and get HEX/RGB values</p>
+    </a>
+    <a href="tools/color-converter.html" class="tool-card" data-cat="image">
+      <div class="tool-icon blue">🎨</div>
+      <h3>Color Converter</h3>
+      <p>Convert between HEX, RGB, HSL</p>
+    </a>
+    <a href="tools/color-palette.html" class="tool-card" data-cat="image">
+      <div class="tool-icon purple">🎨</div>
+      <h3>Color Palette Generator</h3>
+      <p>Create beautiful color schemes</p>
+    </a>
+    <a href="tools/pdf-extract.html" class="tool-card" data-cat="image">
+      <div class="tool-icon red">📄</div>
+      <h3>PDF Text Extractor</h3>
+      <p>Extract text from PDF files locally</p>
+    </a>
+    <a href="tools/pdf-toolkit.html" class="tool-card" data-cat="image" data-keywords="merge pdf split pdf rotate pdf pdf merger pdf toolkit">
+      <div class="tool-icon purple">📑</div>
+      <h3>PDF Toolkit</h3>
+      <p>Merge, split, rotate PDFs — 100% browser-based</p>
+    </a>
+    <a href="tools/data-chart.html" class="tool-card" data-cat="image">
+      <div class="tool-icon green">📊</div>
+      <h3>Data Visualization</h3>
+      <p>Create charts from data instantly</p>
+    </a>
+
+    <!-- Daily Tools -->
+    <a href="tools/qrcode-generator.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon yellow">📱</div>
+      <h3>QR Code Generator</h3>
+      <p>Generate QR codes for URLs and text</p>
+    </a>
+    <a href="tools/qrcode-reader.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon green">📷</div>
+      <h3>QR Code Reader</h3>
+      <p>Scan and decode QR codes from images</p>
+    </a>
+    <a href="tools/password-generator.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon purple">🔐</div>
+      <h3>Password Generator</h3>
+      <p>Create strong random passwords</p>
+    </a>
+    <a href="tools/uuid-generator.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon orange">🎲</div>
+      <h3>UUID Generator</h3>
+      <p>Generate UUID/GUID identifiers</p>
+    </a>
+    <a href="tools/random-string.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon yellow">🎲</div>
+      <h3>Random String Generator</h3>
+      <p>Generate random strings and numbers</p>
+    </a>
+    <a href="tools/unit-converter.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon cyan">📐</div>
+      <h3>Unit Converter</h3>
+      <p>Convert length, weight, temperature</p>
+    </a>
+    <a href="tools/base-converter.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon cyan">📊</div>
+      <h3>Number Base Converter</h3>
+      <p>Convert binary, octal, decimal, hex</p>
+    </a>
+    <a href="tools/file-size-converter.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon cyan">💾</div>
+      <h3>File Size Converter</h3>
+      <p>Convert KB, MB, GB storage units</p>
+    </a>
+    <a href="tools/calculator.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon cyan">🧮</div>
+      <h3>Scientific Calculator</h3>
+      <p>Advanced math functions calculator</p>
+    </a>
+    <a href="tools/date-calculator.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon red">📅</div>
+      <h3>Date Calculator</h3>
+      <p>Calculate days between dates</p>
+    </a>
+    <a href="tools/countdown.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon purple">⏱️</div>
+      <h3>Countdown Timer</h3>
+      <p>Count down to any date or event</p>
+    </a>
+    <a href="tools/world-clock.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon blue">🌍</div>
+      <h3>World Clock</h3>
+      <p>Check time across time zones</p>
+    </a>
+    <a href="tools/timezone-converter.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon green">🌍</div>
+      <h3>Timezone Converter</h3>
+      <p>Convert time between 20+ major cities</p>
+    </a>
+    <a href="tools/bmi-calculator.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon blue">⚖️</div>
+      <h3>BMI Calculator</h3>
+      <p>Calculate Body Mass Index</p>
+    </a>
+    <a href="tools/loan-calculator.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon blue">🏦</div>
+      <h3>Loan Calculator</h3>
+      <p>Calculate mortgage and loan payments</p>
+    </a>
+    <a href="tools/screen-detector.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon blue">📱</div>
+      <h3>Screen Info</h3>
+      <p>Check screen resolution and viewport</p>
+    </a>
+
+    <!-- New Calculator Tools -->
+    <a href="tools/age-calculator.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;">🎂</div>
+      <h3>Age Calculator</h3>
+      <p>Calculate exact age with birthday countdown</p>
+    </a>
+
+    <a href="tools/percentage-calculator.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon" style="background:linear-gradient(135deg,#10b981,#059669);color:#fff;">%</div>
+      <h3>Percentage Calculator</h3>
+      <p>Calculate percentages: what % is X of Y</p>
+    </a>
+
+    <a href="tools/mortgage-calculator.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;">🏠</div>
+      <h3>Mortgage Calculator</h3>
+      <p>Calculate monthly payments and amortization</p>
+    </a>
+
+    <a href="tools/discount-calculator.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon" style="background:linear-gradient(135deg,#ec4899,#db2777);color:#fff;">🏷️</div>
+      <h3>Discount Calculator</h3>
+      <p>Calculate sale prices with multiple discounts</p>
+    </a>
+
+    <a href="tools/tip-calculator.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon" style="background:linear-gradient(135deg,#14b8a6,#0d9488);color:#fff;">💵</div>
+      <h3>Tip Calculator</h3>
+      <p>Calculate tip and split bills evenly</p>
+    </a>
+
+    <a href="tools/compound-interest-calculator.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed);color:#fff;">📈</div>
+      <h3>Compound Interest Calculator</h3>
+      <p>Calculate compound interest with growth chart</p>
+    </a>
+
+    <a href="tools/bmr-calculator.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon" style="background:linear-gradient(135deg,#06b6d4,#0891b2);color:#fff;">🔥</div>
+      <h3>BMR Calculator</h3>
+      <p>Calculate Basal Metabolic Rate</p>
+    </a>
+
+    <a href="tools/calorie-calculator.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon" style="background:linear-gradient(135deg,#f97316,#ea580c);color:#fff;">🍽️</div>
+      <h3>Calorie Calculator</h3>
+      <p>Calculate daily calorie requirements</p>
+    </a>
+
+    <a href="tools/body-fat-calculator.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon" style="background:linear-gradient(135deg,#84cc16,#65a30d);color:#fff;">💪</div>
+      <h3>Body Fat Calculator</h3>
+      <p>Estimate body fat percentage</p>
+    </a>
+
+    <a href="tools/ideal-weight-calculator.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon" style="background:linear-gradient(135deg,#a855f7,#9333ea);color:#fff;">⚖️</div>
+      <h3>Ideal Weight Calculator</h3>
+      <p>Calculate ideal body weight</p>
+    </a>
+
+    <!-- New Converter Tools -->
+    <a href="tools/currency-converter.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon" style="background:linear-gradient(135deg,#3b82f6,#2563eb);color:#fff;">💱</div>
+      <h3>Currency Converter</h3>
+      <p>Convert between major currencies</p>
+    </a>
+
+    <a href="tools/temperature-converter.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon" style="background:linear-gradient(135deg,#ef4444,#dc2626);color:#fff;">🌡️</div>
+      <h3>Temperature Converter</h3>
+      <p>Convert Celsius, Fahrenheit, Kelvin</p>
+    </a>
+
+    <a href="tools/length-converter.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon" style="background:linear-gradient(135deg,#64748b,#475569);color:#fff;">📏</div>
+      <h3>Length Converter</h3>
+      <p>Convert m, ft, in, cm, km, miles</p>
+    </a>
+
+    <a href="tools/weight-converter.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon" style="background:linear-gradient(135deg,#78716c,#57534e);color:#fff;">⚖️</div>
+      <h3>Weight Converter</h3>
+      <p>Convert kg, lbs, oz, g, tons</p>
+    </a>
+
+    <a href="tools/area-converter.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);color:#fff;">🏗️</div>
+      <h3>Area Converter</h3>
+      <p>Convert m², ft², acres, hectares</p>
+    </a>
+
+    <a href="tools/volume-converter.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon" style="background:linear-gradient(135deg,#14b8a6,#0d9488);color:#fff;">🧪</div>
+      <h3>Volume Converter</h3>
+      <p>Convert liters, gallons, ml, cups</p>
+    </a>
+
+    <a href="tools/speed-converter.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon" style="background:linear-gradient(135deg,#f43f5e,#e11d48);color:#fff;">🚀</div>
+      <h3>Speed Converter</h3>
+      <p>Convert km/h, mph, m/s, knots</p>
+    </a>
+
+    <a href="tools/data-storage-converter.html" class="tool-card" data-cat="daily">
+      <div class="tool-icon" style="background:linear-gradient(135deg,#6366f1,#4f46e5);color:#fff;">💾</div>
+      <h3>Data Storage Converter</h3>
+      <p>Convert bytes, KB, MB, GB, TB</p>
+    </a>
+
+    <a href="tools/code-screenshot.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon cyan">📸</div>
+      <h3>Code Screenshot</h3>
+      <p>Turn code into beautiful images with 6 themes and 3 window styles</p>
+    </a>
+
+    <a href="tools/exif-cleaner.html" class="tool-card" data-cat="image">
+      <div class="tool-icon red">🛡️</div>
+      <h3>EXIF Cleaner</h3>
+      <p>View and remove hidden GPS and metadata from photos</p>
+    </a>
+
+    <a href="tools/social-image-resizer.html" class="tool-card" data-cat="image">
+      <div class="tool-icon orange">📐</div>
+      <h3>Social Image Resizer</h3>
+      <p>Resize images for Instagram, YouTube, TikTok and more</p>
+    </a>
+
+    <a href="tools/api-tester.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon green">🔌</div>
+      <h3>API Tester</h3>
+      <p>Test API endpoints with GET/POST/PUT/DELETE requests</p>
+    </a>
+
+    <a href="tools/agent-task-board.html" class="tool-card" data-cat="dev">
+      <div class="tool-icon purple">🤖</div>
+      <h3>AI Agent Task Board</h3>
+      <p>Visual Kanban board for multi-agent task management and collaboration</p>
+    </a>
+
+    <a href="tools/watermark-remover.html" class="tool-card" data-cat="image">
+      <div class="tool-icon red">🧹</div>
+      <h3>Watermark Remover</h3>
+      <p>Remove TikTok watermarks, trim video endings, works for images too</p>
+    </a>
+
+    <a href="tools/stopwatch.html" class="tool-card" data-cat="game">
+      <div class="tool-icon blue">⏱️</div>
+      <h3>Online Stopwatch</h3>
+      <p>Millisecond precision, lap recording support</p>
+    </a>
+    <a href="tools/pomodoro.html" class="tool-card" data-cat="game">
+      <div class="tool-icon red">🍅</div>
+      <h3>Pomodoro Timer</h3>
+      <p>25min work + 5min break, boost focus</p>
+    </a>
+    <a href="tools/dice-roller.html" class="tool-card" data-cat="game">
+      <div class="tool-icon green">🎲</div>
+      <h3>Dice Roller</h3>
+      <p>1-6 dice, animations & statistics</p>
+    </a>
+    <a href="tools/coin-flip.html" class="tool-card" data-cat="game">
+      <div class="tool-icon yellow">🪙</div>
+      <h3>Coin Flip</h3>
+      <p>3D flip animation, heads/tails stats</p>
+    </a>
+    <a href="tools/reaction-test.html" class="tool-card" data-cat="game">
+      <div class="tool-icon purple">⚡</div>
+      <h3>Reaction Test</h3>
+      <p>5-round test, millisecond precision</p>
+    </a>
+    <a href="tools/typing-test.html" class="tool-card" data-cat="game">
+      <div class="tool-icon blue">⌨️</div>
+      <h3>Typing Speed Test</h3>
+      <p>30s/60s mode, WPM & accuracy</p>
+    </a>
+    <a href="tools/minesweeper.html" class="tool-card" data-cat="game">
+      <div class="tool-icon green">💣</div>
+      <h3>Minesweeper</h3>
+      <p>Classic game, 9×9/16×16/30×16 modes</p>
+    </a>
+
+    <a href="tools/random-number-generator.html" class="tool-card" data-cat="game">
+      <div class="tool-icon" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);color:#fff;">🎯</div>
+      <h3>Random Number Generator</h3>
+      <p>Generate random numbers with custom range</p>
+    </a>
+
+    <a href="tools/love-calculator.html" class="tool-card" data-cat="game">
+      <div class="tool-icon" style="background:linear-gradient(135deg,#f43f5e,#e11d48);color:#fff;">💕</div>
+      <h3>Love Calculator</h3>
+      <p>Test love compatibility, fun &amp; shareable</p>
+    </a>
+
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>© 2026 JieBang.tools — Free Online Tools</p>
+      <div class="footer-links">
+        <a href="about.html">About Us</a>
+        <span>|</span>
+        <a href="privacy.html">Privacy Policy</a>
+        <span>|</span>
+        <a href="disclaimer.html">Disclaimer</a>
+        <span>|</span>
+        <a href="contact.html">Contact Us</a>
+        <span>|</span>
+        <a href="learn/">Guides</a>
+        <span>|</span>
+        <a href="api-docs.html">Developer API</a>
+        <span>|</span>
+        <a href="https://www.jiebang.site/sitemap.xml">Sitemap</a>
+        <span>|</span>
+<a href="../" onclick="localStorage.setItem('jiebang_lang','zh');">中文版</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Enhanced Navigation System =====
+    (function(){
+      var RECLASSIFY = {
+        'tools/calculator.html':'calc','tools/bmi-calculator.html':'calc',
+        'tools/loan-calculator.html':'calc','tools/overtime-calculator.html':'calc',
+        'tools/salary-calculator.html':'calc','tools/age-calculator.html':'calc',
+        'tools/percentage-calculator.html':'calc','tools/mortgage-calculator.html':'calc',
+        'tools/discount-calculator.html':'calc','tools/tip-calculator.html':'calc',
+        'tools/compound-interest-calculator.html':'calc','tools/bmr-calculator.html':'calc',
+        'tools/calorie-calculator.html':'calc','tools/body-fat-calculator.html':'calc',
+        'tools/ideal-weight-calculator.html':'calc',
+        'tools/unit-converter.html':'convert','tools/file-size-converter.html':'convert',
+        'tools/currency-converter.html':'convert','tools/temperature-converter.html':'convert',
+        'tools/length-converter.html':'convert','tools/weight-converter.html':'convert',
+        'tools/area-converter.html':'convert','tools/volume-converter.html':'convert',
+        'tools/speed-converter.html':'convert','tools/data-storage-converter.html':'convert'
+      };
+      var SUBCATS = {
+        'tools/ai-copywriting.html':'AI Tools','tools/ai-naming.html':'AI Tools',
+        'tools/base64.html':'Encode/Decode','tools/url-encode.html':'Encode/Decode',
+        'tools/html-encode.html':'Encode/Decode','tools/unicode-converter.html':'Encode/Decode',
+        'tools/image-to-base64.html':'Encode/Decode','tools/jwt-decoder.html':'Encode/Decode',
+        'tools/uuid-generator.html':'Encode/Decode',
+        'tools/json-formatter.html':'JSON/XML','tools/json-yaml-converter.html':'JSON/XML',
+        'tools/json-path.html':'JSON/XML','tools/csv-to-json.html':'JSON/XML',
+        'tools/json-to-csv.html':'JSON/XML','tools/yaml-formatter.html':'JSON/XML',
+        'tools/xml-formatter.html':'JSON/XML',
+        'tools/css-formatter.html':'Code Tools','tools/js-formatter.html':'Code Tools',
+        'tools/sql-formatter.html':'Code Tools','tools/markdown-editor.html':'Code Tools',
+        'tools/html-preview.html':'Code Tools','tools/code-screenshot.html':'Code Tools',
+        'tools/batch-rename.html':'Code Tools','tools/text-diff.html':'Code Tools',
+        'tools/md5.html':'Crypto/Hash','tools/hash-calculator.html':'Crypto/Hash',
+        'tools/random-string.html':'Crypto/Hash',
+        'tools/regex-tester.html':'Regex/Convert','tools/timestamp.html':'Regex/Convert',
+        'tools/base-converter.html':'Regex/Convert','tools/chmod-calculator.html':'Regex/Convert',
+        'tools/cron-generator.html':'Cron','tools/cron-validator.html':'Cron',
+        'tools/css-gradient.html':'Web Dev','tools/color-converter.html':'Web Dev',
+        'tools/screen-detector.html':'Web Dev',
+        'tools/http-status-codes.html':'Network','tools/user-agent-parser.html':'Network',
+        'tools/keyboard-code.html':'Network','tools/meta-tag-extractor.html':'Network',
+        'tools/api-tester.html':'Network',
+        'tools/word-counter.html':'Text Process','tools/chinese-convert.html':'Text Process',
+        'tools/text-deduplicate.html':'Text Process','tools/case-converter.html':'Text Process',
+        'tools/pinyin.html':'Text Process','tools/remove-spaces.html':'Text Process',
+        'tools/text-replace.html':'Text Process','tools/text-sort.html':'Text Process',
+        'tools/char-frequency.html':'Text Process',
+        'tools/text-encrypt.html':'Translate/Voice','tools/text-translation.html':'Translate/Voice',
+        'tools/text-to-speech.html':'Translate/Voice',
+        'tools/morse-code.html':'Generate','tools/number-to-chinese.html':'Generate',
+        'tools/copybook-generator.html':'Generate',
+        'tools/forbidden-word-checker.html':'Content Check',
+        'tools/image-compress.html':'Image Edit','tools/image-convert.html':'Image Edit',
+        'tools/image-watermark.html':'Image Edit','tools/image-crop.html':'Image Edit',
+        'tools/image-merge.html':'Image Edit','tools/qrcode-reader.html':'Image Edit',
+        'tools/image-stitch.html':'Image Edit','tools/image-bg-remove.html':'Image Edit',
+        'tools/exif-cleaner.html':'Image Edit','tools/social-image-resizer.html':'Image Edit',
+        'tools/watermark-remover.html':'Image Edit',
+        'tools/drawing-tool.html':'Image Tool',
+        'tools/calculator.html':'Math','tools/age-calculator.html':'Math',
+        'tools/percentage-calculator.html':'Math',
+        'tools/bmi-calculator.html':'Health','tools/bmr-calculator.html':'Health',
+        'tools/calorie-calculator.html':'Health','tools/body-fat-calculator.html':'Health',
+        'tools/ideal-weight-calculator.html':'Health',
+        'tools/loan-calculator.html':'Finance','tools/mortgage-calculator.html':'Finance',
+        'tools/compound-interest-calculator.html':'Finance',
+        'tools/discount-calculator.html':'Finance','tools/tip-calculator.html':'Finance',
+        'tools/overtime-calculator.html':'Life','tools/salary-calculator.html':'Life',
+        'tools/street-stall-pricing.html':'Life',
+        'tools/unit-converter.html':'Unit','tools/temperature-converter.html':'Unit',
+        'tools/length-converter.html':'Unit','tools/weight-converter.html':'Unit',
+        'tools/area-converter.html':'Unit','tools/volume-converter.html':'Unit',
+        'tools/speed-converter.html':'Unit',
+        'tools/currency-converter.html':'Currency',
+        'tools/file-size-converter.html':'Data','tools/data-storage-converter.html':'Data',
+        'tools/qrcode-generator.html':'QR/Password','tools/password-generator.html':'QR/Password',
+        'tools/date-calculator.html':'Time','tools/countdown.html':'Time',
+        'tools/world-clock.html':'Time','tools/timezone-converter.html':'Time',
+        'tools/color-picker.html':'Color','tools/color-palette.html':'Color',
+        'tools/pdf-extract.html':'Data Tool','tools/data-chart.html':'Data Tool',
+        'tools/stopwatch.html':'Productivity','tools/pomodoro.html':'Productivity',
+        'tools/dice-roller.html':'Games','tools/coin-flip.html':'Games',
+        'tools/reaction-test.html':'Games','tools/typing-test.html':'Games',
+        'tools/minesweeper.html':'Games'
+      };
+      var CAT_INFO = {
+        ai:{name:'🤖 AI',icon:'🤖',overview:2,subcatOrder:['AI Tools']},
+        dev:{name:'💻 Developer',icon:'💻',overview:6,subcatOrder:['Encode/Decode','JSON/XML','Code Tools','Crypto/Hash','Regex/Convert','Cron','Web Dev','Network']},
+        text:{name:'📝 Text',icon:'📝',overview:6,subcatOrder:['Text Process','Generate','Translate/Voice','Content Check']},
+        calc:{name:'🔢 Calculator',icon:'🔢',overview:6,subcatOrder:['Math','Finance','Health','Life']},
+        convert:{name:'📐 Converter',icon:'📐',overview:6,subcatOrder:['Unit','Currency','Data']},
+        image:{name:'🖼️ Image',icon:'🖼️',overview:6,subcatOrder:['Image Edit','Image Tool']},
+        daily:{name:'🧰 Daily',icon:'🧰',overview:6,subcatOrder:['QR/Password','Time','Color','Data Tool']},
+        game:{name:'🎮 Fun',icon:'🎮',overview:4,subcatOrder:['Games','Productivity']}
+      };
+      var CAT_ORDER = ['ai','dev','text','calc','convert','image','daily','game'];
+
+      var FAV_KEY='jiebang_favs',RECENT_KEY='jiebang_recent',MAX_RECENT=12;
+      function getFavs(){try{return JSON.parse(localStorage.getItem(FAV_KEY))||[];}catch(e){return[];}}
+      function setFavs(a){localStorage.setItem(FAV_KEY,JSON.stringify(a));}
+      function toggleFav(h){var f=getFavs(),i=f.indexOf(h);if(i>-1)f.splice(i,1);else f.push(h);setFavs(f);updateStars();}
+      function isFav(h){return getFavs().indexOf(h)>-1;}
+      function getRecent(){try{return JSON.parse(localStorage.getItem(RECENT_KEY))||[];}catch(e){return[];}}
+      function addRecent(h){var r=getRecent().filter(function(x){return x!==h;});r.unshift(h);if(r.length>MAX_RECENT)r=r.slice(0,MAX_RECENT);localStorage.setItem(RECENT_KEY,JSON.stringify(r));}
+      document.addEventListener('click',function(e){var c=e.target.closest('.tool-card');if(c&&c.href)addRecent(c.getAttribute('href'));});
+
+      var toolCards=document.querySelectorAll('.tool-card');
+      var gridEl=document.querySelector('.tools-grid');
+      toolCards.forEach(function(card){
+        var href=card.getAttribute('href')||'';
+        if(RECLASSIFY[href])card.setAttribute('data-cat',RECLASSIFY[href]);
+        if(SUBCATS[href])card.setAttribute('data-subcat',SUBCATS[href]);
+        card.style.position='relative';
+        var star=document.createElement('button');
+        star.className='fav-star'+(isFav(href)?' active':'');
+        star.innerHTML=isFav(href)?'★':'☆';
+        star.setAttribute('data-href',href);
+        star.title='Favorite';
+        star.addEventListener('click',function(e){
+          e.preventDefault();e.stopPropagation();
+          var h=this.getAttribute('data-href');toggleFav(h);
+          this.innerHTML=isFav(h)?'★':'☆';this.classList.toggle('active',isFav(h));
+          if(currentCat==='fav')filterTools();
+        });
+        card.appendChild(star);
+      });
+      function updateStars(){toolCards.forEach(function(c){var s=c.querySelector('.fav-star');if(s){var h=s.getAttribute('data-href');s.innerHTML=isFav(h)?'★':'☆';s.classList.toggle('active',isFav(h));}});}
+
+      var searchInput=document.getElementById('tool-search');
+      if(searchInput){searchInput.addEventListener('input',function(){filterTools();});}
+      var catBtns=document.querySelectorAll('.cat-btn');
+      var currentCat='all';
+      catBtns.forEach(function(btn){
+        btn.addEventListener('click',function(){
+          catBtns.forEach(function(b){b.classList.remove('active');});
+          btn.classList.add('active');
+          currentCat=btn.getAttribute('data-cat');
+          filterTools();
+        });
+      });
+
+      function filterTools(){
+        var query=searchInput?searchInput.value.trim().toLowerCase():'';
+        var isSearch=query.length>0;
+        gridEl.querySelectorAll('.subcat-header,.cat-section').forEach(function(el){el.remove();});
+        toolCards.forEach(function(c){c.style.display='';});
+
+        if(isSearch){
+          gridEl.setAttribute('data-mode','search');
+          var vc=0;toolCards.forEach(function(c){
+            var cardCat=c.getAttribute('data-cat');
+            var keywords=(c.getAttribute('data-keywords')||'').toLowerCase();
+            var title=c.querySelector('h3')?c.querySelector('h3').textContent.toLowerCase():'';
+            var matchCat=currentCat==='all'||cardCat===currentCat;
+            var matchSearch=keywords.indexOf(query)>-1||title.indexOf(query)>-1;
+            if(matchCat&&matchSearch){c.style.display='';vc++;}else{c.style.display='none';}
+          });
+          return;
+        }
+
+        if(currentCat==='fav'){
+          gridEl.setAttribute('data-mode','category');
+          var vc=0;toolCards.forEach(function(c){var h=c.getAttribute('href')||'';if(isFav(h)){c.style.display='';vc++;}else c.style.display='none';});
+          if(vc===0){var t=document.createElement('div');t.className='subcat-header';t.style.display='block';t.style.borderLeft='none';t.style.background='none';t.innerHTML='No favorites yet. Click ☆ on any tool card to add.';gridEl.insertBefore(t,gridEl.firstChild);}
+          return;
+        }
+        if(currentCat==='all'){
+          gridEl.setAttribute('data-mode','overview');
+          toolCards.forEach(function(c){c.style.display='none';});
+          // My Popular tools section (user favorites or defaults)
+          var favs=getFavs();
+          var popHrefs=favs.length>0?favs.slice(0,12):['tools/json-formatter.html','tools/base64.html','tools/timestamp.html','tools/word-counter.html','tools/qrcode-generator.html','tools/password-generator.html','tools/image-compress.html','tools/unit-converter.html','tools/calculator.html','tools/color-picker.html','tools/md5.html','tools/url-encode.html'];
+          var isC=favs.length>0;
+          var popSec=document.createElement('div');popSec.className='cat-section cat-popular';
+          var popTl=document.createElement('div');popTl.className='cat-section-title';
+          popTl.innerHTML=(isC?'📌 My Tools':'🔥 Popular Tools')+' <span class="cat-count">'+(isC?'Custom':'Featured')+'</span>'+(isC?' <span style="font-size:0.78rem;color:var(--text-light);font-weight:400">⭐ to add/remove</span>':' <span style="font-size:0.78rem;color:var(--text-light);font-weight:400">⭐ to customize</span>');
+          popSec.appendChild(popTl);
+          var popG=document.createElement('div');popG.className='cat-section-grid';
+          popHrefs.forEach(function(href){
+            var card=null;toolCards.forEach(function(c){if(c.getAttribute('href')===href)card=c;});
+            if(!card)return;
+            var cl=card.cloneNode(true);cl.style.display='';cl.querySelectorAll('p').forEach(function(p){p.remove();});
+            var st=cl.querySelector('.fav-star');if(st){st.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();var h=this.getAttribute('data-href');toggleFav(h);this.innerHTML=isFav(h)?'★':'☆';this.classList.toggle('active',isFav(h));setTimeout(function(){filterTools();},100);});}
+            cl.addEventListener('click',function(){addRecent(cl.getAttribute('href'));});
+            popG.appendChild(cl);
+          });
+          popSec.appendChild(popG);gridEl.appendChild(popSec);
+          // Category sections
+          CAT_ORDER.forEach(function(cat){
+            var info=CAT_INFO[cat];if(!info)return;
+            var cc=[];toolCards.forEach(function(c){if(c.getAttribute('data-cat')===cat)cc.push(c);});
+            if(!cc.length)return;
+            var sec=document.createElement('div');sec.className='cat-section';
+            var tl=document.createElement('div');tl.className='cat-section-title';
+            tl.innerHTML=info.icon+' '+info.name.replace(info.icon+' ','')+' <span class="cat-count">'+cc.length+'</span><span class="cat-more">View all →</span>';
+            tl.addEventListener('click',function(){catBtns.forEach(function(b){b.classList.remove('active');});var b=document.querySelector('.cat-btn[data-cat="'+cat+'"]');if(b)b.classList.add('active');currentCat=cat;filterTools();window.scrollTo({top:0,behavior:'smooth'});});
+            sec.appendChild(tl);
+            var g=document.createElement('div');g.className='cat-section-grid';
+            cc.slice(0,info.overview).forEach(function(card){
+              var cl=card.cloneNode(true);cl.style.display='';cl.querySelectorAll('p').forEach(function(p){p.remove();});
+              var st=cl.querySelector('.fav-star');if(st){st.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();var h=this.getAttribute('data-href');toggleFav(h);this.innerHTML=isFav(h)?'★':'☆';this.classList.toggle('active',isFav(h));});}
+              cl.addEventListener('click',function(){addRecent(cl.getAttribute('href'));});
+              g.appendChild(cl);
+            });
+            sec.appendChild(g);gridEl.appendChild(sec);
+          });
+          return;
+        }
+        gridEl.setAttribute('data-mode','category');
+        var catCards=[];toolCards.forEach(function(c){if(c.getAttribute('data-cat')===currentCat)catCards.push(c);});
+        var groups={},so=CAT_INFO[currentCat]?CAT_INFO[currentCat].subcatOrder:[];
+        catCards.forEach(function(c){var sc=c.getAttribute('data-subcat')||'Other';if(!groups[sc])groups[sc]=[];groups[sc].push(c);});
+        toolCards.forEach(function(c){c.style.display=c.getAttribute('data-cat')===currentCat?'':'none';});
+        var as=so.slice();Object.keys(groups).forEach(function(k){if(as.indexOf(k)===-1)as.push(k);});
+        as.forEach(function(sc){if(!groups[sc])return;var h=document.createElement('div');h.className='subcat-header';h.textContent=sc+' ('+groups[sc].length+')';if(groups[sc][0])gridEl.insertBefore(h,groups[sc][0]);});
+      }
+      filterTools();
+    })();
+  </script>
+  <!-- 百度自动推送 -->
+  <script>
+  (function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+  <!-- 360自动收录 -->
+  <script>
+  (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?07ce40a6f8df17323104dbf0f5c0946f":"https://jspassport.ssl.qhimg.com/11.0.1.js?07ce40a6f8df17323104dbf0f5c0946f";
+    document.write('<script src="' + src + '" id="sozz"></script');
+  })();
+  </script>
+
+</body>
+</html>
