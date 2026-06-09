@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图片格式转换器 - 免费在线PNG/JPG/WebP/HEIC批量转换 | 捷帮</title>
+  <meta name="description" content="免费在线图片格式转换工具，支持PNG、JPG、WebP、HEIC、BMP、GIF格式批量互转，纯浏览器处理不上传服务器，保护隐私。">
+  <meta name="keywords" content="图片格式转换,HEIC转JPG,PNG转JPG,WebP转换,图片格式转换器,批量转换,免费图片工具">
+  <link rel="canonical" href="https://www.jiebang.site/tools/image-convert">
+  <meta property="og:image" content="https://www.jiebang.site/icon-512.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="图片格式转换器 - 免费在线PNG/JPG/WebP/HEIC批量转换">
+  <meta name="twitter:description" content="免费在线图片格式转换工具，支持PNG、JPG、WebP、HEIC、BMP、GIF格式批量互转">
+  <meta name="twitter:image" content="https://www.jiebang.site/icon-512.png">
+  <meta property="og:title" content="图片格式转换器 - 免费在线PNG/JPG/WebP/HEIC批量转换">
+  <meta property="og:description" content="免费在线图片格式转换工具，支持PNG、JPG、WebP、HEIC、BMP、GIF格式批量互转，纯浏览器处理不上传服务器，保护隐私。">
+  <meta property="og:url" content="https://www.jiebang.site/tools/image-convert.html">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="../css/style.css?v=20260608e">
+  <link rel="alternate" hreflang="zh" href="https://www.jiebang.site/tools/image-convert.html">
+  <link rel="alternate" hreflang="en" href="https://www.jiebang.site/en/tools/image-convert.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiebang.site/tools/image-convert.html">
+
+  <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+
+  <style>
+    .upload-zone {
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      padding: 40px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all .2s;
+      background: var(--bg);
+    }
+    .upload-zone:hover, .upload-zone.dragover {
+      border-color: var(--primary);
+      background: #EEF2FF;
+    }
+    [data-theme="dark"] .upload-zone:hover, [data-theme="dark"] .upload-zone.dragover { background: #2A2A45; }
+    .upload-zone p { color: var(--text-light); margin-top: 8px; font-size: 14px; }
+    .upload-zone .upload-icon { font-size: 48px; }
+    .upload-zone .formats-hint { font-size: 12px; margin-top: 12px; color: var(--text-light); }
+
+    .file-list { margin-top: 20px; display: none; }
+    .file-list.show { display: block; }
+    .file-list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .file-list-header h4 { margin: 0; font-size: 15px; color: var(--text); }
+    .file-list-header .clear-all { font-size: 13px; color: #ef4444; cursor: pointer; background: none; border: none; padding: 4px 8px; border-radius: 6px; }
+    .file-list-header .clear-all:hover { background: #fef2f2; }
+    [data-theme="dark"] .file-list-header .clear-all:hover { background: #3A1E1E; }
+
+    .file-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+    .file-thumb { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; background: var(--bg-white); border: 1px solid var(--border); flex-shrink: 0; }
+    .file-info { flex: 1; min-width: 0; }
+    .file-name { font-size: 14px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px; }
+    .file-meta { font-size: 12px; color: var(--text-light); display: flex; gap: 12px; }
+    .file-status { flex-shrink: 0; }
+    .file-status .status-pending { color: var(--text-light); font-size: 12px; }
+    .file-status .status-converting { color: #f59e0b; font-size: 12px; }
+    .file-status .status-done { color: #10b981; font-size: 12px; }
+    .file-status .status-error { color: #ef4444; font-size: 12px; }
+    .file-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .file-actions button { padding: 6px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; border: 1px solid var(--border); background: var(--bg-white); color: var(--text); }
+    .file-actions button:hover { border-color: var(--primary); color: var(--primary); }
+    .file-actions button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .format-options {
+      display: flex;
+      gap: 12px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    .format-btn {
+      padding: 12px 20px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-white);
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      transition: all .2s;
+      text-align: center;
+    }
+    .format-btn:hover { border-color: var(--primary); }
+    .format-btn.active { border-color: var(--primary); background: #EEF2FF; color: var(--primary); }
+    [data-theme="dark"] .format-btn.active { background: #2A2A45; }
+    .format-btn .ext { font-size: 20px; display: block; margin-bottom: 4px; }
+    .format-btn .desc { font-size: 12px; color: var(--text-light); font-weight: 400; }
+
+    .quality-control { margin: 16px 0; display: none; }
+    .quality-control.show { display: block; }
+    .quality-label { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+    .quality-value { background: var(--primary); color: white; padding: 2px 10px; border-radius: 12px; font-size: 13px; }
+    .quality-slider { width: 100%; height: 8px; border-radius: 4px; background: var(--border); outline: none; -webkit-appearance: none; cursor: pointer; }
+    .quality-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--primary); cursor: pointer; }
+    .quality-slider::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--primary); cursor: pointer; border: none; }
+
+    .batch-actions { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+    .progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-top: 12px; overflow: hidden; display: none; }
+    .progress-bar.show { display: block; }
+    .progress-fill { height: 100%; background: var(--primary); border-radius: 3px; transition: width 0.3s; width: 0; }
+    .progress-text { font-size: 13px; color: var(--text-light); margin-top: 6px; text-align: center; display: none; }
+    .progress-text.show { display: block; }
+
+    .result-section { margin-top: 24px; display: none; }
+    .result-section.show { display: block; }
+    .result-summary { background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 10px; padding: 16px; margin-bottom: 16px; text-align: center; }
+    [data-theme="dark"] .result-summary { background: #1A3A2E; border-color: #2A4A3E; }
+    .result-summary p { margin: 0; color: #065F46; font-weight: 600; font-size: 15px; }
+    [data-theme="dark"] .result-summary p { color: #6EE7B7; }
+    .download-all-btn { width: 100%; padding: 16px; font-size: 16px; }
+
+    .step-card {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 12px;
+      background: #f8faff;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    [data-theme="dark"] .step-card { background: #2A2A45; }
+    .step-card:last-child { margin-bottom: 0; }
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .step-content { flex: 1; }
+    .step-content h6 { font-size: 14px; font-weight: 600; margin: 0 0 4px; color: #1e293b; }
+    [data-theme="dark"] .step-content h6 { color: #D8D8E0; }
+    .step-content p { font-size: 13px; color: #64748b; margin: 0; line-height: 1.5; }
+    [data-theme="dark"] .step-content p { color: #9090A0; }
+    .step-mock {
+      display: inline-block;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 12px;
+      color: #6366f1;
+      margin-top: 4px;
+    }
+    [data-theme="dark"] .step-mock { background: #1C1C24; border-color: #3A3A46; color: #9B9FE0; }
+
+    .faq-section { margin: 32px 0 0; padding: 24px; background: var(--bg); border-radius: 12px; }
+    .faq-title { font-size: 1.3rem; font-weight: 700; margin: 0 0 16px; color: var(--text); }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question { font-weight: 600; padding: 14px 0; cursor: pointer; color: var(--text); list-style: none; display: flex; justify-content: space-between; align-items: center; }
+    .faq-question::-webkit-details-marker { display: none; }
+    .faq-question::after { content: '+'; font-size: 1.2rem; color: var(--text-light); transition: transform 0.2s; }
+    .faq-item[open] .faq-question::after { content: '−'; }
+    .faq-answer { padding: 0 0 14px; color: var(--text-light); line-height: 1.6; margin: 0; }
+    [data-theme="dark"] .faq-section { background: var(--bg-white); }
+
+    @media (max-width: 600px) {
+      .file-card { padding: 10px; }
+      .file-thumb { width: 50px; height: 50px; }
+      .file-meta { flex-direction: column; gap: 4px; }
+      .batch-actions { flex-direction: column; }
+      .batch-actions .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+
+  <meta name="baidu-site-verification" content="codeva-jxz1UNTyGa" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "图片格式转换器",
+    "description": "免费在线图片格式转换工具，支持PNG、JPG、WebP、HEIC、BMP、GIF格式批量互转，纯浏览器处理不上传服务器，保护隐私。",
+    "url": "https://www.jiebang.site/tools/image-convert.html",
+    "applicationCategory": "多媒体应用",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CNY"
+    },
+    "browserRequirements": "需要JavaScript和HTML5支持",
+    "featureList": ["HEIC转JPG转换", "批量图片转换", "PNG转JPG", "WebP转换", "质量调整", "ZIP打包下载"],
+    "isAccessibleForFree": true,
+    "author": {
+      "@type": "Organization",
+      "name": "捷帮",
+      "url": "https://www.jiebang.site"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "如何将HEIC转为JPG？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "上传iPhone拍摄的HEIC照片，选择JPG作为输出格式，点击转换即可。全程浏览器本地处理，无需上传服务器。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "可以批量转换图片吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "可以！拖拽或选择多张图片一次性上传，转换后可逐个下载或打包为ZIP下载。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "我的图片安全吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "绝对安全。所有处理都在你的浏览器中完成，图片不会上传到任何服务器，隐私完全受保护。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "PNG和JPG有什么区别？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "PNG支持透明背景和无损压缩，适合Logo和截图；JPG使用有损压缩文件更小，适合照片；WebP则兼得——比JPG更小，质量接近PNG。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "支持iPhone的HEIC格式吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "支持！捷帮是少有的免费支持HEIC转JPG/PNG/WebP的工具。iPhone默认保存HEIC格式照片，转换后即可通用分享。"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "如何使用图片格式转换器",
+    "description": "学习如何使用捷帮免费在线图片格式转换工具",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "上传图片",
+        "text": "拖拽或点击选择图片，支持PNG、JPG、WebP、HEIC、BMP和GIF格式。"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "选择输出格式",
+        "text": "选择目标格式：JPG、PNG或WebP，根据需要调整质量。"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "转换并下载",
+        "text": "点击"全部转换"处理图片，可逐个下载或打包为ZIP下载。"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "首页",
+        "item": "https://www.jiebang.site"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "图片格式转换器",
+        "item": "https://www.jiebang.site/tools/image-convert.html"
+      }
+    ]
+  }
+  </script>
+
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?fe11c4bd67c394bc89ee8f97d6ffa81a";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  <script src="/dark-mode.js"></script>
+  <script src="/monitor.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="site-logo"><span class="logo-icon">捷</span><span>捷帮</span></a>
+      <span class="site-slogan">快速帮你解决问题</span>
+      <button id="darkToggle" class="dark-toggle" onclick="toggleDarkMode()" title="切换夜间模式">🌙</button>
+    </div>
+  </header>
+
+  <div class="tool-page">
+    <div class="guide-nav-bar">
+      <div class="guide-links">
+        <a href="../index.html" class="guide-link">← 返回首页</a>
+      </div>
+      <a href="../en/tools/image-convert.html" class="lang-switch">🌐 English</a>
+    </div>
+
+    <div class="tool-header">
+      <h1>图片格式转换器</h1>
+      <span class="guide-icon" onclick="event.stopPropagation();document.getElementById('guideModal').classList.add('active')">?</span>
+      <div class="guide-modal" id="guideModal" onclick="if(event.target===this)this.classList.remove('active')">
+        <div class="guide-modal-box">
+          <button class="guide-close" onclick="document.getElementById('guideModal').classList.remove('active')">&times;</button>
+          <h3>📖 图片格式转换器使用指南</h3>
+          <h5>操作步骤</h5>
+          <div class="step-card">
+            <div class="step-num">①</div>
+            <div class="step-content">
+              <h6>上传图片</h6>
+              <p>点击或拖拽图片到上传区域</p>
+              <span class="step-mock">📁 上传区域</span>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">②</div>
+            <div class="step-content">
+              <h6>选择输出格式</h6>
+              <p>选择JPG、PNG、WebP或BMP作为目标格式</p>
+              <span class="step-mock">📄 格式选择</span>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">③</div>
+            <div class="step-content">
+              <h6>调整质量</h6>
+              <p>滑动质量滑块设置输出品质</p>
+              <span class="step-mock">🎚️ 质量滑块</span>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">④</div>
+            <div class="step-content">
+              <h6>转换并下载</h6>
+              <p>等待处理完成后点击下载</p>
+              <span class="step-mock">💾 下载文件</span>
+            </div>
+          </div>
+          <div class="tip">💡 PNG转JPG可大幅减小文件体积</div>
+          <h5>使用场景</h5>
+          <div class="scene"><b>📋 证件照格式</b><p>考试报名要求JPG但照片是PNG</p></div>
+          <div class="scene"><b>🔲 透明背景</b><p>需要透明背景时把JPG转PNG</p></div>
+          <div class="scene"><b>⚡ 网页优化</b><p>WebP格式体积更小</p></div>
+          <div class="scene"><b>📱 iPhone HEIC照片</b><p>转换HEIC为JPG以便通用分享</p></div>
+        </div>
+      </div>
+      <p>支持PNG、JPG、WebP、HEIC、BMP、GIF格式互转 — 纯浏览器处理，无需上传</p>
+    </div>
+
+    <div class="tool-body">
+      <div class="upload-zone" id="upload-zone">
+        <div class="upload-icon">📁</div>
+        <p>点击或拖拽图片到这里</p>
+        <p>支持 PNG、JPG、WebP、HEIC、BMP、GIF 格式</p>
+        <div class="formats-hint">支持iPhone HEIC照片！最多同时处理20张</div>
+      </div>
+      <input type="file" id="file-input" accept="image/*" multiple style="display:none">
+
+      <div class="file-list" id="file-list">
+        <div class="file-list-header">
+          <h4>文件列表 (<span id="file-count">0</span>)</h4>
+          <button class="clear-all" onclick="clearAllFiles()">清空全部</button>
+        </div>
+        <div id="file-items"></div>
+      </div>
+
+      <label style="font-size:14px;font-weight:600;display:block;margin:20px 0 8px">输出格式</label>
+      <div class="format-options">
+        <button class="format-btn active" data-format="jpg" onclick="selectFormat(this)">
+          <span class="ext">JPG</span>
+          <span class="desc">体积小，适合照片</span>
+        </button>
+        <button class="format-btn" data-format="png" onclick="selectFormat(this)">
+          <span class="ext">PNG</span>
+          <span class="desc">无损，支持透明</span>
+        </button>
+        <button class="format-btn" data-format="webp" onclick="selectFormat(this)">
+          <span class="ext">WebP</span>
+          <span class="desc">新一代，更小体积</span>
+        </button>
+        <button class="format-btn" data-format="bmp" onclick="selectFormat(this)">
+          <span class="ext">BMP</span>
+          <span class="desc">未压缩格式</span>
+        </button>
+      </div>
+
+      <div class="quality-control" id="quality-control">
+        <div class="quality-label">
+          <span>输出质量</span>
+          <span class="quality-value" id="quality-value">0.92</span>
+        </div>
+        <input type="range" class="quality-slider" id="quality-slider" min="0.1" max="1" step="0.01" value="0.92">
+      </div>
+
+      <div class="batch-actions">
+        <button class="btn btn-primary" id="convert-all-btn" onclick="convertAllFiles()">🔄 全部转换</button>
+        <button class="btn btn-accent download-all-btn" id="download-zip-btn" onclick="downloadZip()" style="display:none">📦 打包下载ZIP</button>
+      </div>
+
+      <div class="progress-bar" id="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div class="progress-text" id="progress-text">正在转换... 0/0</div>
+
+      <div class="result-section" id="result-section">
+        <div class="result-summary">
+          <p id="result-summary-text">✅ 转换完成！已处理 0 个文件。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="seo-content" style="max-width:800px;margin:40px auto 0;padding:0 20px;">
+    <h2 style="font-size:1.5em;margin-bottom:16px;color:var(--text-primary,#1a1a2e);">什么是图片格式转换器？</h2>
+    <p style="line-height:1.8;color:var(--text-secondary,#555);">捷帮图片格式转换器是一款免费在线工具，支持PNG、JPG、WebP、HEIC、BMP、GIF格式之间的批量互转。所有处理都在浏览器本地完成，图片永远不会离开你的设备。</p>
+
+    <h2 style="font-size:1.5em;margin:24px 0 16px;color:var(--text-primary,#1a1a2e);">如何使用图片格式转换器？</h2>
+    <ol style="line-height:2;color:var(--text-secondary,#555);padding-left:20px;">
+      <li>拖拽或点击选择多张图片上传</li>
+      <li>选择目标输出格式（JPG、PNG、WebP或BMP）</li>
+      <li>如需调整JPG/WebP质量，滑动质量滑块</li>
+      <li>点击"全部转换"处理图片</li>
+      <li>逐个下载或打包为ZIP下载</li>
+    </ol>
+
+    <h2 style="font-size:1.5em;margin:24px 0 16px;color:var(--text-primary,#1a1a2e);">常见使用场景</h2>
+    <ul style="line-height:2;color:var(--text-secondary,#555);padding-left:20px;">
+      <li><strong>iPhone HEIC转JPG：</strong>将iPhone拍摄的HEIC照片转换为JPG格式以便通用分享</li>
+      <li><strong>PNG转JPG：</strong>通过将PNG图片转换为JPG格式来减小文件体积</li>
+      <li><strong>JPG转PNG：</strong>添加透明背景或保留高质量的图形</li>
+      <li><strong>WebP转换：</strong>使用WebP格式获得更小的文件体积用于网页</li>
+      <li><strong>BMP转换：</strong>将BMP转换为JPG/PNG以便网页使用</li>
+    </ul>
+
+    <h2 style="font-size:1.5em;margin:24px 0 16px;color:var(--text-primary,#1a1a2e);">为什么选择捷帮图片格式转换器？</h2>
+    <ul style="line-height:2;color:var(--text-secondary,#555);padding-left:20px;">
+      <li><strong>完全免费：</strong>无需注册、无需登录、无任何限制</li>
+      <li><strong>隐私优先：</strong>所有处理在浏览器完成，图片不会上传到服务器</li>
+      <li><strong>HEIC支持：</strong>少数支持iPhone HEIC转换的免费工具之一</li>
+      <li><strong>批量处理：</strong>最多可同时转换20张图片</li>
+      <li><strong>质量控制：</strong>可调节质量滑块获得最佳文件大小</li>
+    </ul>
+
+    <div class="related-tools" style="margin-top:32px;padding-top:24px;border-top:1px solid var(--border-color,#e5e7eb);">
+      <h2 style="font-size:1.3em;margin-bottom:16px;color:var(--text-primary,#1a1a2e);">相关工具推荐</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;">
+        <a href="../tools/image-compress.html" style="display:block;padding:12px;border:1px solid var(--border-color,#e5e7eb);border-radius:8px;text-decoration:none;color:var(--text-primary,#1a1a2e);transition:border-color 0.2s;">
+          <strong>图片压缩</strong>
+          <p style="margin:4px 0 0;font-size:0.85em;color:var(--text-secondary,#666);">在线压缩图片</p>
+        </a>
+        <a href="../tools/image-crop.html" style="display:block;padding:12px;border:1px solid var(--border-color,#e5e7eb);border-radius:8px;text-decoration:none;color:var(--text-primary,#1a1a2e);transition:border-color 0.2s;">
+          <strong>图片裁剪</strong>
+          <p style="margin:4px 0 0;font-size:0.85em;color:var(--text-secondary,#666);">在线裁剪图片</p>
+        </a>
+        <a href="../tools/image-merge.html" style="display:block;padding:12px;border:1px solid var(--border-color,#e5e7eb);border-radius:8px;text-decoration:none;color:var(--text-primary,#1a1a2e);transition:border-color 0.2s;">
+          <strong>图片合并</strong>
+          <p style="margin:4px 0 0;font-size:0.85em;color:var(--text-secondary,#666);">在线合并图片</p>
+        </a>
+        <a href="../tools/json-formatter.html" style="display:block;padding:12px;border:1px solid var(--border-color,#e5e7eb);border-radius:8px;text-decoration:none;color:var(--text-primary,#1a1a2e);transition:border-color 0.2s;">
+          <strong>JSON格式化</strong>
+          <p style="margin:4px 0 0;font-size:0.85em;color:var(--text-secondary,#666);">美化压缩验证JSON</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <h2 class="faq-title">常见问题</h2>
+    <details class="faq-item">
+      <summary class="faq-question">如何将HEIC转为JPG？</summary>
+      <p class="faq-answer">上传iPhone拍摄的HEIC照片，选择JPG作为输出格式，点击转换即可。全程浏览器本地处理，无需上传服务器。</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">可以批量转换图片吗？</summary>
+      <p class="faq-answer">可以！拖拽或选择多张图片一次性上传，转换后可逐个下载或打包为ZIP下载。</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">我的图片安全吗？</summary>
+      <p class="faq-answer">绝对安全。所有处理都在你的浏览器中完成，图片不会上传到任何服务器，隐私完全受保护。</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">PNG和JPG有什么区别？</summary>
+      <p class="faq-answer">PNG支持透明背景和无损压缩，适合Logo和截图；JPG使用有损压缩文件更小，适合照片；WebP则兼得——比JPG更小，质量接近PNG。</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">支持iPhone的HEIC格式吗？</summary>
+      <p class="faq-answer">支持！捷帮是少有的免费支持HEIC转JPG/PNG/WebP的工具。iPhone默认保存HEIC格式照片，转换后即可通用分享。</p>
+    </details>
+  </section>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 捷帮 JieBang — 免费在线工具站</p>
+    <div style="margin-top:8px;">
+      <a href="../about.html" style="color:#888;text-decoration:none;margin:0 8px;">关于我们</a>
+      <a href="../privacy.html" style="color:#888;text-decoration:none;margin:0 8px;">隐私政策</a>
+      <a href="../contact.html" style="color:#888;text-decoration:none;margin:0 8px;">联系我们</a>
+    </div>
+  </footer>
+
+  <script>
+    var files = [];
+    var targetFmt = 'jpg';
+    var quality = 0.92;
+    var convertedFiles = [];
+
+    var uploadZone = document.getElementById('upload-zone');
+    uploadZone.addEventListener('click', function() { document.getElementById('file-input').click(); });
+    uploadZone.addEventListener('dragover', function(e) { e.preventDefault(); this.classList.add('dragover'); });
+    uploadZone.addEventListener('dragleave', function() { this.classList.remove('dragover'); });
+    uploadZone.addEventListener('drop', function(e) {
+      e.preventDefault(); this.classList.remove('dragover');
+      handleFiles(e.dataTransfer.files);
+    });
+    document.getElementById('file-input').addEventListener('change', function() { handleFiles(this.files); });
+
+    document.getElementById('quality-slider').addEventListener('input', function() {
+      quality = parseFloat(this.value);
+      document.getElementById('quality-value').textContent = quality.toFixed(2);
+    });
+
+    function handleFiles(fileList) {
+      var newFiles = Array.from(fileList).filter(function(f) { return f.type.startsWith('image/'); });
+      if (newFiles.length === 0) { showToast('请选择图片文件'); return; }
+      if (files.length + newFiles.length > 20) {
+        showToast('最多支持20个文件');
+        newFiles = newFiles.slice(0, 20 - files.length);
+      }
+      newFiles.forEach(function(file) {
+        var ext = getFileExtension(file);
+        files.push({
+          file: file,
+          id: Date.now() + Math.random(),
+          name: file.name,
+          ext: ext,
+          size: file.size,
+          status: 'pending',
+          thumb: null,
+          blob: null
+        });
+      });
+      renderFileList();
+      generateThumbnails();
+    }
+
+    function getFileExtension(file) {
+      var ext = file.name.split('.').pop().toUpperCase();
+      if (ext === 'JPEG') ext = 'JPG';
+      if (file.type === 'image/heic' || file.type === 'image/heif') ext = 'HEIC';
+      return ext;
+    }
+
+    function formatSize(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1048576).toFixed(2) + ' MB';
+    }
+
+    function renderFileList() {
+      var fileList = document.getElementById('file-list');
+      var fileItems = document.getElementById('file-items');
+      var fileCount = document.getElementById('file-count');
+
+      if (files.length === 0) {
+        fileList.classList.remove('show');
+        return;
+      }
+
+      fileList.classList.add('show');
+      fileCount.textContent = files.length;
+      fileItems.innerHTML = '';
+
+      files.forEach(function(item) {
+        var card = document.createElement('div');
+        card.className = 'file-card';
+        card.id = 'file-' + item.id;
+
+        var statusHtml = '';
+        if (item.status === 'pending') statusHtml = '<span class="status-pending">⏳ 等待中</span>';
+        else if (item.status === 'converting') statusHtml = '<span class="status-converting">⚙️ 转换中...</span>';
+        else if (item.status === 'done') statusHtml = '<span class="status-done">✅ 完成</span>';
+        else if (item.status === 'error') statusHtml = '<span class="status-error">❌ 错误</span>';
+
+        var downloadBtn = item.status === 'done' 
+          ? '<button onclick="downloadSingle(\'' + item.id + '\')">💾 下载</button>'
+          : '<button disabled>💾 下载</button>';
+
+        card.innerHTML = 
+          '<img class="file-thumb" id="thumb-' + item.id + '" src="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'60\' height=\'60\'%3E%3Crect fill=\'%23e5e7eb\' width=\'60\' height=\'60\'/%3E%3Ctext x=\'30\' y=\'35\' text-anchor=\'middle\' fill=\'%239ca3af\' font-size=\'10\'%3E' + item.ext + '%3C/text%3E%3C/svg%3E" alt="缩略图">' +
+          '<div class="file-info">' +
+            '<div class="file-name">' + item.name + '</div>' +
+            '<div class="file-meta">' +
+              '<span>' + item.ext + '</span>' +
+              '<span>' + formatSize(item.size) + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="file-status">' + statusHtml + '</div>' +
+          '<div class="file-actions">' + downloadBtn + '</div>';
+        fileItems.appendChild(card);
+      });
+    }
+
+    function generateThumbnails() {
+      files.forEach(function(item) {
+        if (item.thumb) return;
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          var thumb = document.getElementById('thumb-' + item.id);
+          if (thumb) {
+            thumb.src = e.target.result;
+            thumb.onload = function() {
+              var canvas = document.createElement('canvas');
+              var size = 60;
+              canvas.width = size;
+              canvas.height = size;
+              var ctx = canvas.getContext('2d');
+              var img = new Image();
+              img.onload = function() {
+                var scale = Math.max(size / img.width, size / img.height);
+                var x = (size - img.width * scale) / 2;
+                var y = (size - img.height * scale) / 2;
+                ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+                thumb.src = canvas.toDataURL('image/jpeg', 0.7);
+              };
+              img.src = e.target.result;
+            };
+          }
+        };
+        reader.readAsDataURL(item.file);
+      });
+    }
+
+    function clearAllFiles() {
+      files = [];
+      convertedFiles = [];
+      renderFileList();
+      document.getElementById('result-section').classList.remove('show');
+      document.getElementById('download-zip-btn').style.display = 'none';
+    }
+
+    function selectFormat(btn) {
+      document.querySelectorAll('.format-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      targetFmt = btn.getAttribute('data-format');
+
+      var qualityControl = document.getElementById('quality-control');
+      if (targetFmt === 'jpg' || targetFmt === 'webp') {
+        qualityControl.classList.add('show');
+      } else {
+        qualityControl.classList.remove('show');
+      }
+    }
+
+    async function convertAllFiles() {
+      if (files.length === 0) { showToast('请先添加图片'); return; }
+
+      var progressBar = document.getElementById('progress-bar');
+      var progressFill = document.getElementById('progress-fill');
+      var progressText = document.getElementById('progress-text');
+      var convertBtn = document.getElementById('convert-all-btn');
+
+      progressBar.classList.add('show');
+      progressText.classList.add('show');
+      convertBtn.disabled = true;
+      convertedFiles = [];
+
+      var completed = 0;
+      var total = files.length;
+
+      for (var i = 0; i < files.length; i++) {
+        var item = files[i];
+        item.status = 'converting';
+        renderFileList();
+
+        try {
+          var result = await convertFile(item);
+          item.status = 'done';
+          item.blob = result.blob;
+          item.newName = result.name;
+          convertedFiles.push({ name: result.name, blob: result.blob });
+        } catch (err) {
+          console.error('转换错误:', err);
+          item.status = 'error';
+        }
+
+        completed++;
+        var percent = (completed / total) * 100;
+        progressFill.style.width = percent + '%';
+        progressText.textContent = '正在转换... ' + completed + '/' + total;
+        renderFileList();
+      }
+
+      progressText.textContent = '转换完成！已处理 ' + completed + ' 个文件';
+      convertBtn.disabled = false;
+
+      if (convertedFiles.length > 0) {
+        document.getElementById('result-section').classList.add('show');
+        document.getElementById('result-summary-text').textContent = '✅ 转换完成！已处理 ' + completed + ' 个文件。';
+        document.getElementById('download-zip-btn').style.display = 'inline-flex';
+      }
+
+      setTimeout(function() {
+        progressBar.classList.remove('show');
+        progressText.classList.remove('show');
+      }, 2000);
+    }
+
+    function convertFile(item) {
+      return new Promise(function(resolve, reject) {
+        var isHeic = item.file.type === 'image/heic' || item.file.type === 'image/heif' || 
+                     item.file.name.toLowerCase().endsWith('.heic') || item.file.name.toLowerCase().endsWith('.heif');
+
+        if (isHeic) {
+          heic2any({
+            blob: item.file,
+            toType: 'image/' + targetFmt,
+            quality: quality
+          }).then(function(resultBlob) {
+            var newName = item.name.replace(/\.[^.]+$/, '.' + targetFmt);
+            resolve({ blob: resultBlob, name: newName });
+          }).catch(function(err) {
+            reject(err);
+          });
+        } else {
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            var img = new Image();
+            img.onload = function() {
+              var canvas = document.createElement('canvas');
+              canvas.width = img.width;
+              canvas.height = img.height;
+              var ctx = canvas.getContext('2d');
+
+              if (targetFmt === 'jpg') {
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+              }
+              ctx.drawImage(img, 0, 0);
+
+              var mimeType = 'image/' + targetFmt;
+              var qualityVal = (targetFmt === 'png' || targetFmt === 'bmp') ? undefined : quality;
+
+              canvas.toBlob(function(blob) {
+                if (!blob) {
+                  reject(new Error('转换失败'));
+                  return;
+                }
+                var newName = item.name.replace(/\.[^.]+$/, '.' + targetFmt);
+                resolve({ blob: blob, name: newName });
+              }, mimeType, qualityVal);
+            };
+            img.onerror = function() {
+              reject(new Error('图片加载失败'));
+            };
+            img.src = e.target.result;
+          };
+          reader.onerror = function() {
+            reject(new Error('文件读取失败'));
+          };
+          reader.readAsDataURL(item.file);
+        }
+      });
+    }
+
+    function downloadSingle(id) {
+      var item = files.find(function(f) { return f.id == id; });
+      if (!item || !item.blob) return;
+
+      var url = URL.createObjectURL(item.blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = item.newName || item.name;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function downloadZip() {
+      if (convertedFiles.length === 0) return;
+
+      showToast('正在创建ZIP文件...');
+
+      var zip = new JSZip();
+      convertedFiles.forEach(function(item) {
+        zip.file(item.name, item.blob);
+      });
+
+      zip.generateAsync({ type: 'blob' }).then(function(content) {
+        saveAs(content, '捷帮_转换文件_' + Date.now() + '.zip');
+        showToast('ZIP下载成功！');
+      }).catch(function(err) {
+        showToast('ZIP创建失败');
+      });
+    }
+
+    function showToast(msg) {
+      var t = document.querySelector('.toast');
+      if (t) t.remove();
+      t = document.createElement('div'); t.className = 'toast'; t.textContent = msg;
+      document.body.appendChild(t);
+      setTimeout(function() { t.classList.add('show'); }, 10);
+      setTimeout(function() { t.classList.remove('show'); setTimeout(function() { t.remove(); }, 300); }, 2500);
+    }
+  </script>
+
+  <script>
+  (function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+  <script>
+  (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?07ce40a6f8df17323104dbf0f5c0946f":"https://jspassport.ssl.qhimg.com/11.0.1.js?07ce40a6f8df17323104dbf0f5c0946f";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+  })();
+  </script>
+
+  <div class="feedback-fab">
+    <button class="feedback-btn" onclick="openFeedback()" title="意见反馈">💬</button>
+  </div>
+  <div class="feedback-modal" id="feedbackModal">
+    <div class="feedback-modal-content">
+      <button class="feedback-close" onclick="closeFeedback()">&times;</button>
+      <h3>意见反馈</h3>
+      <p class="feedback-subtitle">告诉我们您需要什么工具，或使用中遇到的问题</p>
+      <textarea id="feedbackText" placeholder="请输入您的建议或遇到的问题..."></textarea>
+      <input type="text" id="feedbackContact" placeholder="联系方式（选填，方便我们回复您）">
+      <div class="feedback-actions">
+        <button class="btn-cancel" onclick="closeFeedback()">取消</button>
+        <button class="btn-submit" onclick="submitFeedback()">提交</button>
+      </div>
+    </div>
+  </div>
+  <script>
+  function openFeedback(){document.getElementById('feedbackModal').classList.add('active');document.getElementById('feedbackText').focus()}
+  function closeFeedback(){document.getElementById('feedbackModal').classList.remove('active')}
+  document.getElementById('feedbackModal').addEventListener('click',function(e){if(e.target===this)closeFeedback()});
+  function submitFeedback(){
+    var text=document.getElementById('feedbackText').value.trim();
+    if(!text){alert('请输入反馈内容');return}
+    var contact=document.getElementById('feedbackContact').value.trim();
+    var page=location.pathname;
+    if(navigator.sendBeacon){
+      var blob=new Blob([JSON.stringify({type:'feedback',tool:page,text:text,contact:contact})],{type:'application/json'});
+      navigator.sendBeacon('/api/telemetry',blob);
+    }
+    closeFeedback();
+    if(typeof showToast==='function')showToast('感谢您的反馈！');
+  }
+  </script>
+</body>
+</html>

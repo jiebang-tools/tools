@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Format Converter - Free Online PNG/JPG/WebP/HEIC Conversion | JieBang</title>
+  <meta name="description" content="Free online image converter. Batch convert between PNG, JPG, WebP, HEIC, BMP, and GIF formats. No upload to server — all processing in your browser. 100% free.">
+  <meta name="keywords" content="image converter, HEIC to JPG, PNG to JPG, WebP converter, image format, batch conversion, free image tool">
+  <link rel="canonical" href="https://www.jiebang.site/en/tools/image-convert">
+  <meta property="og:image" content="https://www.jiebang.site/icon-512.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Image Format Converter - Free Online PNG/JPG/WebP/HEIC Conversion">
+  <meta name="twitter:description" content="Free online image converter. Batch convert between PNG, JPG, WebP, HEIC, BMP, and GIF formats.">
+  <meta name="twitter:image" content="https://www.jiebang.site/icon-512.png">
+  <meta property="og:title" content="Image Format Converter - Free Online PNG/JPG/WebP/HEIC Conversion">
+  <meta property="og:description" content="Free online image converter. Batch convert between PNG, JPG, WebP, HEIC, BMP, and GIF formats. No upload to server.">
+  <meta property="og:url" content="https://www.jiebang.site/en/tools/image-convert.html">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="../../css/style.css?v=20260608e">
+  <link rel="alternate" hreflang="zh" href="https://www.jiebang.site/tools/image-convert.html">
+  <link rel="alternate" hreflang="en" href="https://www.jiebang.site/en/tools/image-convert.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiebang.site/tools/image-convert.html">
+  
+  <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+
+  <style>
+    .upload-zone {
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+      padding: 40px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all .2s;
+      background: var(--bg);
+    }
+    .upload-zone:hover, .upload-zone.dragover {
+      border-color: var(--primary);
+      background: #EEF2FF;
+    }
+    [data-theme="dark"] .upload-zone:hover, [data-theme="dark"] .upload-zone.dragover { background: #2A2A45; }
+    .upload-zone p { color: var(--text-light); margin-top: 8px; font-size: 14px; }
+    .upload-zone .upload-icon { font-size: 48px; }
+    .upload-zone .formats-hint { font-size: 12px; margin-top: 12px; color: var(--text-light); }
+
+    .file-list { margin-top: 20px; display: none; }
+    .file-list.show { display: block; }
+    .file-list-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .file-list-header h4 { margin: 0; font-size: 15px; color: var(--text); }
+    .file-list-header .clear-all { font-size: 13px; color: #ef4444; cursor: pointer; background: none; border: none; padding: 4px 8px; border-radius: 6px; }
+    .file-list-header .clear-all:hover { background: #fef2f2; }
+    [data-theme="dark"] .file-list-header .clear-all:hover { background: #3A1E1E; }
+
+    .file-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+    .file-thumb { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; background: var(--bg-white); border: 1px solid var(--border); flex-shrink: 0; }
+    .file-info { flex: 1; min-width: 0; }
+    .file-name { font-size: 14px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 4px; }
+    .file-meta { font-size: 12px; color: var(--text-light); display: flex; gap: 12px; }
+    .file-status { flex-shrink: 0; }
+    .file-status .status-pending { color: var(--text-light); font-size: 12px; }
+    .file-status .status-converting { color: #f59e0b; font-size: 12px; }
+    .file-status .status-done { color: #10b981; font-size: 12px; }
+    .file-status .status-error { color: #ef4444; font-size: 12px; }
+    .file-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .file-actions button { padding: 6px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; border: 1px solid var(--border); background: var(--bg-white); color: var(--text); }
+    .file-actions button:hover { border-color: var(--primary); color: var(--primary); }
+    .file-actions button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .format-options {
+      display: flex;
+      gap: 12px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+    .format-btn {
+      padding: 12px 20px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-white);
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      transition: all .2s;
+      text-align: center;
+    }
+    .format-btn:hover { border-color: var(--primary); }
+    .format-btn.active { border-color: var(--primary); background: #EEF2FF; color: var(--primary); }
+    [data-theme="dark"] .format-btn.active { background: #2A2A45; }
+    .format-btn .ext { font-size: 20px; display: block; margin-bottom: 4px; }
+    .format-btn .desc { font-size: 12px; color: var(--text-light); font-weight: 400; }
+
+    .quality-control { margin: 16px 0; display: none; }
+    .quality-control.show { display: block; }
+    .quality-label { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+    .quality-value { background: var(--primary); color: white; padding: 2px 10px; border-radius: 12px; font-size: 13px; }
+    .quality-slider { width: 100%; height: 8px; border-radius: 4px; background: var(--border); outline: none; -webkit-appearance: none; cursor: pointer; }
+    .quality-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--primary); cursor: pointer; }
+    .quality-slider::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--primary); cursor: pointer; border: none; }
+
+    .batch-actions { display: flex; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+    .progress-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; margin-top: 12px; overflow: hidden; display: none; }
+    .progress-bar.show { display: block; }
+    .progress-fill { height: 100%; background: var(--primary); border-radius: 3px; transition: width 0.3s; width: 0; }
+    .progress-text { font-size: 13px; color: var(--text-light); margin-top: 6px; text-align: center; display: none; }
+    .progress-text.show { display: block; }
+
+    .result-section { margin-top: 24px; display: none; }
+    .result-section.show { display: block; }
+    .result-summary { background: #ECFDF5; border: 1px solid #A7F3D0; border-radius: 10px; padding: 16px; margin-bottom: 16px; text-align: center; }
+    [data-theme="dark"] .result-summary { background: #1A3A2E; border-color: #2A4A3E; }
+    .result-summary p { margin: 0; color: #065F46; font-weight: 600; font-size: 15px; }
+    [data-theme="dark"] .result-summary p { color: #6EE7B7; }
+    .download-all-btn { width: 100%; padding: 16px; font-size: 16px; }
+
+    .step-card {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 12px;
+      background: #f8faff;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    [data-theme="dark"] .step-card { background: #2A2A45; }
+    .step-card:last-child { margin-bottom: 0; }
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .step-content { flex: 1; }
+    .step-content h6 { font-size: 14px; font-weight: 600; margin: 0 0 4px; color: #1e293b; }
+    [data-theme="dark"] .step-content h6 { color: #D8D8E0; }
+    .step-content p { font-size: 13px; color: #64748b; margin: 0; line-height: 1.5; }
+    [data-theme="dark"] .step-content p { color: #9090A0; }
+    .step-mock {
+      display: inline-block;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: 12px;
+      color: #6366f1;
+      margin-top: 4px;
+    }
+    [data-theme="dark"] .step-mock { background: #1C1C24; border-color: #3A3A46; color: #9B9FE0; }
+
+    .faq-section { margin: 32px 0 0; padding: 24px; background: var(--bg); border-radius: 12px; }
+    .faq-title { font-size: 1.3rem; font-weight: 700; margin: 0 0 16px; color: var(--text); }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question { font-weight: 600; padding: 14px 0; cursor: pointer; color: var(--text); list-style: none; display: flex; justify-content: space-between; align-items: center; }
+    .faq-question::-webkit-details-marker { display: none; }
+    .faq-question::after { content: '+'; font-size: 1.2rem; color: var(--text-light); transition: transform 0.2s; }
+    .faq-item[open] .faq-question::after { content: '−'; }
+    .faq-answer { padding: 0 0 14px; color: var(--text-light); line-height: 1.6; margin: 0; }
+    [data-theme="dark"] .faq-section { background: var(--bg-white); }
+
+    @media (max-width: 600px) {
+      .file-card { padding: 10px; }
+      .file-thumb { width: 50px; height: 50px; }
+      .file-meta { flex-direction: column; gap: 4px; }
+      .batch-actions { flex-direction: column; }
+      .batch-actions .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+
+  <meta name="baidu-site-verification" content="codeva-jxz1UNTyGa" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Image Format Converter",
+    "description": "Free online image converter. Batch convert between PNG, JPG, WebP, HEIC, BMP, and GIF formats. No upload to server.",
+    "url": "https://www.jiebang.site/en/tools/image-convert.html",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "browserRequirements": "Requires JavaScript. Requires HTML5.",
+    "featureList": ["HEIC to JPG conversion", "Batch image conversion", "PNG to JPG", "WebP conversion", "Quality adjustment", "ZIP download"],
+    "isAccessibleForFree": true,
+    "author": {
+      "@type": "Organization",
+      "name": "JieBang",
+      "url": "https://www.jiebang.site"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How to convert HEIC to JPG?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Upload your HEIC file (from iPhone), select JPG as output format, and click Convert. JieBang converts HEIC files entirely in your browser — no upload needed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I convert multiple images at once?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! Drag and drop or select multiple images at once. After conversion, download them individually or as a ZIP file."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my image data safe?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely. All processing happens locally in your browser using JavaScript. Your images are never uploaded to any server."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between PNG and JPG?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "PNG supports transparency and lossless compression, ideal for logos and screenshots. JPG uses lossy compression for smaller file sizes, best for photographs. WebP offers both — smaller than JPG with quality close to PNG."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this tool support HEIC files from iPhone?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! JieBang is one of the few free tools that supports HEIC-to-JPG/PNG/WebP conversion. iPhone photos are saved as HEIC by default — convert them to share universally."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Convert Image Formats",
+    "description": "Learn how to convert image formats online using JieBang's free image converter",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Upload images",
+        "text": "Drag and drop or click to select images. Supports PNG, JPG, WebP, HEIC, BMP, and GIF."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Select output format",
+        "text": "Choose your target format: JPG, PNG, or WebP. Adjust quality if needed."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Convert and download",
+        "text": "Click Convert All to process your images. Download individually or as a ZIP file."
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.jiebang.site/en"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Image Format Converter",
+        "item": "https://www.jiebang.site/en/tools/image-convert.html"
+      }
+    ]
+  }
+  </script>
+
+  <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?fe11c4bd67c394bc89ee8f97d6ffa81a";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+  <script src="/dark-mode.js"></script>
+  <script src="/monitor.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../en/index.html" class="site-logo"><span class="logo-icon">捷</span><span>JieBang</span></a>
+      <span class="site-slogan">Quick tools, instant solutions</span>
+      <button id="darkToggle" class="dark-toggle" onclick="toggleDarkMode()" title="Toggle dark mode">🌙</button>
+    </div>
+  </header>
+
+  <div class="tool-page">
+    <div class="guide-nav-bar">
+      <div class="guide-links">
+        <a href="../../en/index.html" class="guide-link">← Home</a>
+      </div>
+      <a href="../../tools/image-convert.html" class="lang-switch">🌐 中文</a>
+    </div>
+
+    <div class="tool-header">
+      <h1>Image Format Converter</h1>
+      <span class="guide-icon" onclick="event.stopPropagation();document.getElementById('guideModal').classList.add('active')">?</span>
+      <div class="guide-modal" id="guideModal" onclick="if(event.target===this)this.classList.remove('active')">
+        <div class="guide-modal-box">
+          <button class="guide-close" onclick="document.getElementById('guideModal').classList.remove('active')">&times;</button>
+          <h3>📖 How to Use Image Format Converter</h3>
+          <h5>Steps</h5>
+          <div class="step-card">
+            <div class="step-num">①</div>
+            <div class="step-content">
+              <h6>Upload Images</h6>
+              <p>Click or drag images to the upload area</p>
+              <span class="step-mock">📁 Upload Zone</span>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">②</div>
+            <div class="step-content">
+              <h6>Select Output Format</h6>
+              <p>Choose JPG, PNG, WebP, or BMP as target format</p>
+              <span class="step-mock">📄 Format Selection</span>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">③</div>
+            <div class="step-content">
+              <h6>Adjust Quality</h6>
+              <p>Slide the quality slider to set output quality</p>
+              <span class="step-mock">🎚️ Quality Slider</span>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">④</div>
+            <div class="step-content">
+              <h6>Convert & Download</h6>
+              <p>Wait for processing and click download</p>
+              <span class="step-mock">💾 Download</span>
+            </div>
+          </div>
+          <div class="tip">💡 PNG to JPG significantly reduces file size</div>
+          <h5>Use Cases</h5>
+          <div class="scene"><b>📋 ID Photo Format</b><p>Exam requires JPG but photo is PNG</p></div>
+          <div class="scene"><b>🔲 Transparent Background</b><p>Need transparent background, convert JPG to PNG</p></div>
+          <div class="scene"><b>⚡ Web Optimization</b><p>WebP format has smaller file size</p></div>
+          <div class="scene"><b>📱 iPhone HEIC Photos</b><p>Convert HEIC to JPG for universal sharing</p></div>
+        </div>
+      </div>
+      <p>Convert between PNG, JPG, WebP, HEIC, BMP, GIF formats — all in your browser, no upload needed</p>
+    </div>
+
+    <div class="tool-body">
+      <div class="upload-zone" id="upload-zone">
+        <div class="upload-icon">📁</div>
+        <p>Click or drag images here</p>
+        <p>Supports PNG, JPG, WebP, HEIC, BMP, GIF</p>
+        <div class="formats-hint">iPhone HEIC photos supported! Max 20 files at once</div>
+      </div>
+      <input type="file" id="file-input" accept="image/*" multiple style="display:none">
+
+      <div class="file-list" id="file-list">
+        <div class="file-list-header">
+          <h4>Files (<span id="file-count">0</span>)</h4>
+          <button class="clear-all" onclick="clearAllFiles()">Clear All</button>
+        </div>
+        <div id="file-items"></div>
+      </div>
+
+      <label style="font-size:14px;font-weight:600;display:block;margin:20px 0 8px">Output Format</label>
+      <div class="format-options">
+        <button class="format-btn active" data-format="jpg" onclick="selectFormat(this)">
+          <span class="ext">JPG</span>
+          <span class="desc">Small size, photos</span>
+        </button>
+        <button class="format-btn" data-format="png" onclick="selectFormat(this)">
+          <span class="ext">PNG</span>
+          <span class="desc">Lossless, transparent</span>
+        </button>
+        <button class="format-btn" data-format="webp" onclick="selectFormat(this)">
+          <span class="ext">WebP</span>
+          <span class="desc">Modern, smaller</span>
+        </button>
+        <button class="format-btn" data-format="bmp" onclick="selectFormat(this)">
+          <span class="ext">BMP</span>
+          <span class="desc">Uncompressed</span>
+        </button>
+      </div>
+
+      <div class="quality-control" id="quality-control">
+        <div class="quality-label">
+          <span>Output Quality</span>
+          <span class="quality-value" id="quality-value">0.92</span>
+        </div>
+        <input type="range" class="quality-slider" id="quality-slider" min="0.1" max="1" step="0.01" value="0.92">
+      </div>
+
+      <div class="batch-actions">
+        <button class="btn btn-primary" id="convert-all-btn" onclick="convertAllFiles()">🔄 Convert All</button>
+        <button class="btn btn-accent download-all-btn" id="download-zip-btn" onclick="downloadZip()" style="display:none">📦 Download All as ZIP</button>
+      </div>
+
+      <div class="progress-bar" id="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div class="progress-text" id="progress-text">Converting... 0/0</div>
+
+      <div class="result-section" id="result-section">
+        <div class="result-summary">
+          <p id="result-summary-text">✅ Conversion complete! 0 files processed.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="seo-content" style="max-width:800px;margin:40px auto 0;padding:0 20px;">
+    <h2 style="font-size:1.5em;margin-bottom:16px;color:var(--text-primary,#1a1a2e);">What is Image Format Converter?</h2>
+    <p style="line-height:1.8;color:var(--text-secondary,#555);">JieBang Image Format Converter is a free online tool that supports batch conversion between PNG, JPG, WebP, HEIC, BMP, and GIF formats. All processing happens locally in your browser — your images never leave your device.</p>
+
+    <h2 style="font-size:1.5em;margin:24px 0 16px;color:var(--text-primary,#1a1a2e);">How to Use Image Format Converter?</h2>
+    <ol style="line-height:2;color:var(--text-secondary,#555);padding-left:20px;">
+      <li>Drag and drop or select multiple images to upload</li>
+      <li>Choose your target output format (JPG, PNG, WebP, or BMP)</li>
+      <li>Adjust quality slider for JPG/WebP if needed</li>
+      <li>Click "Convert All" to process your images</li>
+      <li>Download individually or as a ZIP file</li>
+    </ol>
+
+    <h2 style="font-size:1.5em;margin:24px 0 16px;color:var(--text-primary,#1a1a2e);">Common Use Cases</h2>
+    <ul style="line-height:2;color:var(--text-secondary,#555);padding-left:20px;">
+      <li><strong>iPhone HEIC to JPG:</strong> Convert HEIC photos from iPhone to JPG for universal compatibility</li>
+      <li><strong>PNG to JPG:</strong> Reduce file size by converting PNG images to JPG format</li>
+      <li><strong>JPG to PNG:</strong> Add transparency or preserve quality for graphics</li>
+      <li><strong>WebP conversion:</strong> Use WebP for smaller file sizes in web projects</li>
+      <li><strong>BMP conversion:</strong> Convert BMP to JPG/PNG for web use</li>
+    </ul>
+
+    <h2 style="font-size:1.5em;margin:24px 0 16px;color:var(--text-primary,#1a1a2e);">Why Choose JieBang Image Format Converter?</h2>
+    <ul style="line-height:2;color:var(--text-secondary,#555);padding-left:20px;">
+      <li><strong>100% Free:</strong> No signup, no registration, no limits</li>
+      <li><strong>Privacy First:</strong> All processing in browser, images never uploaded to server</li>
+      <li><strong>HEIC Support:</strong> One of the few free tools supporting iPhone HEIC conversion</li>
+      <li><strong>Batch Processing:</strong> Convert up to 20 images at once</li>
+      <li><strong>Quality Control:</strong> Adjustable quality slider for optimal file size</li>
+    </ul>
+
+    <div class="related-tools" style="margin-top:32px;padding-top:24px;border-top:1px solid var(--border-color,#e5e7eb);">
+      <h2 style="font-size:1.3em;margin-bottom:16px;color:var(--text-primary,#1a1a2e);">Related Tools</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;">
+        <a href="/en/tools/image-compress.html" style="display:block;padding:12px;border:1px solid var(--border-color,#e5e7eb);border-radius:8px;text-decoration:none;color:var(--text-primary,#1a1a2e);transition:border-color 0.2s;">
+          <strong>Image Compress</strong>
+          <p style="margin:4px 0 0;font-size:0.85em;color:var(--text-secondary,#666);">Compress images online</p>
+        </a>
+        <a href="/en/tools/image-crop.html" style="display:block;padding:12px;border:1px solid var(--border-color,#e5e7eb);border-radius:8px;text-decoration:none;color:var(--text-primary,#1a1a2e);transition:border-color 0.2s;">
+          <strong>Image Crop</strong>
+          <p style="margin:4px 0 0;font-size:0.85em;color:var(--text-secondary,#666);">Crop images online</p>
+        </a>
+        <a href="/en/tools/image-merge.html" style="display:block;padding:12px;border:1px solid var(--border-color,#e5e7eb);border-radius:8px;text-decoration:none;color:var(--text-primary,#1a1a2e);transition:border-color 0.2s;">
+          <strong>Image Merge</strong>
+          <p style="margin:4px 0 0;font-size:0.85em;color:var(--text-secondary,#666);">Merge images online</p>
+        </a>
+        <a href="/en/tools/json-formatter.html" style="display:block;padding:12px;border:1px solid var(--border-color,#e5e7eb);border-radius:8px;text-decoration:none;color:var(--text-primary,#1a1a2e);transition:border-color 0.2s;">
+          <strong>JSON Formatter</strong>
+          <p style="margin:4px 0 0;font-size:0.85em;color:var(--text-secondary,#666);">Format & validate JSON</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <h2 class="faq-title">Frequently Asked Questions</h2>
+    <details class="faq-item">
+      <summary class="faq-question">How to convert HEIC to JPG?</summary>
+      <p class="faq-answer">Upload your HEIC file (from iPhone), select JPG as output format, and click Convert. JieBang converts HEIC files entirely in your browser — no upload needed.</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">Can I convert multiple images at once?</summary>
+      <p class="faq-answer">Yes! Drag and drop or select multiple images at once. After conversion, download them individually or as a ZIP file.</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">Is my image data safe?</summary>
+      <p class="faq-answer">Absolutely. All processing happens locally in your browser using JavaScript. Your images are never uploaded to any server.</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">What's the difference between PNG and JPG?</summary>
+      <p class="faq-answer">PNG supports transparency and lossless compression, ideal for logos and screenshots. JPG uses lossy compression for smaller file sizes, best for photographs. WebP offers both — smaller than JPG with quality close to PNG.</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">Does this tool support HEIC files from iPhone?</summary>
+      <p class="faq-answer">Yes! JieBang is one of the few free tools that supports HEIC-to-JPG/PNG/WebP conversion. iPhone photos are saved as HEIC by default — convert them to share universally.</p>
+    </details>
+  </section>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 JieBang — Free Online Tools</p>
+    <div style="margin-top:8px;">
+      <a href="../../en/about.html" style="color:#888;text-decoration:none;margin:0 8px;">About</a>
+      <a href="../../en/privacy.html" style="color:#888;text-decoration:none;margin:0 8px;">Privacy</a>
+      <a href="../../en/contact.html" style="color:#888;text-decoration:none;margin:0 8px;">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    var files = [];
+    var targetFmt = 'jpg';
+    var quality = 0.92;
+    var convertedFiles = [];
+
+    var uploadZone = document.getElementById('upload-zone');
+    uploadZone.addEventListener('click', function() { document.getElementById('file-input').click(); });
+    uploadZone.addEventListener('dragover', function(e) { e.preventDefault(); this.classList.add('dragover'); });
+    uploadZone.addEventListener('dragleave', function() { this.classList.remove('dragover'); });
+    uploadZone.addEventListener('drop', function(e) {
+      e.preventDefault(); this.classList.remove('dragover');
+      handleFiles(e.dataTransfer.files);
+    });
+    document.getElementById('file-input').addEventListener('change', function() { handleFiles(this.files); });
+
+    document.getElementById('quality-slider').addEventListener('input', function() {
+      quality = parseFloat(this.value);
+      document.getElementById('quality-value').textContent = quality.toFixed(2);
+    });
+
+    function handleFiles(fileList) {
+      var newFiles = Array.from(fileList).filter(function(f) { return f.type.startsWith('image/'); });
+      if (newFiles.length === 0) { showToast('Please select image files only'); return; }
+      if (files.length + newFiles.length > 20) {
+        showToast('Maximum 20 files allowed');
+        newFiles = newFiles.slice(0, 20 - files.length);
+      }
+      newFiles.forEach(function(file) {
+        var ext = getFileExtension(file);
+        files.push({
+          file: file,
+          id: Date.now() + Math.random(),
+          name: file.name,
+          ext: ext,
+          size: file.size,
+          status: 'pending',
+          thumb: null,
+          blob: null
+        });
+      });
+      renderFileList();
+      generateThumbnails();
+    }
+
+    function getFileExtension(file) {
+      var ext = file.name.split('.').pop().toUpperCase();
+      if (ext === 'JPEG') ext = 'JPG';
+      if (file.type === 'image/heic' || file.type === 'image/heif') ext = 'HEIC';
+      return ext;
+    }
+
+    function formatSize(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1048576).toFixed(2) + ' MB';
+    }
+
+    function renderFileList() {
+      var fileList = document.getElementById('file-list');
+      var fileItems = document.getElementById('file-items');
+      var fileCount = document.getElementById('file-count');
+
+      if (files.length === 0) {
+        fileList.classList.remove('show');
+        return;
+      }
+
+      fileList.classList.add('show');
+      fileCount.textContent = files.length;
+      fileItems.innerHTML = '';
+
+      files.forEach(function(item) {
+        var card = document.createElement('div');
+        card.className = 'file-card';
+        card.id = 'file-' + item.id;
+
+        var statusHtml = '';
+        if (item.status === 'pending') statusHtml = '<span class="status-pending">⏳ Waiting</span>';
+        else if (item.status === 'converting') statusHtml = '<span class="status-converting">⚙️ Converting...</span>';
+        else if (item.status === 'done') statusHtml = '<span class="status-done">✅ Done</span>';
+        else if (item.status === 'error') statusHtml = '<span class="status-error">❌ Error</span>';
+
+        var downloadBtn = item.status === 'done' 
+          ? '<button onclick="downloadSingle(\'' + item.id + '\')">💾 Download</button>'
+          : '<button disabled>💾 Download</button>';
+
+        card.innerHTML = 
+          '<img class="file-thumb" id="thumb-' + item.id + '" src="data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'60\' height=\'60\'%3E%3Crect fill=\'%23e5e7eb\' width=\'60\' height=\'60\'/%3E%3Ctext x=\'30\' y=\'35\' text-anchor=\'middle\' fill=\'%239ca3af\' font-size=\'10\'%3E' + item.ext + '%3C/text%3E%3C/svg%3E" alt="thumbnail">' +
+          '<div class="file-info">' +
+            '<div class="file-name">' + item.name + '</div>' +
+            '<div class="file-meta">' +
+              '<span>' + item.ext + '</span>' +
+              '<span>' + formatSize(item.size) + '</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="file-status">' + statusHtml + '</div>' +
+          '<div class="file-actions">' + downloadBtn + '</div>';
+        fileItems.appendChild(card);
+      });
+    }
+
+    function generateThumbnails() {
+      files.forEach(function(item) {
+        if (item.thumb) return;
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          var thumb = document.getElementById('thumb-' + item.id);
+          if (thumb) {
+            thumb.src = e.target.result;
+            thumb.onload = function() {
+              var canvas = document.createElement('canvas');
+              var size = 60;
+              canvas.width = size;
+              canvas.height = size;
+              var ctx = canvas.getContext('2d');
+              var img = new Image();
+              img.onload = function() {
+                var scale = Math.max(size / img.width, size / img.height);
+                var x = (size - img.width * scale) / 2;
+                var y = (size - img.height * scale) / 2;
+                ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+                thumb.src = canvas.toDataURL('image/jpeg', 0.7);
+              };
+              img.src = e.target.result;
+            };
+          }
+        };
+        reader.readAsDataURL(item.file);
+      });
+    }
+
+    function clearAllFiles() {
+      files = [];
+      convertedFiles = [];
+      renderFileList();
+      document.getElementById('result-section').classList.remove('show');
+      document.getElementById('download-zip-btn').style.display = 'none';
+    }
+
+    function selectFormat(btn) {
+      document.querySelectorAll('.format-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      targetFmt = btn.getAttribute('data-format');
+
+      var qualityControl = document.getElementById('quality-control');
+      if (targetFmt === 'jpg' || targetFmt === 'webp') {
+        qualityControl.classList.add('show');
+      } else {
+        qualityControl.classList.remove('show');
+      }
+    }
+
+    async function convertAllFiles() {
+      if (files.length === 0) { showToast('Please add images first'); return; }
+
+      var progressBar = document.getElementById('progress-bar');
+      var progressFill = document.getElementById('progress-fill');
+      var progressText = document.getElementById('progress-text');
+      var convertBtn = document.getElementById('convert-all-btn');
+
+      progressBar.classList.add('show');
+      progressText.classList.add('show');
+      convertBtn.disabled = true;
+      convertedFiles = [];
+
+      var completed = 0;
+      var total = files.length;
+
+      for (var i = 0; i < files.length; i++) {
+        var item = files[i];
+        item.status = 'converting';
+        renderFileList();
+
+        try {
+          var result = await convertFile(item);
+          item.status = 'done';
+          item.blob = result.blob;
+          item.newName = result.name;
+          convertedFiles.push({ name: result.name, blob: result.blob });
+        } catch (err) {
+          console.error('Convert error:', err);
+          item.status = 'error';
+        }
+
+        completed++;
+        var percent = (completed / total) * 100;
+        progressFill.style.width = percent + '%';
+        progressText.textContent = 'Converting... ' + completed + '/' + total;
+        renderFileList();
+      }
+
+      progressText.textContent = 'Conversion complete! ' + completed + ' files processed.';
+      convertBtn.disabled = false;
+
+      if (convertedFiles.length > 0) {
+        document.getElementById('result-section').classList.add('show');
+        document.getElementById('result-summary-text').textContent = '✅ Conversion complete! ' + completed + ' files processed.';
+        document.getElementById('download-zip-btn').style.display = 'inline-flex';
+      }
+
+      setTimeout(function() {
+        progressBar.classList.remove('show');
+        progressText.classList.remove('show');
+      }, 2000);
+    }
+
+    function convertFile(item) {
+      return new Promise(function(resolve, reject) {
+        var isHeic = item.file.type === 'image/heic' || item.file.type === 'image/heif' || 
+                     item.file.name.toLowerCase().endsWith('.heic') || item.file.name.toLowerCase().endsWith('.heif');
+
+        if (isHeic) {
+          heic2any({
+            blob: item.file,
+            toType: 'image/' + targetFmt,
+            quality: quality
+          }).then(function(resultBlob) {
+            var newName = item.name.replace(/\.[^.]+$/, '.' + targetFmt);
+            resolve({ blob: resultBlob, name: newName });
+          }).catch(function(err) {
+            reject(err);
+          });
+        } else {
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            var img = new Image();
+            img.onload = function() {
+              var canvas = document.createElement('canvas');
+              canvas.width = img.width;
+              canvas.height = img.height;
+              var ctx = canvas.getContext('2d');
+
+              if (targetFmt === 'jpg') {
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+              }
+              ctx.drawImage(img, 0, 0);
+
+              var mimeType = 'image/' + targetFmt;
+              var qualityVal = (targetFmt === 'png' || targetFmt === 'bmp') ? undefined : quality;
+
+              canvas.toBlob(function(blob) {
+                if (!blob) {
+                  reject(new Error('Conversion failed'));
+                  return;
+                }
+                var newName = item.name.replace(/\.[^.]+$/, '.' + targetFmt);
+                resolve({ blob: blob, name: newName });
+              }, mimeType, qualityVal);
+            };
+            img.onerror = function() {
+              reject(new Error('Failed to load image'));
+            };
+            img.src = e.target.result;
+          };
+          reader.onerror = function() {
+            reject(new Error('Failed to read file'));
+          };
+          reader.readAsDataURL(item.file);
+        }
+      });
+    }
+
+    function downloadSingle(id) {
+      var item = files.find(function(f) { return f.id == id; });
+      if (!item || !item.blob) return;
+
+      var url = URL.createObjectURL(item.blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = item.newName || item.name;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function downloadZip() {
+      if (convertedFiles.length === 0) return;
+
+      showToast('Creating ZIP file...');
+
+      var zip = new JSZip();
+      convertedFiles.forEach(function(item) {
+        zip.file(item.name, item.blob);
+      });
+
+      zip.generateAsync({ type: 'blob' }).then(function(content) {
+        saveAs(content, 'JieBang_Converted_' + Date.now() + '.zip');
+        showToast('ZIP downloaded!');
+      }).catch(function(err) {
+        showToast('ZIP creation failed');
+      });
+    }
+
+    function showToast(msg) {
+      var t = document.querySelector('.toast');
+      if (t) t.remove();
+      t = document.createElement('div'); t.className = 'toast'; t.textContent = msg;
+      document.body.appendChild(t);
+      setTimeout(function() { t.classList.add('show'); }, 10);
+      setTimeout(function() { t.classList.remove('show'); setTimeout(function() { t.remove(); }, 300); }, 2500);
+    }
+  </script>
+
+  <script>
+  (function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+  <script>
+  (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?07ce40a6f8df17323104dbf0f5c0946f":"https://jspassport.ssl.qhimg.com/11.0.1.js?07ce40a6f8df17323104dbf0f5c0946f";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+  })();
+  </script>
+
+  <div class="feedback-fab">
+    <button class="feedback-btn" onclick="openFeedback()" title="Feedback">💬</button>
+  </div>
+  <div class="feedback-modal" id="feedbackModal">
+    <div class="feedback-modal-content">
+      <button class="feedback-close" onclick="closeFeedback()">&times;</button>
+      <h3>Feedback</h3>
+      <p class="feedback-subtitle">Tell us what tools you need or report any issues</p>
+      <textarea id="feedbackText" placeholder="Enter your feedback or issues..."></textarea>
+      <input type="text" id="feedbackContact" placeholder="Contact (optional)">
+      <div class="feedback-actions">
+        <button class="btn-cancel" onclick="closeFeedback()">Cancel</button>
+        <button class="btn-submit" onclick="submitFeedback()">Submit</button>
+      </div>
+    </div>
+  </div>
+  <script>
+  function openFeedback(){document.getElementById('feedbackModal').classList.add('active');document.getElementById('feedbackText').focus()}
+  function closeFeedback(){document.getElementById('feedbackModal').classList.remove('active')}
+  document.getElementById('feedbackModal').addEventListener('click',function(e){if(e.target===this)closeFeedback()});
+  function submitFeedback(){
+    var text=document.getElementById('feedbackText').value.trim();
+    if(!text){alert('Please enter feedback');return}
+    var contact=document.getElementById('feedbackContact').value.trim();
+    var page=location.pathname;
+    if(navigator.sendBeacon){
+      var blob=new Blob([JSON.stringify({type:'feedback',tool:page,text:text,contact:contact})],{type:'application/json'});
+      navigator.sendBeacon('/api/telemetry',blob);
+    }
+    closeFeedback();
+    if(typeof showToast==='function')showToast('Thank you for your feedback!');
+  }
+  </script>
+</body>
+</html>
