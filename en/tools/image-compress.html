@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Compressor - Free Online Batch Image Compression | JieBang</title>
+  <meta name="description" content="Free online image compressor. Batch compress JPG, PNG, WebP images with adjustable quality. No upload to server — 100% browser-based. Unlimited, no signup.">
+  <meta name="keywords" content="image compressor, compress image, reduce image size, online image compression, batch image compression, JPG compressor, PNG compressor, WebP compressor">
+  <link rel="canonical" href="https://www.jiebang.site/en/tools/image-compress">
+  <meta property="og:image" content="https://www.jiebang.site/icon-512.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Image Compressor - Free Online Batch Image Compression | JieBang">
+  <meta name="twitter:description" content="Free online image compressor. Batch compress JPG, PNG, WebP images with adjustable quality. No upload to server.">
+  <meta name="twitter:image" content="https://www.jiebang.site/icon-512.png">
+  <meta property="og:title" content="Image Compressor - Free Online Batch Image Compression | JieBang">
+  <meta property="og:description" content="Free online image compressor. Batch compress JPG, PNG, WebP images with adjustable quality. No upload to server — 100% browser-based. Unlimited, no signup.">
+  <meta property="og:url" content="https://www.jiebang.site/en/tools/image-compress.html">
+  <meta property="og:type" content="website">
+  <meta name="baidu-site-verification" content="codeva-jxz1UNTyGa" />
+  
+  <link rel="alternate" hreflang="zh" href="https://www.jiebang.site/tools/image-compress.html">
+  <link rel="alternate" hreflang="en" href="https://www.jiebang.site/en/tools/image-compress.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiebang.site/tools/image-compress.html">
+  
+  <link rel="stylesheet" href="../../css/style.css?v=20260608e">
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Image Compressor",
+    "description": "Free online image compressor. Batch compress JPG, PNG, WebP images with adjustable quality. No upload to server — 100% browser-based. Unlimited, no signup.",
+    "url": "https://www.jiebang.site/en/tools/image-compress.html",
+    "applicationCategory": "ImageTool",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "browserRequirements": "Requires JavaScript. Requires HTML5.",
+    "featureList": ["Batch image compression", "Adjustable quality slider", "Format conversion", "Local browser processing", "ZIP download"],
+    "isAccessibleForFree": true,
+    "author": {
+      "@type": "Organization",
+      "name": "JieBang",
+      "url": "https://www.jiebang.site"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How to compress images without losing quality?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use the quality slider (80% is recommended) to balance file size and visual quality. JieBang processes everything in your browser — your images never leave your device."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I compress multiple images at once?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! Drag and drop or select multiple images. After compression, download them individually or as a ZIP file. No limit on the number of images."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the best quality setting for web images?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For web use, 70-80% quality provides the best balance between file size and visual quality. For high-detail images like product photos, use 80-90%. For thumbnails, 60-70% works well."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this tool better than TinyPNG?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "JieBang offers unlimited batch compression with no daily limit (TinyPNG limits to 20 images/day for free). Plus, all processing stays in your browser for maximum privacy."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does compression reduce image resolution?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. JieBang only adjusts the compression quality, not the resolution. Your images maintain their original dimensions — only the file size changes."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Compress Images Online",
+    "description": "Learn how to compress images using JieBang's free online image compressor",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Upload images",
+        "text": "Drag and drop or click to select multiple images (JPG, PNG, WebP)"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Adjust settings",
+        "text": "Set compression quality (10-100%) and choose output format"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Compress and download",
+        "text": "Click 'Compress All' to process images, then download individually or as ZIP"
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.jiebang.site/en"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Image Compressor",
+        "item": "https://www.jiebang.site/en/tools/image-compress.html"
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    /* ===== Image Compressor Styles ===== */
+    .upload-zone {
+      border: 2px dashed var(--border, #E4E4E0);
+      border-radius: 12px;
+      padding: 48px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all .2s;
+      background: var(--bg, #F7F7F5);
+      margin-bottom: 24px;
+    }
+    .upload-zone:hover, .upload-zone.dragover {
+      border-color: var(--primary, #5B5FC7);
+      background: #EEF2FF;
+    }
+    .upload-zone p { color: var(--text-light, #6E6E80); margin: 8px 0 0; font-size: 14px; }
+    .upload-zone .upload-icon { font-size: 52px; margin-bottom: 8px; }
+    .upload-zone .upload-hint { font-size: 12px; color: var(--text-light, #6E6E80); margin-top: 4px; }
+
+    .settings-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+      background: var(--bg, #F7F7F5);
+      border-radius: 12px;
+      margin-bottom: 24px;
+      align-items: center;
+    }
+    .quality-control { flex: 1; min-width: 200px; }
+    .quality-control label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--text, #2D2D3A); }
+    .quality-value { font-size: 18px; font-weight: 700; color: var(--primary, #5B5FC7); }
+    .quality-slider { width: 100%; accent-color: var(--primary, #5B5FC7); margin-top: 6px; }
+    .estimated-size { font-size: 12px; color: var(--text-light, #6E6E80); margin-top: 4px; }
+
+    .format-control { display: flex; flex-direction: column; gap: 8px; }
+    .format-control label { font-size: 14px; font-weight: 600; color: var(--text, #2D2D3A); }
+    .format-pills { display: flex; gap: 8px; }
+    .format-pill {
+      padding: 8px 16px;
+      border: 1px solid var(--border, #E4E4E0);
+      border-radius: 20px;
+      background: var(--bg-white, #FFFFFF);
+      color: var(--text, #2D2D3A);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .format-pill:hover { border-color: var(--primary, #5B5FC7); }
+    .format-pill.active { background: var(--primary, #5B5FC7); color: white; border-color: var(--primary, #5B5FC7); }
+
+    .file-list { margin-bottom: 24px; }
+    .file-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      background: var(--bg-white, #FFFFFF);
+      border: 1px solid var(--border, #E4E4E0);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      transition: all .2s;
+    }
+    .file-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    .file-thumb {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      object-fit: cover;
+      background: var(--bg, #F7F7F5);
+      border: 1px solid var(--border, #E4E4E0);
+      flex-shrink: 0;
+    }
+    .file-info { flex: 1; min-width: 0; }
+    .file-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text, #2D2D3A);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 4px;
+    }
+    .file-sizes {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-light, #6E6E80);
+    }
+    .file-sizes .arrow { color: var(--primary, #5B5FC7); }
+    .file-sizes .compressed { color: #22C55E; font-weight: 600; }
+    .file-sizes .savings { 
+      background: #DCFCE7; 
+      color: #16A34A; 
+      padding: 2px 8px; 
+      border-radius: 10px; 
+      font-weight: 600;
+      font-size: 12px;
+    }
+    .file-sizes .savings.increase {
+      background: #FEE2E2;
+      color: #DC2626;
+    }
+    .file-status {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 500;
+    }
+    .file-status.pending { background: #F3F4F6; color: #6B7280; }
+    .file-status.processing { background: #EEF2FF; color: #4F46E5; }
+    .file-status.done { background: #DCFCE7; color: #16A34A; }
+    .file-status.error { background: #FEE2E2; color: #DC2626; }
+    .file-actions { display: flex; gap: 8px; }
+    .download-btn {
+      padding: 8px 16px;
+      background: var(--primary, #5B5FC7);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .download-btn:hover { background: var(--primary-dark, #3F42A8); }
+    .download-btn:disabled { background: #D1D5DB; cursor: not-allowed; }
+    .remove-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border, #E4E4E0);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--text-light, #6E6E80);
+      cursor: pointer;
+      transition: all .2s;
+      font-size: 16px;
+    }
+    .remove-btn:hover { background: #FEE2E2; border-color: #DC2626; color: #DC2626; }
+
+    .progress-bar-container {
+      margin-bottom: 24px;
+      display: none;
+    }
+    .progress-text {
+      font-size: 14px;
+      color: var(--text-light, #6E6E80);
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .progress-bar {
+      height: 8px;
+      background: var(--bg, #F7F7F5);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary, #5B5FC7), var(--primary-light, #7C7FE0));
+      border-radius: 4px;
+      transition: width .3s ease;
+    }
+
+    .action-bar {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .btn-compress {
+      padding: 12px 28px;
+      background: var(--primary, #5B5FC7);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-compress:hover { background: var(--primary-dark, #3F42A8); transform: translateY(-1px); }
+    .btn-compress:disabled { background: #D1D5DB; cursor: not-allowed; transform: none; }
+    .btn-download-zip {
+      padding: 12px 28px;
+      background: #22C55E;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-download-zip:hover { background: #16A34A; transform: translateY(-1px); }
+    .btn-download-zip:disabled { background: #D1D5DB; cursor: not-allowed; transform: none; }
+    .btn-clear {
+      padding: 12px 28px;
+      background: transparent;
+      color: var(--text-light, #6E6E80);
+      border: 1px solid var(--border, #E4E4E0);
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-clear:hover { background: #FEE2E2; border-color: #DC2626; color: #DC2626; }
+
+    .empty-state {
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--text-light, #6E6E80);
+    }
+    .empty-state .empty-icon { font-size: 48px; margin-bottom: 12px; opacity: 0.5; }
+    .empty-state p { font-size: 14px; }
+
+    .faq-section { margin: 32px 0 0; padding: 24px; background: var(--bg, #F7F7F5); border-radius: 12px; }
+    .faq-title { font-size: 1.3rem; font-weight: 700; margin: 0 0 16px; color: var(--text, #2D2D3A); }
+    .faq-item { border-bottom: 1px solid var(--border, #E4E4E0); }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question { font-weight: 600; padding: 14px 0; cursor: pointer; color: var(--text, #2D2D3A); list-style: none; display: flex; justify-content: space-between; align-items: center; }
+    .faq-question::-webkit-details-marker { display: none; }
+    .faq-question::after { content: '+'; font-size: 1.2rem; color: var(--text-light, #6E6E80); transition: transform 0.2s; }
+    .faq-item[open] .faq-question::after { content: '−'; }
+    .faq-answer { padding: 0 0 14px; color: var(--text-light, #6E6E80); line-height: 1.6; margin: 0; }
+    [data-theme="dark"] .faq-section { background: var(--bg-white, #26262F); }
+
+    .seo-content { max-width: 800px; margin: 40px auto 0; padding: 0 20px; }
+    .seo-content h2 { font-size: 1.5em; margin: 24px 0 16px; color: var(--text, #2D2D3A); }
+    .seo-content p { line-height: 1.8; color: var(--text-light, #6E6E80); }
+    .seo-content ul, .seo-content ol { line-height: 2; color: var(--text-light, #6E6E80); padding-left: 20px; }
+
+    .related-tools { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border, #E4E4E0); }
+    .related-tools h2 { font-size: 1.3em; margin-bottom: 16px; color: var(--text, #2D2D3A); }
+    .related-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+    .related-card {
+      display: block;
+      padding: 12px;
+      border: 1px solid var(--border, #E4E4E0);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text, #2D2D3A);
+      transition: all .2s;
+    }
+    .related-card:hover { border-color: var(--primary, #5B5FC7); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    .related-card strong { font-size: 14px; }
+    .related-card p { margin: 4px 0 0; font-size: 12px; color: var(--text-light, #6E6E80); }
+
+    @media (max-width: 768px) {
+      .settings-bar { flex-direction: column; }
+      .quality-control { width: 100%; }
+      .file-card { flex-wrap: wrap; }
+      .file-actions { width: 100%; justify-content: flex-end; margin-top: 8px; }
+      .action-bar { flex-direction: column; }
+      .action-bar button { width: 100%; }
+    }
+
+    .guide-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #e0e7ff;
+      color: #4f46e5;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-left: 8px;
+      vertical-align: middle;
+      transition: all 0.2s;
+      line-height: 1;
+    }
+    .guide-icon:hover { background: #6366f1; color: white; }
+    .guide-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 10001;
+      justify-content: center;
+      align-items: center;
+    }
+    .guide-modal.active { display: flex; }
+    .guide-modal-box {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      width: 90%;
+      max-width: 440px;
+      max-height: 80vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      position: relative;
+    }
+    .guide-modal-box h3 { margin: 0 0 16px; font-size: 17px; color: #1e293b; display: flex; align-items: center; gap: 8px; }
+    .guide-modal-box h5 { margin: 16px 0 8px; font-size: 14px; color: #4f46e5; }
+    .guide-modal-box .tip { margin-top: 10px; padding: 8px 12px; background: #fef3c7; border-radius: 8px; font-size: 13px; color: #92400e; line-height: 1.6; }
+    .guide-close { position: absolute; top: 14px; right: 16px; background: none; border: none; font-size: 22px; color: #94a3b8; cursor: pointer; }
+    .guide-close:hover { color: #64748b; }
+    [data-theme="dark"] .guide-modal-box { background: #26262F; }
+    [data-theme="dark"] .guide-modal-box h3 { color: #D8D8E0; }
+    [data-theme="dark"] .guide-modal-box h5 { color: #9B9FE0; }
+    [data-theme="dark"] .guide-modal-box .tip { background: #3A2E18; color: #E8A050; }
+  </style>
+
+  <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?fe11c4bd67c394bc89ee8f97d6ffa81a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+  </script>
+  <script src="/dark-mode.js"></script>
+  <script src="/monitor.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../../en/index.html" class="site-logo"><span class="logo-icon">捷</span><span>JieBang</span></a>
+      <span class="site-slogan">Quick tools for your needs</span>
+      <button id="darkToggle" class="dark-toggle" onclick="toggleDarkMode()" title="Toggle dark mode">🌙</button>
+    </div>
+  </header>
+
+  <div class="tool-page">
+    <div class="guide-nav-bar">
+      <a href="../../en/index.html" class="back-link">← Home</a>
+      <a href="../../tools/image-compress.html" onclick="localStorage.setItem('jiebang_lang','zh');" class="lang-switch">🌐 中文</a>
+    </div>
+
+    <div class="tool-header">
+      <h1>Image Compressor <span class="guide-icon" onclick="event.stopPropagation();document.getElementById('guideModal').classList.add('active')">?</span></h1>
+      <div class="guide-modal" id="guideModal" onclick="if(event.target===this)this.classList.remove('active')">
+        <div class="guide-modal-box">
+          <button class="guide-close" onclick="document.getElementById('guideModal').classList.remove('active')">&times;</button>
+          <h3>📖 How to Use Image Compressor</h3>
+          <h5>Steps</h5>
+          <ol>
+            <li><strong>Upload Images:</strong> Drag & drop or click to select multiple images</li>
+            <li><strong>Adjust Quality:</strong> Set compression level with the slider (70-80% recommended)</li>
+            <li><strong>Choose Format:</strong> Keep original or convert to JPG/WebP/PNG</li>
+            <li><strong>Compress & Download:</strong> Click "Compress All", then download individually or as ZIP</li>
+          </ol>
+          <div class="tip">💡 70-80% quality is invisible to the eye but significantly reduces file size</div>
+        </div>
+      </div>
+      <p>Batch compress JPG, PNG, WebP images. 100% browser-based, no upload needed.</p>
+    </div>
+
+    <div class="tool-body">
+      <!-- Upload Zone -->
+      <div class="upload-zone" id="upload-zone">
+        <div class="upload-icon">📁</div>
+        <p>Drag & drop images here, or click to select</p>
+        <p>Supports JPG, PNG, WebP</p>
+        <p class="upload-hint">You can select multiple files at once</p>
+      </div>
+      <input type="file" id="file-input" accept="image/jpeg,image/png,image/webp" multiple style="display:none">
+
+      <!-- Settings Bar -->
+      <div class="settings-bar" id="settings-bar" style="display:none;">
+        <div class="quality-control">
+          <label>Quality: <span class="quality-value" id="quality-label">80</span>%</label>
+          <input type="range" id="quality-slider" class="quality-slider" min="10" max="100" value="80">
+          <div class="estimated-size" id="estimated-size">Estimated total size: calculating...</div>
+        </div>
+        <div class="format-control">
+          <label>Output Format</label>
+          <div class="format-pills">
+            <button class="format-pill active" data-format="original">Keep Original</button>
+            <button class="format-pill" data-format="image/jpeg">JPG</button>
+            <button class="format-pill" data-format="image/webp">WebP</button>
+            <button class="format-pill" data-format="image/png">PNG</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-bar-container" id="progress-container">
+        <div class="progress-text">
+          <span id="progress-label">Compressing...</span>
+          <span id="progress-count">0/0</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- File List -->
+      <div class="file-list" id="file-list">
+        <div class="empty-state" id="empty-state">
+          <div class="empty-icon">🖼️</div>
+          <p>No images uploaded yet. Drop some images above to get started.</p>
+        </div>
+      </div>
+
+      <!-- Action Bar -->
+      <div class="action-bar" id="action-bar" style="display:none;">
+        <button class="btn-compress" id="btn-compress" onclick="compressAll()">🗜️ Compress All</button>
+        <button class="btn-download-zip" id="btn-download-zip" onclick="downloadAllZip()" disabled>📦 Download ZIP</button>
+        <button class="btn-clear" onclick="clearAll()">🗑️ Clear All</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <section class="faq-section" style="max-width: 900px; margin: 40px auto; padding: 24px;">
+    <h2 class="faq-title">Frequently Asked Questions</h2>
+    <details class="faq-item">
+      <summary class="faq-question">How to compress images without losing quality?</summary>
+      <p class="faq-answer">Use the quality slider (80% is recommended) to balance file size and visual quality. JieBang processes everything in your browser — your images never leave your device.</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">Can I compress multiple images at once?</summary>
+      <p class="faq-answer">Yes! Drag and drop or select multiple images. After compression, download them individually or as a ZIP file. No limit on the number of images.</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">What's the best quality setting for web images?</summary>
+      <p class="faq-answer">For web use, 70-80% quality provides the best balance between file size and visual quality. For high-detail images like product photos, use 80-90%. For thumbnails, 60-70% works well.</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">Is this tool better than TinyPNG?</summary>
+      <p class="faq-answer">JieBang offers unlimited batch compression with no daily limit (TinyPNG limits to 20 images/day for free). Plus, all processing stays in your browser for maximum privacy.</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">Does compression reduce image resolution?</summary>
+      <p class="faq-answer">No. JieBang only adjusts the compression quality, not the resolution. Your images maintain their original dimensions — only the file size changes.</p>
+    </details>
+  </section>
+
+  <!-- SEO Content -->
+  <section class="seo-content">
+    <h2>What is Image Compressor?</h2>
+    <p>JieBang's free online image compressor lets you reduce image file sizes without sacrificing quality. Supports batch processing for JPG, PNG, and WebP formats. All processing happens locally in your browser — your images never leave your device, ensuring complete privacy.</p>
+    
+    <h2>How to Use Image Compressor?</h2>
+    <ol>
+      <li>Upload images by dragging and dropping or clicking the upload area</li>
+      <li>Adjust the quality slider (10-100%) to control compression level</li>
+      <li>Choose output format (keep original, JPG, WebP, or PNG)</li>
+      <li>Click "Compress All" to process all images</li>
+      <li>Download compressed images individually or as a ZIP file</li>
+    </ol>
+    
+    <h2>Best Quality Settings by Use Case</h2>
+    <ul>
+      <li><strong>Web images:</strong> 70-80% — Best balance of size and quality</li>
+      <li><strong>Product photos:</strong> 80-90% — Preserve detail for e-commerce</li>
+      <li><strong>Thumbnails:</strong> 60-70% — Small files for previews</li>
+      <li><strong>Social media:</strong> 75-85% — Optimized for fast loading</li>
+    </ul>
+    
+    <h2>Why Choose JieBang Image Compressor?</h2>
+    <ul>
+      <li>100% free with no signup required</li>
+      <li>Unlimited batch compression — no daily limits</li>
+      <li>100% browser-based — your images never leave your device</li>
+      <li>Supports JPG, PNG, and WebP formats</li>
+      <li>Works on any device — desktop, tablet, or mobile</li>
+    </ul>
+
+    <div class="related-tools">
+      <h2>Related Tools</h2>
+      <div class="related-grid">
+        <a href="/en/tools/image-convert.html" class="related-card">
+          <strong>Image Convert</strong>
+          <p>Convert between image formats</p>
+        </a>
+        <a href="/en/tools/image-crop.html" class="related-card">
+          <strong>Image Crop</strong>
+          <p>Crop and resize images</p>
+        </a>
+        <a href="/en/tools/image-merge.html" class="related-card">
+          <strong>Image Merge</strong>
+          <p>Combine multiple images</p>
+        </a>
+        <a href="/en/tools/image-resize.html" class="related-card">
+          <strong>Image Resize</strong>
+          <p>Change image dimensions</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 JieBang — Free Online Tools</p>
+    <div style="margin-top:8px;">
+      <a href="../../en/about.html" style="color:#888;text-decoration:none;margin:0 8px;">About Us</a>
+      <a href="../../en/privacy.html" style="color:#888;text-decoration:none;margin:0 8px;">Privacy Policy</a>
+      <a href="../../en/contact.html" style="color:#888;text-decoration:none;margin:0 8px;">Contact Us</a>
+    </div>
+  </footer>
+
+  <!-- Feedback Button -->
+  <div class="feedback-fab">
+    <button class="feedback-btn" onclick="openFeedback()" title="Feedback">💬</button>
+  </div>
+  <div class="feedback-modal" id="feedbackModal">
+    <div class="feedback-modal-content">
+      <button class="feedback-close" onclick="closeFeedback()">&times;</button>
+      <h3>Feedback</h3>
+      <p class="feedback-subtitle">Tell us what tools you need or report any issues</p>
+      <textarea id="feedbackText" placeholder="Enter your feedback..."></textarea>
+      <input type="text" id="feedbackContact" placeholder="Contact (optional)">
+      <div class="feedback-actions">
+        <button class="btn-cancel" onclick="closeFeedback()">Cancel</button>
+        <button class="btn-submit" onclick="submitFeedback()">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ===== State =====
+    let files = [];
+    let outputFormat = 'original';
+    let quality = 80;
+
+    // ===== DOM Elements =====
+    const uploadZone = document.getElementById('upload-zone');
+    const fileInput = document.getElementById('file-input');
+    const settingsBar = document.getElementById('settings-bar');
+    const fileList = document.getElementById('file-list');
+    const emptyState = document.getElementById('empty-state');
+    const actionBar = document.getElementById('action-bar');
+    const qualitySlider = document.getElementById('quality-slider');
+    const qualityLabel = document.getElementById('quality-label');
+    const estimatedSize = document.getElementById('estimated-size');
+    const progressContainer = document.getElementById('progress-container');
+    const progressFill = document.getElementById('progress-fill');
+    const progressLabel = document.getElementById('progress-label');
+    const progressCount = document.getElementById('progress-count');
+    const btnCompress = document.getElementById('btn-compress');
+    const btnDownloadZip = document.getElementById('btn-download-zip');
+
+    // ===== Event Listeners =====
+    uploadZone.addEventListener('click', () => fileInput.click());
+    uploadZone.addEventListener('dragover', (e) => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+    uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+    uploadZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadZone.classList.remove('dragover');
+      handleFiles(e.dataTransfer.files);
+    });
+    fileInput.addEventListener('change', () => handleFiles(fileInput.files));
+
+    qualitySlider.addEventListener('input', () => {
+      quality = parseInt(qualitySlider.value);
+      qualityLabel.textContent = quality;
+      updateEstimatedSize();
+    });
+
+    document.querySelectorAll('.format-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.format-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        outputFormat = pill.dataset.format;
+      });
+    });
+
+    // ===== File Handling =====
+    function handleFiles(fileListInput) {
+      const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
+      Array.from(fileListInput).forEach(file => {
+        if (!validTypes.includes(file.type)) {
+          showToast('Please select JPG, PNG, or WebP images only');
+          return;
+        }
+        if (files.some(f => f.name === file.name && f.size === file.size)) {
+          return;
+        }
+        const fileObj = {
+          id: Date.now() + Math.random(),
+          file: file,
+          name: file.name,
+          size: file.size,
+          type: file.type,
+          compressed: null,
+          compressedBlob: null,
+          status: 'pending',
+          url: URL.createObjectURL(file)
+        };
+        files.push(fileObj);
+      });
+      updateUI();
+    }
+
+    function removeFile(id) {
+      const idx = files.findIndex(f => f.id === id);
+      if (idx !== -1) {
+        URL.revokeObjectURL(files[idx].url);
+        files.splice(idx, 1);
+        updateUI();
+      }
+    }
+
+    function clearAll() {
+      files.forEach(f => URL.revokeObjectURL(f.url));
+      files = [];
+      updateUI();
+    }
+
+    // ===== UI Updates =====
+    function updateUI() {
+      const hasFiles = files.length > 0;
+      settingsBar.style.display = hasFiles ? 'flex' : 'none';
+      actionBar.style.display = hasFiles ? 'flex' : 'none';
+      emptyState.style.display = hasFiles ? 'none' : 'block';
+
+      renderFileList();
+      updateEstimatedSize();
+      updateZipButton();
+    }
+
+    function renderFileList() {
+      const existingCards = fileList.querySelectorAll('.file-card');
+      existingCards.forEach(card => card.remove());
+
+      files.forEach(fileObj => {
+        const card = document.createElement('div');
+        card.className = 'file-card';
+        card.id = `file-${fileObj.id}`;
+
+        const savings = fileObj.compressed ? ((1 - fileObj.compressed.size / fileObj.size) * 100).toFixed(1) : null;
+        const savingsClass = savings !== null && parseFloat(savings) < 0 ? 'increase' : '';
+        const savingsText = savings !== null ? `${Math.abs(parseFloat(savings))}% saved` : '';
+
+        card.innerHTML = `
+          <img src="${fileObj.url}" class="file-thumb" alt="${fileObj.name}">
+          <div class="file-info">
+            <div class="file-name">${fileObj.name}</div>
+            <div class="file-sizes">
+              <span>${formatSize(fileObj.size)}</span>
+              <span class="arrow">→</span>
+              ${fileObj.compressed ? `<span class="compressed">${formatSize(fileObj.compressed.size)}</span>` : '<span class="compressed">-</span>'}
+              ${savings !== null ? `<span class="file-sizes savings ${savingsClass}">${savingsText}</span>` : ''}
+            </div>
+          </div>
+          <span class="file-status ${fileObj.status}">${getStatusText(fileObj.status)}</span>
+          <div class="file-actions">
+            <button class="download-btn" onclick="downloadSingle('${fileObj.id}')" ${!fileObj.compressed ? 'disabled' : ''}>⬇️ Download</button>
+            <button class="remove-btn" onclick="removeFile('${fileObj.id}')">×</button>
+          </div>
+        `;
+
+        fileList.appendChild(card);
+      });
+    }
+
+    function getStatusText(status) {
+      const texts = { pending: 'Pending', processing: 'Processing...', done: 'Done', error: 'Error' };
+      return texts[status] || status;
+    }
+
+    function updateEstimatedSize() {
+      if (files.length === 0) {
+        estimatedSize.textContent = 'Estimated total size: -';
+        return;
+      }
+      const totalOriginal = files.reduce((sum, f) => sum + f.size, 0);
+      const ratio = quality / 100;
+      const estimated = totalOriginal * (0.3 + ratio * 0.7);
+      estimatedSize.textContent = `Estimated compressed total: ~${formatSize(Math.round(estimated))} (from ${formatSize(totalOriginal)})`;
+    }
+
+    function updateZipButton() {
+      const hasCompressed = files.some(f => f.compressed);
+      btnDownloadZip.disabled = !hasCompressed;
+    }
+
+    // ===== Compression =====
+    async function compressAll() {
+      if (files.length === 0) return;
+      
+      btnCompress.disabled = true;
+      progressContainer.style.display = 'block';
+      
+      let completed = 0;
+      const total = files.length;
+
+      for (const fileObj of files) {
+        updateProgress('Compressing...', completed, total);
+        fileObj.status = 'processing';
+        renderFileList();
+
+        try {
+          await compressSingle(fileObj);
+          fileObj.status = 'done';
+        } catch (e) {
+          console.error('Compression error:', e);
+          fileObj.status = 'error';
+        }
+
+        completed++;
+        updateProgress('Compressing...', completed, total);
+        renderFileList();
+      }
+
+      updateProgress('Complete!', total, total);
+      btnCompress.disabled = false;
+      updateZipButton();
+      showToast('Compression complete!');
+    }
+
+    function compressSingle(fileObj) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.width;
+          canvas.height = img.height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+
+          let targetFormat = outputFormat;
+          if (targetFormat === 'original') {
+            targetFormat = fileObj.type;
+          }
+
+          const qualityVal = targetFormat === 'image/png' ? undefined : quality / 100;
+
+          canvas.toBlob((blob) => {
+            if (blob) {
+              fileObj.compressedBlob = blob;
+              fileObj.compressed = {
+                name: fileObj.name.replace(/\.[^.]+$/, getExtension(targetFormat)),
+                size: blob.size,
+                type: targetFormat
+              };
+              resolve();
+            } else {
+              reject(new Error('Failed to compress'));
+            }
+          }, targetFormat, qualityVal);
+        };
+        img.onerror = () => reject(new Error('Failed to load image'));
+        img.src = fileObj.url;
+      });
+    }
+
+    function getExtension(mimeType) {
+      const map = { 'image/jpeg': '.jpg', 'image/png': '.png', 'image/webp': '.webp' };
+      return map[mimeType] || '.jpg';
+    }
+
+    function updateProgress(label, current, total) {
+      progressLabel.textContent = label;
+      progressCount.textContent = `${current}/${total}`;
+      progressFill.style.width = `${(current / total) * 100}%`;
+    }
+
+    // ===== Download =====
+    function downloadSingle(id) {
+      const fileObj = files.find(f => f.id == id);
+      if (!fileObj || !fileObj.compressedBlob) return;
+
+      saveAs(fileObj.compressedBlob, fileObj.compressed.name);
+      showToast('Download started');
+    }
+
+    function downloadAllZip() {
+      const compressed = files.filter(f => f.compressedBlob);
+      if (compressed.length === 0) {
+        showToast('No compressed images to download');
+        return;
+      }
+
+      showToast('Creating ZIP file...');
+      const zip = new JSZip();
+      
+      compressed.forEach(fileObj => {
+        zip.file(fileObj.compressed.name, fileObj.compressedBlob);
+      });
+
+      zip.generateAsync({ type: 'blob' }).then(blob => {
+        saveAs(blob, `jiebang-compressed-${Date.now()}.zip`);
+        showToast('ZIP download started');
+      }).catch(e => {
+        console.error('ZIP error:', e);
+        showToast('Failed to create ZIP file');
+      });
+    }
+
+    // ===== Utilities =====
+    function formatSize(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1048576).toFixed(2) + ' MB';
+    }
+
+    function showToast(msg) {
+      let toast = document.querySelector('.toast');
+      if (toast) toast.remove();
+      toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.textContent = msg;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.classList.add('show'), 10);
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+      }, 2000);
+    }
+
+    // ===== Feedback =====
+    function openFeedback(){document.getElementById('feedbackModal').classList.add('active');document.getElementById('feedbackText').focus()}
+    function closeFeedback(){document.getElementById('feedbackModal').classList.remove('active')}
+    document.getElementById('feedbackModal').addEventListener('click',function(e){if(e.target===this)closeFeedback()});
+    function submitFeedback(){
+      var text=document.getElementById('feedbackText').value.trim();
+      if(!text){alert('Please enter your feedback');return}
+      var contact=document.getElementById('feedbackContact').value.trim();
+      var page=location.pathname;
+      if(navigator.sendBeacon){
+        var blob=new Blob([JSON.stringify({type:'feedback',tool:page,text:text,contact:contact})],{type:'application/json'});
+        navigator.sendBeacon('/api/telemetry',blob);
+      }
+      closeFeedback();
+      showToast('Thank you for your feedback!');
+    }
+  </script>
+
+  <!-- Baidu Auto Push -->
+  <script>
+  (function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+</body>
+</html>
