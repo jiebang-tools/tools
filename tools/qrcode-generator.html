@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>二维码生成器 - 免费在线制作带Logo二维码 | 捷帮</title>
+  <meta name="description" content="免费在线二维码生成器，支持Logo嵌入、自定义颜色、URL/文本/WiFi/vCard多种类型，PNG和SVG双格式下载，无需注册。">
+  <meta name="keywords" content="二维码生成器,在线二维码,免费二维码生成,网址转二维码,文字转二维码,WiFi二维码,vCard二维码,Logo二维码,二维码制作,在线生成二维码">
+  <link rel="canonical" href="https://www.jiebang.site/tools/qrcode-generator">
+  <meta property="og:image" content="https://www.jiebang.site/icon-512.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="二维码生成器 - 免费在线制作带Logo二维码">
+  <meta name="twitter:description" content="免费在线二维码生成器，支持Logo嵌入、自定义颜色、URL/文本/WiFi/vCard多种类型。">
+  <meta name="twitter:image" content="https://www.jiebang.site/icon-512.png">
+  <link rel="stylesheet" href="../css/style.css?v=20260608e">
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+
+  <meta property="og:title" content="二维码生成器 - 免费在线制作带Logo二维码">
+  <meta property="og:description" content="免费在线二维码生成器，支持Logo嵌入、自定义颜色、URL/文本/WiFi/vCard多种类型，PNG和SVG双格式下载。">
+  <meta property="og:url" content="https://www.jiebang.site/tools/qrcode-generator.html">
+  <meta property="og:type" content="website">
+
+  <meta name="baidu-site-verification" content="codeva-jxz1UNTyGa" />
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "二维码生成器",
+  "description": "免费在线二维码生成器，支持Logo嵌入、自定义颜色、URL/文本/WiFi/vCard多种类型，PNG和SVG双格式下载，无需注册。",
+  "url": "https://www.jiebang.site/tools/qrcode-generator.html",
+  "applicationCategory": "日常工具",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "CNY"
+  },
+  "browserRequirements": "Requires JavaScript. Requires HTML5.",
+  "featureList": ["网址转二维码", "文本转二维码", "WiFi二维码", "vCard二维码", "Logo嵌入", "自定义颜色", "PNG下载", "SVG下载"],
+  "isAccessibleForFree": true,
+  "author": {
+    "@type": "Organization",
+    "name": "捷帮",
+    "url": "https://www.jiebang.site"
+  }
+}
+  </script>
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "如何在二维码中添加Logo？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "上传Logo图片，捷帮会自动将其嵌入二维码中心，并使用H级纠错（30%）确保扫码成功。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "可以制作WiFi二维码吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "可以！选择WiFi标签，输入网络名称(SSID)、密码和加密类型，扫码即可自动连接WiFi。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "PNG和SVG格式的二维码有什么区别？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "PNG是位图，适合数字展示；SVG是矢量格式，可无限放大不失真——适合印名片、海报或大型展示。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "这个二维码生成器免费吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "完全免费，无任何限制。很多竞品对Logo嵌入或高清下载收费，捷帮所有功能免费使用。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "如何制作名片二维码？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "选择vCard标签，填写联系人信息（姓名、电话、邮箱、公司），生成二维码后扫码即可直接保存到手机通讯录。"
+      }
+    }
+  ]
+}
+  </script>
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiebang.site"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "工具",
+      "item": "https://www.jiebang.site"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "二维码生成器",
+      "item": "https://www.jiebang.site/tools/qrcode-generator.html"
+    }
+  ]
+}
+  </script>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?fe11c4bd67c394bc89ee8f97d6ffa81a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<style>
+  .qr-tool-wrap {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 24px;
+    align-items: start;
+  }
+
+  @media (max-width: 768px) {
+    .qr-tool-wrap {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .qr-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .qr-tab {
+    padding: 8px 20px;
+    border: 1px solid var(--border, #E4E4E0);
+    border-radius: 50px;
+    background: var(--bg, #F7F7F5);
+    color: var(--text-light, #6E6E80);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+
+  .qr-tab:hover {
+    border-color: var(--primary, #5B5FC7);
+    color: var(--primary, #5B5FC7);
+  }
+
+  .qr-tab.active {
+    background: var(--primary, #5B5FC7);
+    color: white;
+    border-color: var(--primary, #5B5FC7);
+  }
+
+  .qr-panel {
+    display: none;
+  }
+
+  .qr-panel.active {
+    display: block;
+  }
+
+  .card-group {
+    background: var(--bg, #F7F7F5);
+    border: 1px solid var(--border, #E4E4E0);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+
+  .card-group-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-light, #6E6E80);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+
+  .card-group .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  @media (max-width: 480px) {
+    .card-group .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .qr-settings {
+    background: var(--bg-white, #FFFFFF);
+    border: 1px solid var(--border, #E4E4E0);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .qr-settings-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-light, #6E6E80);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 14px;
+  }
+
+  .color-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .color-item {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .color-item label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--text, #2D2D3A);
+  }
+
+  .color-item input[type="color"] {
+    width: 100%;
+    height: 40px;
+    border: 1px solid var(--border, #E4E4E0);
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 2px;
+    background: var(--bg, #F7F7F5);
+  }
+
+  .size-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .size-btn {
+    padding: 7px 16px;
+    border: 1px solid var(--border, #E4E4E0);
+    border-radius: 8px;
+    background: var(--bg, #F7F7F5);
+    color: var(--text-light, #6E6E80);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+
+  .size-btn:hover {
+    border-color: var(--primary, #5B5FC7);
+    color: var(--primary, #5B5FC7);
+  }
+
+  .size-btn.active {
+    background: var(--primary, #5B5FC7);
+    color: white;
+    border-color: var(--primary, #5B5FC7);
+  }
+
+  .logo-upload-area {
+    border: 2px dashed var(--border, #E4E4E0);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--bg, #F7F7F5);
+  }
+
+  .logo-upload-area:hover {
+    border-color: var(--primary, #5B5FC7);
+    background: rgba(91, 95, 199, 0.05);
+  }
+
+  .logo-upload-area.has-logo {
+    border-style: solid;
+    border-color: var(--primary, #5B5FC7);
+  }
+
+  .logo-upload-icon {
+    font-size: 32px;
+    margin-bottom: 8px;
+  }
+
+  .logo-upload-text {
+    font-size: 13px;
+    color: var(--text-light, #6E6E80);
+  }
+
+  .logo-upload-text strong {
+    color: var(--primary, #5B5FC7);
+  }
+
+  .logo-preview-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .logo-preview-img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 1px solid var(--border, #E4E4E0);
+    background: white;
+  }
+
+  .logo-remove-btn {
+    padding: 6px 14px;
+    border: 1px solid #ef4444;
+    border-radius: 6px;
+    background: white;
+    color: #ef4444;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+
+  .logo-remove-btn:hover {
+    background: #fef2f2;
+  }
+
+  #logo-input {
+    display: none;
+  }
+
+  /* Preview Panel */
+  .qr-preview-panel {
+    background: var(--bg-white, #FFFFFF);
+    border: 1px solid var(--border, #E4E4E0);
+    border-radius: 12px;
+    padding: 24px 20px;
+    text-align: center;
+    position: sticky;
+    top: 80px;
+  }
+
+  .qr-preview-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-light, #6E6E80);
+    margin-bottom: 16px;
+  }
+
+  #qr-preview-canvas {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+
+  #qr-preview-canvas canvas,
+  #qr-preview-canvas img {
+    border-radius: 8px;
+    max-width: 100%;
+  }
+
+  .qr-download-btns {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .qr-empty-state {
+    padding: 48px 20px;
+    color: var(--text-light, #6E6E80);
+    font-size: 14px;
+  }
+
+  .qr-empty-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+    opacity: 0.4;
+  }
+
+  /* Step card styles */
+  .step-card {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 12px;
+    background: #f8faff;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  .step-card:last-child { margin-bottom: 0; }
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .step-content { flex: 1; }
+  .step-content h6 { font-size: 14px; font-weight: 600; margin: 0 0 4px; color: #1e293b; }
+  .step-content p { font-size: 13px; color: #64748b; margin: 0; line-height: 1.5; }
+  .step-mock {
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-size: 12px;
+    color: #6366f1;
+    margin-top: 4px;
+  }
+
+  .faq-section { margin: 32px 0 0; padding: 24px; background: var(--bg, #F7F7F5); border-radius: 12px; }
+  .faq-title { font-size: 1.3rem; font-weight: 700; margin: 0 0 16px; color: var(--text, #2D2D3A); }
+  .faq-item { border-bottom: 1px solid var(--border, #E4E4E0); }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-question {
+    font-weight: 600;
+    padding: 14px 0;
+    cursor: pointer;
+    color: var(--text, #2D2D3A);
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .faq-question::-webkit-details-marker { display: none; }
+  .faq-question::after { content: '+'; font-size: 1.2rem; color: var(--text-light, #6E6E80); transition: transform 0.2s; }
+  .faq-item[open] .faq-question::after { content: '−'; }
+  .faq-answer { padding: 0 0 14px; color: var(--text-light, #6E6E80); line-height: 1.6; margin: 0; }
+  [data-theme="dark"] .faq-section { background: var(--bg-white, #26262F); }
+  [data-theme="dark"] .step-card { background: rgba(99,102,241,0.08); }
+  [data-theme="dark"] .step-mock { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); color: #9B9FE0; }
+</style>
+
+<link rel="alternate" hreflang="zh" href="https://www.jiebang.site/tools/qrcode-generator.html">
+<link rel="alternate" hreflang="en" href="https://www.jiebang.site/en/tools/qrcode-generator.html">
+<link rel="alternate" hreflang="x-default" href="https://www.jiebang.site/tools/qrcode-generator.html">
+<script src="/dark-mode.js"></script>
+<script src="/monitor.js"></script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-icon">捷</span>
+        <span>捷帮</span>
+      </a>
+      <span class="site-slogan">快速帮你解决问题</span>
+      <button id="darkToggle" class="dark-toggle" onclick="toggleDarkMode()" title="切换夜间模式">🌙</button>
+    </div>
+  </header>
+
+  <main class="tool-page">
+    <div class="guide-nav-bar">
+      <div class="guide-links">
+        <a href="../index.html" class="guide-link">🏠 返回首页</a>
+        <a href="../index.html#tools" class="guide-link">🛠️ 工具</a>
+      </div>
+      <a href="../en/tools/qrcode-generator.html" class="lang-switch">🌐 English</a>
+    </div>
+
+    <div class="tool-header" style="margin-top:16px;">
+      <h1>📱 二维码生成器</h1>
+      <span class="guide-icon" onclick="event.stopPropagation();document.getElementById('guideModal').classList.add('active')">?</span>
+      <div class="guide-modal" id="guideModal" onclick="if(event.target===this)this.classList.remove('active')">
+        <div class="guide-modal-box">
+          <button class="guide-close" onclick="document.getElementById('guideModal').classList.remove('active')">&times;</button>
+          <h3>📖 二维码生成器使用指南</h3>
+          <h5>操作步骤</h5>
+          <div class="step-card">
+            <div class="step-num">①</div>
+            <div class="step-content">
+              <h6>选择类型</h6>
+              <p>选择网址、文本、WiFi或vCard标签页</p>
+              <span class="step-mock">[ 网址 ] [ 文本 ] [ WiFi ] [ vCard ]</span>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">②</div>
+            <div class="step-content">
+              <h6>填写内容</h6>
+              <p>输入内容后实时预览会立即更新</p>
+              <span class="step-mock">[ 实时预览 ]</span>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">③</div>
+            <div class="step-content">
+              <h6>自定义样式</h6>
+              <p>选择颜色、尺寸，可选上传Logo</p>
+              <span class="step-mock">[ 128-1024px ] [ 颜色 ] [ Logo ]</span>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">④</div>
+            <div class="step-content">
+              <h6>下载</h6>
+              <p>下载PNG或SVG格式，无水印可打印</p>
+              <span class="step-mock">[ PNG ] [ SVG ]</span>
+            </div>
+          </div>
+          <div class="tip">💡 添加Logo后，系统自动提升纠错等级至H级（30%），确保二维码可正常扫描。</div>
+          <h5>使用场景</h5>
+          <div class="scene"><b>📱 名片分享</b><p>把vCard二维码印在名片上，扫码直接保存联系人</p></div>
+          <div class="scene"><b>🎉 活动签到</b><p>把报名链接做成二维码放在海报和宣传单上</p></div>
+          <div class="scene"><b>📶 WiFi分享</b><p>生成WiFi二维码，客人扫码自动连网，无需输入密码</p></div>
+        </div>
+      </div>
+      <p>为网址、文本、WiFi和联系人创建二维码 — 支持Logo嵌入、自定义颜色、PNG/SVG双格式下载。</p>
+    </div>
+
+    <div class="tool-body">
+      <div class="qr-tabs">
+        <button class="qr-tab active" data-tab="url" onclick="switchTab('url')">🔗 网址</button>
+        <button class="qr-tab" data-tab="text" onclick="switchTab('text')">📝 文本</button>
+        <button class="qr-tab" data-tab="wifi" onclick="switchTab('wifi')">📶 WiFi</button>
+        <button class="qr-tab" data-tab="vcard" onclick="switchTab('vcard')">👤 vCard</button>
+      </div>
+
+      <div class="qr-tool-wrap">
+        <!-- Left: Forms -->
+        <div>
+          <!-- URL Panel -->
+          <div class="qr-panel active" id="panel-url">
+            <div class="form-group">
+              <label for="url-input">网站地址</label>
+              <input type="url" id="url-input" placeholder="https://example.com" oninput="debouncedGenerate()">
+            </div>
+          </div>
+
+          <!-- Text Panel -->
+          <div class="qr-panel" id="panel-text">
+            <div class="form-group">
+              <label for="text-input">文本内容</label>
+              <textarea id="text-input" placeholder="输入任意文字、消息或备注..." rows="4" oninput="debouncedGenerate()"></textarea>
+            </div>
+          </div>
+
+          <!-- WiFi Panel -->
+          <div class="qr-panel" id="panel-wifi">
+            <div class="card-group">
+              <div class="card-group-title">网络信息</div>
+              <div class="form-group">
+                <label for="wifi-ssid">网络名称 (SSID)</label>
+                <input type="text" id="wifi-ssid" placeholder="MyWiFi_Network" oninput="debouncedGenerate()">
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="wifi-password">密码</label>
+                  <input type="text" id="wifi-password" placeholder="留空表示开放网络" oninput="debouncedGenerate()">
+                </div>
+                <div class="form-group">
+                  <label for="wifi-encryption">加密类型</label>
+                  <select id="wifi-encryption" onchange="debouncedGenerate()">
+                    <option value="WPA">WPA/WPA2</option>
+                    <option value="WEP">WEP</option>
+                    <option value="nopass">无加密 (开放)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- vCard Panel -->
+          <div class="qr-panel" id="panel-vcard">
+            <div class="card-group">
+              <div class="card-group-title">基本信息</div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="vcard-firstname">名</label>
+                  <input type="text" id="vcard-firstname" placeholder="小" oninput="debouncedGenerate()">
+                </div>
+                <div class="form-group">
+                  <label for="vcard-lastname">姓</label>
+                  <input type="text" id="vcard-lastname" placeholder="明" oninput="debouncedGenerate()">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="vcard-phone">电话</label>
+                  <input type="tel" id="vcard-phone" placeholder="+86 138 0000 0000" oninput="debouncedGenerate()">
+                </div>
+                <div class="form-group">
+                  <label for="vcard-email">邮箱</label>
+                  <input type="email" id="vcard-email" placeholder="xiaoming@example.com" oninput="debouncedGenerate()">
+                </div>
+              </div>
+            </div>
+            <div class="card-group">
+              <div class="card-group-title">工作信息</div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="vcard-company">公司</label>
+                  <input type="text" id="vcard-company" placeholder="捷帮科技" oninput="debouncedGenerate()">
+                </div>
+                <div class="form-group">
+                  <label for="vcard-title">职位</label>
+                  <input type="text" id="vcard-title" placeholder="产品经理" oninput="debouncedGenerate()">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="vcard-url">网址</label>
+                <input type="url" id="vcard-url" placeholder="https://example.com" oninput="debouncedGenerate()">
+              </div>
+            </div>
+          </div>
+
+          <!-- Settings -->
+          <div class="qr-settings">
+            <div class="qr-settings-title">⚙️ 设置</div>
+
+            <div class="color-row">
+              <div class="color-item">
+                <label>前景色</label>
+                <input type="color" id="fg-color" value="#000000" oninput="debouncedGenerate()">
+              </div>
+              <div class="color-item">
+                <label>背景色</label>
+                <input type="color" id="bg-color" value="#ffffff" oninput="debouncedGenerate()">
+              </div>
+            </div>
+
+            <div style="margin-bottom: 14px;">
+              <label style="display:block;font-size:13px;font-weight:600;margin-bottom:8px;color:var(--text,#2D2D3A);">尺寸</label>
+              <div class="size-row">
+                <button class="size-btn" data-size="128" onclick="setSize(128)">128px</button>
+                <button class="size-btn active" data-size="256" onclick="setSize(256)">256px</button>
+                <button class="size-btn" data-size="512" onclick="setSize(512)">512px</button>
+                <button class="size-btn" data-size="1024" onclick="setSize(1024)">1024px</button>
+              </div>
+            </div>
+
+            <div>
+              <label style="display:block;font-size:13px;font-weight:600;margin-bottom:8px;color:var(--text,#2D2D3A);">Logo（可选）</label>
+              <div class="logo-upload-area" id="logo-upload-area" onclick="document.getElementById('logo-input').click()">
+                <div id="logo-placeholder">
+                  <div class="logo-upload-icon">🖼️</div>
+                  <div class="logo-upload-text">点击上传Logo<br><strong>支持 PNG、JPG 或 SVG</strong></div>
+                </div>
+                <div id="logo-preview-container" style="display:none;">
+                  <div class="logo-preview-row">
+                    <img id="logo-preview-thumb" class="logo-preview-img" src="" alt="Logo">
+                    <button class="logo-remove-btn" onclick="event.stopPropagation();removeLogo()">✕ 移除</button>
+                  </div>
+                </div>
+              </div>
+              <input type="file" id="logo-input" accept="image/*" onchange="handleLogoUpload(event)">
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Preview -->
+        <div class="qr-preview-panel">
+          <div class="qr-preview-title">实时预览</div>
+          <div id="qr-preview-canvas">
+            <div class="qr-empty-state">
+              <div class="qr-empty-icon">📱</div>
+              <div>输入内容即可生成二维码</div>
+            </div>
+          </div>
+          <div class="qr-download-btns">
+            <button class="btn btn-primary" id="btn-download-png" disabled onclick="downloadPNG()">📥 PNG</button>
+            <button class="btn btn-secondary" id="btn-download-svg" disabled onclick="downloadSVG()">📥 SVG</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- SEO Content Section -->
+  <section class="seo-content" style="max-width:800px;margin:40px auto 0;padding:0 20px;">
+    <h2 style="font-size:1.5em;margin-bottom:16px;color:var(--text-primary,#1a1a2e);">什么是二维码生成器？</h2>
+    <p style="line-height:1.8;color:var(--text-secondary,#555);">捷帮二维码生成器可以将任何内容转换为可扫描的二维码——网址、纯文本、WiFi密码和电子名片（vCard）。支持添加Logo、自定义颜色、PNG或SVG格式下载。</p>
+
+    <h2 style="font-size:1.5em;margin:24px 0 16px;color:var(--text-primary,#1a1a2e);">如何使用</h2>
+    <ol style="line-height:2;color:var(--text-secondary,#555);padding-left:20px;">
+      <li>选择内容类型（网址、文本、WiFi或vCard）</li>
+      <li>填写所需字段——预览实时更新</li>
+      <li>自定义颜色、尺寸，可选添加Logo</li>
+      <li>一键下载PNG或SVG格式</li>
+    </ol>
+
+    <h2 style="font-size:1.5em;margin:24px 0 16px;color:var(--text-primary,#1a1a2e);">常见使用场景</h2>
+    <ul style="line-height:2;color:var(--text-secondary,#555);padding-left:20px;">
+      <li><strong>营销推广</strong> — 在传单、海报和产品包装上嵌入二维码</li>
+      <li><strong>电子名片</strong> — vCard二维码让他人扫码即可保存联系人</li>
+      <li><strong>WiFi分享</strong> — 生成WiFi二维码，客人扫码自动连接，无需输入密码</li>
+      <li><strong>活动管理</strong> — 通过二维码链接门票、日程或报名表单</li>
+    </ul>
+
+    <h2 style="font-size:1.5em;margin:24px 0 16px;color:var(--text-primary,#1a1a2e);">为什么选捷帮？</h2>
+    <ul style="line-height:2;color:var(--text-secondary,#555);padding-left:20px;">
+      <li>完全免费 — Logo嵌入、SVG导出和所有尺寸全部免费</li>
+      <li>支持Logo，自动启用H级纠错（30%），确保二维码可扫描</li>
+      <li>SVG下载，输出清晰、无限缩放——适合印刷</li>
+      <li>实时预览，300ms防抖，即时反馈</li>
+      <li>所有处理在浏览器本地完成——数据不离开您的设备</li>
+    </ul>
+
+    <div class="related-tools" style="margin-top:32px;padding-top:24px;border-top:1px solid var(--border-color,#e5e7eb);">
+      <h2 style="font-size:1.3em;margin-bottom:16px;color:var(--text-primary,#1a1a2e);">相关工具</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;">
+        <a href="/tools/qrcode-reader.html" style="display:block;padding:12px;border:1px solid var(--border-color,#e5e7eb);border-radius:8px;text-decoration:none;color:var(--text-primary,#1a1a2e);transition:border-color 0.2s;">
+          <strong>二维码识别</strong>
+          <p style="margin:4px 0 0;font-size:0.85em;color:var(--text-secondary,#666);">扫描解析二维码</p>
+        </a>
+        <a href="/tools/image-compress.html" style="display:block;padding:12px;border:1px solid var(--border-color,#e5e7eb);border-radius:8px;text-decoration:none;color:var(--text-primary,#1a1a2e);transition:border-color 0.2s;">
+          <strong>图片压缩</strong>
+          <p style="margin:4px 0 0;font-size:0.85em;color:var(--text-secondary,#666);">在线压缩图片</p>
+        </a>
+        <a href="/tools/image-convert.html" style="display:block;padding:12px;border:1px solid var(--border-color,#e5e7eb);border-radius:8px;text-decoration:none;color:var(--text-primary,#1a1a2e);transition:border-color 0.2s;">
+          <strong>图片格式转换</strong>
+          <p style="margin:4px 0 0;font-size:0.85em;color:var(--text-secondary,#666);">转换图片格式</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <h2 class="faq-title">常见问题</h2>
+    <details class="faq-item" open>
+      <summary class="faq-question">如何在二维码中添加Logo？</summary>
+      <p class="faq-answer">上传Logo图片，捷帮会自动将其嵌入二维码中心，并使用H级纠错（30%）确保扫码成功。</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">可以制作WiFi二维码吗？</summary>
+      <p class="faq-answer">可以！选择WiFi标签，输入网络名称(SSID)、密码和加密类型，扫码即可自动连接WiFi。</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">PNG和SVG格式的二维码有什么区别？</summary>
+      <p class="faq-answer">PNG是位图，适合数字展示；SVG是矢量格式，可无限放大不失真——适合印名片、海报或大型展示。</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">这个二维码生成器免费吗？</summary>
+      <p class="faq-answer">完全免费，无任何限制。很多竞品对Logo嵌入或高清下载收费，捷帮所有功能免费使用。</p>
+    </details>
+    <details class="faq-item">
+      <summary class="faq-question">如何制作名片二维码？</summary>
+      <p class="faq-answer">选择vCard标签，填写联系人信息（姓名、电话、邮箱、公司），生成二维码后扫码即可直接保存到手机通讯录。</p>
+    </details>
+  </section>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 捷帮 — 免费在线工具站</p>
+    <div style="margin-top:8px;">
+      <a href="../about.html" style="color:#888;text-decoration:none;margin:0 8px;">关于我们</a>
+      <a href="../privacy.html" style="color:#888;text-decoration:none;margin:0 8px;">隐私政策</a>
+      <a href="../contact.html" style="color:#888;text-decoration:none;margin:0 8px;">联系我们</a>
+    </div>
+  </footer>
+
+  <!-- 反馈浮动按钮 -->
+  <div class="feedback-fab">
+    <button class="feedback-btn" onclick="openFeedback()" title="意见反馈">💬</button>
+  </div>
+  <div class="feedback-modal" id="feedbackModal">
+    <div class="feedback-modal-content">
+      <button class="feedback-close" onclick="closeFeedback()">&times;</button>
+      <h3>意见反馈</h3>
+      <p class="feedback-subtitle">告诉我们您需要什么工具，或使用中遇到的问题</p>
+      <textarea id="feedbackText" placeholder="请输入您的建议或遇到的问题..."></textarea>
+      <input type="text" id="feedbackContact" placeholder="联系方式（选填，方便我们回复您）">
+      <div class="feedback-actions">
+        <button class="btn-cancel" onclick="closeFeedback()">取消</button>
+        <button class="btn-submit" onclick="submitFeedback()">提交</button>
+      </div>
+    </div>
+  </div>
+  <script>
+  function openFeedback(){document.getElementById('feedbackModal').classList.add('active');document.getElementById('feedbackText').focus()}
+  function closeFeedback(){document.getElementById('feedbackModal').classList.remove('active')}
+  document.getElementById('feedbackModal').addEventListener('click',function(e){if(e.target===this)closeFeedback()});
+  function submitFeedback(){
+    var text=document.getElementById('feedbackText').value.trim();
+    if(!text){alert('请输入反馈内容');return}
+    var contact=document.getElementById('feedbackContact').value.trim();
+    var page=location.pathname;
+    if(navigator.sendBeacon){
+      var blob=new Blob([JSON.stringify({type:'feedback',tool:page,text:text,contact:contact})],{type:'application/json'});
+      navigator.sendBeacon('/api/telemetry',blob);
+    }
+    closeFeedback();
+    if(typeof showToast==='function')showToast('感谢您的反馈！');
+  }
+  </script>
+
+  <!-- 百度自动推送 -->
+  <script>
+  (function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+  <script>
+    // State
+    let currentTab = 'url';
+    let currentSize = 256;
+    let logoDataURL = null;
+    let debounceTimer = null;
+    let currentQRCanvas = null;
+    let currentQRData = null;
+
+    // Tab switching
+    function switchTab(tab) {
+      currentTab = tab;
+      document.querySelectorAll('.qr-tab').forEach(t => t.classList.remove('active'));
+      document.querySelector('[data-tab="'+tab+'"]').classList.add('active');
+      document.querySelectorAll('.qr-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-' + tab).classList.add('active');
+      debouncedGenerate();
+    }
+
+    // Size
+    function setSize(size) {
+      currentSize = size;
+      document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('[data-size="'+size+'"]').classList.add('active');
+      debouncedGenerate();
+    }
+
+    // Logo
+    function handleLogoUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        logoDataURL = e.target.result;
+        document.getElementById('logo-placeholder').style.display = 'none';
+        document.getElementById('logo-preview-container').style.display = 'block';
+        document.getElementById('logo-preview-thumb').src = logoDataURL;
+        document.getElementById('logo-upload-area').classList.add('has-logo');
+        debouncedGenerate();
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removeLogo() {
+      logoDataURL = null;
+      document.getElementById('logo-input').value = '';
+      document.getElementById('logo-placeholder').style.display = 'block';
+      document.getElementById('logo-preview-container').style.display = 'none';
+      document.getElementById('logo-upload-area').classList.remove('has-logo');
+      debouncedGenerate();
+    }
+
+    // Build content string from current tab
+    function buildContent() {
+      if (currentTab === 'url') {
+        return document.getElementById('url-input').value.trim();
+      } else if (currentTab === 'text') {
+        return document.getElementById('text-input').value;
+      } else if (currentTab === 'wifi') {
+        const ssid = document.getElementById('wifi-ssid').value.trim();
+        const pass = document.getElementById('wifi-password').value;
+        const enc = document.getElementById('wifi-encryption').value;
+        if (!ssid) return '';
+        return 'WIFI:T:' + enc + ';S:' + ssid.replace(/;/g, '\\;').replace(/,/g, '\\,') + ';P:' + pass.replace(/;/g, '\\;').replace(/,/g, '\\,') + ';;';
+      } else if (currentTab === 'vcard') {
+        const fn = document.getElementById('vcard-firstname').value.trim();
+        const ln = document.getElementById('vcard-lastname').value.trim();
+        const tel = document.getElementById('vcard-phone').value.trim();
+        const email = document.getElementById('vcard-email').value.trim();
+        const org = document.getElementById('vcard-company').value.trim();
+        const title = document.getElementById('vcard-title').value.trim();
+        const url = document.getElementById('vcard-url').value.trim();
+        if (!fn && !ln && !tel && !email) return '';
+        let vcard = 'BEGIN:VCARD\nVERSION:3.0\n';
+        if (ln || fn) vcard += 'N:' + ln + ';' + fn + '\n';
+        if (fn || ln) vcard += 'FN:' + fn + (ln ? ' ' + ln : '') + '\n';
+        if (tel) vcard += 'TEL:' + tel + '\n';
+        if (email) vcard += 'EMAIL:' + email + '\n';
+        if (org) vcard += 'ORG:' + org + '\n';
+        if (title) vcard += 'TITLE:' + title + '\n';
+        if (url) vcard += 'URL:' + url + '\n';
+        vcard += 'END:VCARD';
+        return vcard;
+      }
+      return '';
+    }
+
+    // Generate QR code
+    function generateQRCode() {
+      const content = buildContent();
+      const preview = document.getElementById('qr-preview-canvas');
+      const btnPng = document.getElementById('btn-download-png');
+      const btnSvg = document.getElementById('btn-download-svg');
+
+      if (!content) {
+        preview.innerHTML = '<div class="qr-empty-state"><div class="qr-empty-icon">📱</div><div>输入内容即可生成二维码</div></div>';
+        btnPng.disabled = true;
+        btnSvg.disabled = true;
+        currentQRCanvas = null;
+        currentQRData = null;
+        return;
+      }
+
+      const fg = document.getElementById('fg-color').value;
+      const bg = document.getElementById('bg-color').value;
+      const size = currentSize;
+
+      // Level H for logo support
+      const qr = qrcode(0, 'H');
+      qr.addData(content);
+      qr.make();
+
+      const moduleCount = qr.getModuleCount();
+      const cellSize = Math.floor(size / moduleCount);
+      const actualSize = cellSize * moduleCount;
+      const quietZone = 4;
+      const totalSize = actualSize + quietZone * cellSize * 2;
+
+      const canvas = document.createElement('canvas');
+      canvas.width = totalSize;
+      canvas.height = totalSize;
+      const ctx = canvas.getContext('2d');
+
+      // Background
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, totalSize, totalSize);
+
+      // Modules
+      ctx.fillStyle = fg;
+      for (let r = 0; r < moduleCount; r++) {
+        for (let c = 0; c < moduleCount; c++) {
+          if (qr.isDark(r, c)) {
+            const x = quietZone * cellSize + c * cellSize;
+            const y = quietZone * cellSize + r * cellSize;
+            ctx.fillRect(x, y, cellSize, cellSize);
+          }
+        }
+      }
+
+      // Draw logo on canvas
+      if (logoDataURL) {
+        const logoSize = actualSize * 0.22;
+        const logoX = totalSize / 2 - logoSize / 2;
+        const logoY = totalSize / 2 - logoSize / 2;
+        const padding = cellSize * 2;
+
+        // White border
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(logoX - padding, logoY - padding, logoSize + padding * 2, logoSize + padding * 2);
+
+        // Logo
+        const logoImg = new Image();
+        logoImg.onload = function() {
+          ctx.drawImage(logoImg, logoX, logoY, logoSize, logoSize);
+          currentQRCanvas = canvas;
+          preview.innerHTML = '';
+          preview.appendChild(canvas);
+          btnPng.disabled = false;
+          btnSvg.disabled = false;
+        };
+        logoImg.src = logoDataURL;
+        currentQRCanvas = canvas;
+        preview.innerHTML = '';
+        preview.appendChild(canvas);
+        btnPng.disabled = false;
+        btnSvg.disabled = false;
+      } else {
+        currentQRCanvas = canvas;
+        preview.innerHTML = '';
+        preview.appendChild(canvas);
+        btnPng.disabled = false;
+        btnSvg.disabled = false;
+      }
+
+      currentQRData = { content, fg, bg, size, moduleCount, cellSize, actualSize, quietZone };
+    }
+
+    // Debounced generate
+    function debouncedGenerate() {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(generateQRCode, 300);
+    }
+
+    // Download PNG
+    function downloadPNG() {
+      if (!currentQRCanvas) return;
+      const link = document.createElement('a');
+      link.download = 'qrcode.png';
+      link.href = currentQRCanvas.toDataURL('image/png');
+      link.click();
+      showToast('PNG已下载！');
+    }
+
+    // Download SVG
+    function downloadSVG() {
+      if (!currentQRData) return;
+      const { content, fg, bg, moduleCount, cellSize, quietZone } = currentQRData;
+      const totalSize = cellSize * moduleCount + quietZone * cellSize * 2;
+
+      let svg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="${totalSize}" height="${totalSize}" viewBox="0 0 ${totalSize} ${totalSize}">
+  <rect width="${totalSize}" height="${totalSize}" fill="${bg}"/>`;
+
+      const qr = qrcode(0, 'H');
+      qr.addData(content);
+      qr.make();
+      const cz = quietZone * cellSize;
+
+      for (let r = 0; r < moduleCount; r++) {
+        for (let c = 0; c < moduleCount; c++) {
+          if (qr.isDark(r, c)) {
+            const x = cz + c * cellSize;
+            const y = cz + r * cellSize;
+            svg += `<rect x="${x}" y="${y}" width="${cellSize}" height="${cellSize}" fill="${fg}"/>`;
+          }
+        }
+      }
+
+      // Logo in SVG
+      if (logoDataURL) {
+        const logoSize = cellSize * moduleCount * 0.22;
+        const logoX = totalSize / 2 - logoSize / 2;
+        const logoY = totalSize / 2 - logoSize / 2;
+        const padding = cellSize * 2;
+        svg += `<rect x="${logoX - padding}" y="${logoY - padding}" width="${logoSize + padding * 2}" height="${logoSize + padding * 2}" fill="#ffffff"/>`;
+        svg += `<image x="${logoX}" y="${logoY}" width="${logoSize}" height="${logoSize}" href="${logoDataURL}" preserveAspectRatio="xMidYMid meet"/>`;
+      }
+
+      svg += '</svg>';
+      const blob = new Blob([svg], { type: 'image/svg+xml' });
+      const link = document.createElement('a');
+      link.download = 'qrcode.svg';
+      link.href = URL.createObjectURL(blob);
+      link.click();
+      showToast('SVG已下载！');
+    }
+
+    function showToast(msg) {
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.textContent = msg;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.classList.add('show'), 10);
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+      }, 2000);
+    }
+  </script>
+
+</body>
+</html>
