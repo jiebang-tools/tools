@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>颜色选择器 - 免费在线HEX/RGB/HSL转换+WCAG对比度检查 | 捷帮</title>
+  <meta name="description" content="免费在线颜色选择器，支持HEX/RGB/HSL实时互转、屏幕取色、WCAG对比度检查、调色板导出，纯浏览器处理。">
+  <meta name="keywords" content="颜色选择器,在线取色器,颜色拾取器,RGB颜色值,HEX颜色码,HSL颜色值,WCAG对比度检查,网页无障碍,免费取色工具">
+  <link rel="canonical" href="https://www.jiebang.site/tools/color-picker">
+  <meta property="og:image" content="https://www.jiebang.site/icon-512.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="颜色选择器 - 免费在线HEX/RGB/HSL转换+WCAG对比度检查">
+  <meta name="twitter:description" content="免费在线颜色选择器，支持HEX/RGB/HSL实时互转、屏幕取色、WCAG对比度检查、调色板导出。">
+  <meta name="twitter:image" content="https://www.jiebang.site/icon-512.png">
+  <link rel="stylesheet" href="../css/style.css?v=20260608e">
+
+  <meta property="og:title" content="颜色选择器 - 免费在线HEX/RGB/HSL转换+WCAG对比度检查">
+  <meta property="og:description" content="免费在线颜色选择器，支持HEX/RGB/HSL实时互转、屏幕取色、WCAG对比度检查、调色板导出。">
+  <meta property="og:url" content="https://www.jiebang.site/tools/color-picker.html">
+  <meta property="og:type" content="website">
+
+  <meta name="baidu-site-verification" content="codeva-jxz1UNTyGa" />
+
+  <link rel="alternate" hreflang="zh" href="https://www.jiebang.site/tools/color-picker.html">
+  <link rel="alternate" hreflang="en" href="https://www.jiebang.site/en/tools/color-picker.html">
+  <link rel="alternate" hreflang="x-default" href="https://www.jiebang.site/tools/color-picker.html">
+
+<script src="/dark-mode.js"></script>
+<script src="/monitor.js"></script>
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "颜色选择器 - 免费在线HEX/RGB/HSL转换+WCAG对比度检查",
+  "description": "免费在线颜色选择器，支持HEX/RGB/HSL实时互转、屏幕取色、WCAG对比度检查、调色板导出，纯浏览器处理。",
+  "url": "https://www.jiebang.site/tools/color-picker.html",
+  "applicationCategory": "开发者工具",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "CNY"
+  },
+  "browserRequirements": "需要JavaScript和HTML5",
+  "featureList": ["HEX/RGB/HSL互转", "屏幕取色(Chrome/Edge)", "WCAG对比度检查", "调色板保存与导出"],
+  "isAccessibleForFree": true,
+  "author": {
+    "@type": "Organization",
+    "name": "捷帮",
+    "url": "https://www.jiebang.site"
+  }
+}
+  </script>
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "如何从屏幕取色？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "点击'屏幕取色'按钮（仅Chrome/Edge支持），然后点击屏幕上的任意位置即可捕获该颜色，HEX/RGB/HSL值即时更新。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "什么是WCAG对比度？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WCAG（网页内容无障碍指南）要求文字和背景色之间有最低对比度。AA级普通文字需≥4.5:1，大文字需≥3:1。AAA级分别需≥7:1和≥4.5:1。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "如何将HEX转为RGB？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "输入HEX值（如#5B5FC7），捷帮即时显示RGB(91,95,199)和HSL(238°,48%,57%)。修改任一值，其他格式自动更新。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "可以保存和导出调色板吗？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "可以！点击收藏图标将颜色加入调色板，可导出为CSS变量、JSON或分享链接。调色板保存在浏览器本地，下次访问仍可用。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "HEX、RGB和HSL有什么区别？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "HEX是十六进制色值（#5B5FC7），CSS中常用。RGB表示红绿蓝通道（0-255）。HSL表示色相/饱和度/明度——对设计师更直观，将颜色、强度和亮度分开了。"
+      }
+    }
+  ]
+}
+  </script>
+
+  <script type="application/ld+json">
+  {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "首页",
+      "item": "https://www.jiebang.site"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "颜色选择器",
+      "item": "https://www.jiebang.site/tools/color-picker.html"
+    }
+  ]
+}
+  </script>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?fe11c4bd67c394bc89ee8f97d6ffa81a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+<style>
+/* Color Picker Enhanced Styles */
+.cp-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.cp-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .cp-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Main Color Picker Section */
+.cp-main {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.cp-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 16px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Color Preview */
+.cp-preview {
+  width: 100%;
+  height: 140px;
+  border-radius: 12px;
+  border: 2px solid var(--border);
+  margin-bottom: 20px;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: inherit;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+/* HEX Input */
+.cp-hex-input {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.cp-hex-input input {
+  flex: 1;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 16px;
+  font-family: "SF Mono", "Fira Code", monospace;
+  background: var(--bg);
+  color: var(--text);
+  transition: all 0.2s;
+}
+
+.cp-hex-input input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(91,95,199,0.15);
+}
+
+/* Color Picker Native */
+.cp-color-picker {
+  width: 50px;
+  height: 48px;
+  padding: 2px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  background: var(--bg);
+}
+
+/* Sliders */
+.cp-sliders {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cp-slider-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cp-slider-label {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+.cp-slider-label.r { background: #EF4444; }
+.cp-slider-label.g { background: #22C55E; }
+.cp-slider-label.b { background: #3B82F6; }
+.cp-slider-label.h { background: linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00); }
+.cp-slider-label.s { background: #8B5CF6; }
+.cp-slider-label.l { background: linear-gradient(to right, #000, #fff); }
+
+.cp-slider-value {
+  width: 60px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: "SF Mono", "Fira Code", monospace;
+  text-align: center;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.cp-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 12px;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+}
+
+.cp-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid var(--primary);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.cp-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: white;
+  border: 3px solid var(--primary);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.cp-slider.r { background: linear-gradient(to right, #000, #EF4444); }
+.cp-slider.g { background: linear-gradient(to right, #000, #22C55E); }
+.cp-slider.b { background: linear-gradient(to right, #000, #3B82F6); }
+.cp-slider.h { background: linear-gradient(to right, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00); }
+.cp-slider.s { background: linear-gradient(to right, #ccc, #8B5CF6); }
+.cp-slider.l { background: linear-gradient(to right, #000, #fff); }
+
+/* Eye Dropper Button */
+.cp-eyedropper-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #5B5FC7, #7C7FE0);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 16px;
+  width: 100%;
+  justify-content: center;
+}
+
+.cp-eyedropper-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(91,95,199,0.35);
+}
+
+.cp-eyedropper-btn:disabled {
+  background: #9CA3AF;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.cp-unsupported-msg {
+  font-size: 12px;
+  color: var(--text-light);
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* Format Values Display */
+.cp-formats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.cp-format-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cp-format-item:hover {
+  border-color: var(--primary);
+  background: rgba(91,95,199,0.05);
+}
+
+.cp-format-label {
+  font-size: 11px;
+  color: var(--text-light);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.cp-format-value {
+  font-size: 13px;
+  font-family: "SF Mono", "Fira Code", monospace;
+  color: var(--text);
+  word-break: break-all;
+}
+
+/* WCAG Section */
+.cp-wcag {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.cp-wcag-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.cp-wcag-color {
+  text-align: center;
+}
+
+.cp-wcag-color label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.cp-wcag-preview {
+  width: 100%;
+  height: 60px;
+  border-radius: 10px;
+  border: 2px solid var(--border);
+  margin-bottom: 8px;
+}
+
+.cp-wcag-color input[type="color"] {
+  width: 100%;
+  height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 2px;
+}
+
+/* Contrast Result */
+.cp-contrast-result {
+  background: var(--bg);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.cp-contrast-ratio {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.cp-contrast-label {
+  font-size: 13px;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+/* WCAG Levels */
+.cp-wcag-levels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.cp-wcag-level {
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.cp-wcag-level-title {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.cp-wcag-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  font-size: 13px;
+}
+
+.cp-wcag-check .icon {
+  font-size: 18px;
+}
+
+.cp-wcag-check.pass .icon { color: #22C55E; }
+.cp-wcag-check.fail .icon { color: #EF4444; }
+.cp-wcag-check.pass span { color: #22C55E; font-weight: 600; }
+.cp-wcag-check.fail span { color: #EF4444; font-weight: 600; }
+
+/* Preview Text */
+.cp-preview-text {
+  margin-top: 16px;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* Palette Section */
+.cp-palette {
+  grid-column: 1 / -1;
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.cp-palette-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.cp-palette-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.cp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: var(--bg-white);
+  color: var(--text);
+}
+
+.cp-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.cp-btn.primary {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.cp-btn.primary:hover {
+  background: var(--primary-dark);
+}
+
+/* Palette Grid */
+.cp-palette-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 12px;
+}
+
+.cp-palette-item {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  overflow: hidden;
+  border: 2px solid transparent;
+}
+
+.cp-palette-item:hover {
+  transform: scale(1.05);
+  border-color: var(--primary);
+}
+
+.cp-palette-item.selected {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(91,95,199,0.3);
+}
+
+.cp-palette-color {
+  width: 100%;
+  height: 70%;
+  border-radius: 8px 8px 0 0;
+}
+
+.cp-palette-hex {
+  font-size: 10px;
+  font-family: "SF Mono", "Fira Code", monospace;
+  text-align: center;
+  padding: 4px;
+  background: var(--bg);
+  color: var(--text);
+  word-break: break-all;
+}
+
+.cp-palette-delete {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(239,68,68,0.9);
+  color: white;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.cp-palette-item:hover .cp-palette-delete {
+  display: flex;
+}
+
+/* Export Modal */
+.cp-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 10001;
+  justify-content: center;
+  align-items: center;
+}
+
+.cp-modal.active {
+  display: flex;
+}
+
+.cp-modal-content {
+  background: var(--bg-white);
+  border-radius: 16px;
+  padding: 24px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+.cp-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.cp-modal-header h3 {
+  font-size: 18px;
+  margin: 0;
+  color: var(--text);
+}
+
+.cp-modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--text-light);
+  cursor: pointer;
+}
+
+.cp-modal-close:hover {
+  color: var(--text);
+}
+
+.cp-export-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.cp-export-tab {
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg-white);
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cp-export-tab.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.cp-export-content {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  font-family: "SF Mono", "Fira Code", monospace;
+  font-size: 12px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 300px;
+  overflow-y: auto;
+  color: var(--text);
+}
+
+.cp-export-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  justify-content: flex-end;
+}
+
+/* Color Variants */
+.cp-variants {
+  grid-column: 1 / -1;
+  background: var(--bg-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.cp-variants-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 8px;
+}
+
+@media (max-width: 600px) {
+  .cp-variants-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.cp-variant {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid transparent;
+  position: relative;
+}
+
+.cp-variant:hover {
+  transform: scale(1.1);
+  border-color: var(--primary);
+  z-index: 1;
+}
+
+.cp-variant-label {
+  font-size: 9px;
+  text-align: center;
+  margin-top: 4px;
+  color: var(--text-light);
+  font-family: "SF Mono", "Fira Code", monospace;
+}
+
+/* SEO Content */
+.seo-content {
+  max-width: 800px;
+  margin: 40px auto 0;
+  padding: 0 20px;
+}
+
+.seo-content h2 {
+  font-size: 1.5em;
+  margin: 24px 0 16px;
+  color: var(--text-primary, #1a1a2e);
+}
+
+.seo-content p {
+  line-height: 1.8;
+  color: var(--text-secondary, #555);
+}
+
+.seo-content ol, .seo-content ul {
+  line-height: 2;
+  color: var(--text-secondary, #555);
+  padding-left: 20px;
+}
+
+/* FAQ Section */
+.faq-section {
+  margin: 32px 0 0;
+  padding: 24px;
+  background: var(--bg, #F7F7F5);
+  border-radius: 12px;
+}
+
+.faq-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 16px;
+  color: var(--text, #2D2D3A);
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--border, #E4E4E0);
+}
+
+.faq-item:last-child {
+  border-bottom: none;
+}
+
+.faq-question {
+  font-weight: 600;
+  padding: 14px 0;
+  cursor: pointer;
+  color: var(--text, #2D2D3A);
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-question::after {
+  content: '+';
+  font-size: 1.2rem;
+  color: var(--text-light, #6E6E80);
+  transition: transform 0.2s;
+}
+
+.faq-item[open] .faq-question::after {
+  content: '−';
+}
+
+.faq-answer {
+  padding: 0 0 14px;
+  color: var(--text-light, #6E6E80);
+  line-height: 1.6;
+  margin: 0;
+}
+
+[data-theme="dark"] .faq-section {
+  background: var(--bg-white, #26262F);
+}
+
+/* Related Tools */
+.related-tools {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color, #e5e7eb);
+}
+
+.related-tools h2 {
+  font-size: 1.3em;
+  margin-bottom: 16px;
+  color: var(--text-primary, #1a1a2e);
+}
+
+.related-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.related-tool-card {
+  display: block;
+  padding: 12px;
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text-primary, #1a1a2e);
+  transition: border-color 0.2s;
+}
+
+.related-tool-card:hover {
+  border-color: var(--primary);
+}
+
+.related-tool-card strong {
+  font-size: 14px;
+}
+
+.related-tool-card p {
+  margin: 4px 0 0;
+  font-size: 0.85em;
+  color: var(--text-secondary, #666);
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--text);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  z-index: 9999;
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Feedback FAB */
+.feedback-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+}
+
+.feedback-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #5B5FC7, #7C7FE0);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(99,102,241,0.4);
+  transition: all 0.3s;
+}
+
+.feedback-btn:hover {
+  transform: scale(1.1);
+}
+
+.feedback-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 10000;
+  justify-content: center;
+  align-items: center;
+}
+
+.feedback-modal.active {
+  display: flex;
+}
+
+.feedback-modal-content {
+  background: white;
+  border-radius: 16px;
+  padding: 28px 24px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.feedback-modal-content h3 {
+  font-size: 18px;
+  margin: 0 0 6px;
+  color: #1e293b;
+}
+
+.feedback-subtitle {
+  font-size: 13px;
+  color: #94a3b8;
+  margin: 0 0 18px;
+}
+
+.feedback-modal-content textarea,
+.feedback-modal-content input[type="text"] {
+  width: 100%;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 14px;
+  font-family: inherit;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.feedback-modal-content textarea {
+  height: 120px;
+  resize: vertical;
+}
+
+.feedback-modal-content input[type="text"] {
+  margin-top: 10px;
+}
+
+.feedback-modal-content textarea:focus,
+.feedback-modal-content input[type="text"]:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+.feedback-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  justify-content: flex-end;
+}
+
+.btn-cancel {
+  padding: 8px 20px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: white;
+  color: #64748b;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.btn-submit {
+  padding: 8px 24px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #5B5FC7, #7C7FE0);
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.feedback-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #94a3b8;
+  cursor: pointer;
+}
+
+[data-theme="dark"] .feedback-modal-content {
+  background: #26262F;
+}
+
+[data-theme="dark"] .feedback-modal-content h3 {
+  color: #D8D8E0;
+}
+
+[data-theme="dark"] .feedback-modal-content .feedback-subtitle {
+  color: #606070;
+}
+
+[data-theme="dark"] .feedback-modal-content textarea,
+[data-theme="dark"] .feedback-modal-content input[type="text"] {
+  background: #1C1C24;
+  border-color: #3A3A46;
+  color: #D8D8E0;
+}
+
+[data-theme="dark"] .btn-cancel {
+  background: #26262F;
+  border-color: #3A3A46;
+  color: #9090A0;
+}
+
+@media (max-width: 480px) {
+  .cp-formats {
+    grid-template-columns: 1fr;
+  }
+  
+  .cp-wcag-inputs {
+    grid-template-columns: 1fr;
+  }
+  
+  .cp-wcag-levels {
+    grid-template-columns: 1fr;
+  }
+  
+  .feedback-fab {
+    bottom: 16px;
+    right: 16px;
+  }
+  
+  .feedback-btn {
+    width: 46px;
+    height: 46px;
+    font-size: 18px;
+  }
+}
+</style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="site-logo">
+        <span class="logo-icon">捷</span>
+        <span>捷帮</span>
+      </a>
+      <span class="site-slogan">快速帮你解决问题</span>
+    </div>
+  </header>
+
+  <main class="tool-page">
+    <button id="darkToggle" class="dark-toggle" onclick="toggleDarkMode()" title="切换深色模式">🌙</button>
+    <a href="../index.html" class="back-link">← 返回首页</a>
+    <a href="../en/tools/color-picker.html" style="font-size:0.9rem;color:#4F46E5;font-weight:500;">🌐 English</a>
+
+    <div class="tool-header">
+      <h1>🎨 颜色选择器</h1>
+      <p>HEX/RGB/HSL实时互转、WCAG对比度检查、调色板导出</p>
+    </div>
+
+    <div class="cp-container">
+      <div class="cp-grid">
+        <!-- Main Color Picker -->
+        <div class="cp-main">
+          <h2 class="cp-section-title">📌 选择颜色</h2>
+          
+          <div class="cp-preview" id="cp-preview">#5B5FC7</div>
+          
+          <div class="cp-hex-input">
+            <input type="text" id="cp-hex" value="#5B5FC7" placeholder="#5B5FC7" maxlength="7">
+            <input type="color" id="cp-color-picker" class="cp-color-picker" value="#5B5FC7">
+          </div>
+          
+          <div class="cp-sliders">
+            <h3 style="font-size:14px;margin:0 0 8px;color:var(--text-light);">RGB</h3>
+            <div class="cp-slider-group">
+              <span class="cp-slider-label r">R</span>
+              <input type="range" class="cp-slider r" id="cp-r" min="0" max="255" value="91">
+              <input type="number" class="cp-slider-value" id="cp-r-val" min="0" max="255" value="91">
+            </div>
+            <div class="cp-slider-group">
+              <span class="cp-slider-label g">G</span>
+              <input type="range" class="cp-slider g" id="cp-g" min="0" max="255" value="95">
+              <input type="number" class="cp-slider-value" id="cp-g-val" min="0" max="255" value="95">
+            </div>
+            <div class="cp-slider-group">
+              <span class="cp-slider-label b">B</span>
+              <input type="range" class="cp-slider b" id="cp-b" min="0" max="255" value="199">
+              <input type="number" class="cp-slider-value" id="cp-b-val" min="0" max="255" value="199">
+            </div>
+            
+            <h3 style="font-size:14px;margin:16px 0 8px;color:var(--text-light);">HSL</h3>
+            <div class="cp-slider-group">
+              <span class="cp-slider-label h">H</span>
+              <input type="range" class="cp-slider h" id="cp-h" min="0" max="360" value="238">
+              <input type="number" class="cp-slider-value" id="cp-h-val" min="0" max="360" value="238">°
+            </div>
+            <div class="cp-slider-group">
+              <span class="cp-slider-label s">S</span>
+              <input type="range" class="cp-slider s" id="cp-s" min="0" max="100" value="48">
+              <input type="number" class="cp-slider-value" id="cp-s-val" min="0" max="100" value="48">%
+            </div>
+            <div class="cp-slider-group">
+              <span class="cp-slider-label l">L</span>
+              <input type="range" class="cp-slider l" id="cp-l" min="0" max="100" value="57">
+              <input type="number" class="cp-slider-value" id="cp-l-val" min="0" max="100" value="57">%
+            </div>
+          </div>
+          
+          <button class="cp-eyedropper-btn" id="cp-eyedropper-btn" onclick="pickFromScreen()">
+            🖱️ 屏幕取色
+          </button>
+          <p class="cp-unsupported-msg" id="cp-eyedropper-msg" style="display:none;">屏幕取色功能需要Chrome或Edge浏览器</p>
+          
+          <div class="cp-formats" id="cp-formats">
+            <div class="cp-format-item" onclick="copyFormat('hex')">
+              <div class="cp-format-label">HEX</div>
+              <div class="cp-format-value" id="cp-format-hex">#5B5FC7</div>
+            </div>
+            <div class="cp-format-item" onclick="copyFormat('rgb')">
+              <div class="cp-format-label">RGB</div>
+              <div class="cp-format-value" id="cp-format-rgb">rgb(91, 95, 199)</div>
+            </div>
+            <div class="cp-format-item" onclick="copyFormat('hsl')">
+              <div class="cp-format-label">HSL</div>
+              <div class="cp-format-value" id="cp-format-hsl">hsl(238, 48%, 57%)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- WCAG Contrast Checker -->
+        <div class="cp-wcag">
+          <h2 class="cp-section-title">♿ WCAG对比度检查</h2>
+          
+          <div class="cp-wcag-inputs">
+            <div class="cp-wcag-color">
+              <label>前景色（文字）</label>
+              <div class="cp-wcag-preview" id="cp-fg-preview" style="background:#5B5FC7;"></div>
+              <input type="color" id="cp-fg" value="#5B5FC7">
+            </div>
+            <div class="cp-wcag-color">
+              <label>背景色</label>
+              <div class="cp-wcag-preview" id="cp-bg-preview" style="background:#FFFFFF;"></div>
+              <input type="color" id="cp-bg" value="#FFFFFF">
+            </div>
+          </div>
+          
+          <div class="cp-contrast-result">
+            <div class="cp-contrast-ratio" id="cp-contrast-ratio">7.74:1</div>
+            <div class="cp-contrast-label">对比度比值</div>
+            
+            <div class="cp-wcag-levels">
+              <div class="cp-wcag-level">
+                <div class="cp-wcag-level-title">AA级</div>
+                <div class="cp-wcag-check" id="cp-aa-normal">
+                  <span class="icon">✓</span>
+                  <span>普通文字 (≥4.5:1)</span>
+                </div>
+                <div class="cp-wcag-check" id="cp-aa-large">
+                  <span class="icon">✓</span>
+                  <span>大文字 (≥3:1)</span>
+                </div>
+              </div>
+              <div class="cp-wcag-level">
+                <div class="cp-wcag-level-title">AAA级</div>
+                <div class="cp-wcag-check" id="cp-aaa-normal">
+                  <span class="icon">✓</span>
+                  <span>普通文字 (≥7:1)</span>
+                </div>
+                <div class="cp-wcag-check" id="cp-aaa-large">
+                  <span class="icon">✓</span>
+                  <span>大文字 (≥4.5:1)</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="cp-preview-text" id="cp-preview-text" style="background:#FFFFFF;color:#5B5FC7;">
+              示例文字预览
+            </div>
+          </div>
+        </div>
+
+        <!-- Color Variants -->
+        <div class="cp-variants">
+          <h2 class="cp-section-title">🎨 颜色变体</h2>
+          <div class="cp-variants-grid" id="cp-variants"></div>
+        </div>
+
+        <!-- Palette Section -->
+        <div class="cp-palette">
+          <div class="cp-palette-header">
+            <h2 class="cp-section-title" style="margin:0;">❤️ 我的调色板 <span id="cp-palette-count">(0/30)</span></h2>
+            <div class="cp-palette-actions">
+              <button class="cp-btn primary" onclick="addToPalette()">+ 添加当前颜色</button>
+              <button class="cp-btn" onclick="exportPalette('css')">CSS</button>
+              <button class="cp-btn" onclick="exportPalette('json')">JSON</button>
+              <button class="cp-btn" onclick="exportPalette('url')">分享链接</button>
+              <button class="cp-btn" onclick="clearPalette()">清空全部</button>
+            </div>
+          </div>
+          <div class="cp-palette-grid" id="cp-palette-grid">
+            <p style="color:var(--text-light);font-size:14px;grid-column:1/-1;text-align:center;padding:20px;">还没有保存颜色。点击"添加当前颜色"来收藏。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEO Content -->
+    <section class="seo-content">
+      <h2>什么是颜色选择器？</h2>
+      <p>捷帮免费颜色选择器提供可视化的颜色选取功能，支持HEX、RGB、HSL格式实时互转。非常适合网页设计师和开发人员获取精确的颜色值。</p>
+      
+      <h2>如何使用颜色选择器</h2>
+      <ol>
+        <li>点击颜色预览区域或使用原生取色器选择颜色</li>
+        <li>使用RGB或HSL滑块调整数值</li>
+        <li>点击"屏幕取色"捕获屏幕上任意位置的颜色（仅Chrome/Edge）</li>
+        <li>检查WCAG对比度确保无障碍访问</li>
+        <li>保存喜欢的颜色到调色板并导出使用</li>
+      </ol>
+      
+      <h2>为什么选择捷帮颜色选择器？</h2>
+      <ul>
+        <li>完全免费，无需注册</li>
+        <li>所有处理在浏览器本地完成，保护隐私</li>
+        <li>HEX、RGB、HSL格式实时互转</li>
+        <li>内置WCAG无障碍对比度检查</li>
+        <li>支持调色板保存和多种格式导出</li>
+      </ul>
+      
+      <div class="related-tools">
+        <h2>相关工具推荐</h2>
+        <div class="related-tools-grid">
+          <a href="/tools/image-compress.html" class="related-tool-card">
+            <strong>图片压缩</strong>
+            <p>在线压缩图片大小</p>
+          </a>
+          <a href="/tools/image-convert.html" class="related-tool-card">
+            <strong>图片格式转换</strong>
+            <p>转换图片格式</p>
+          </a>
+          <a href="/tools/image-crop.html" class="related-tool-card">
+            <strong>图片裁剪</strong>
+            <p>在线裁剪图片</p>
+          </a>
+          <a href="/tools/qrcode.html" class="related-tool-card">
+            <strong>二维码生成器</strong>
+            <p>创建二维码</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <h2 class="faq-title">常见问题</h2>
+      <details class="faq-item">
+        <summary class="faq-question">如何从屏幕取色？</summary>
+        <p class="faq-answer">点击'屏幕取色'按钮（仅Chrome/Edge支持），然后点击屏幕上的任意位置即可捕获该颜色，HEX/RGB/HSL值即时更新。</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-question">什么是WCAG对比度？</summary>
+        <p class="faq-answer">WCAG（网页内容无障碍指南）要求文字和背景色之间有最低对比度。AA级普通文字需≥4.5:1，大文字需≥3:1。AAA级分别需≥7:1和≥4.5:1。</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-question">如何将HEX转为RGB？</summary>
+        <p class="faq-answer">输入HEX值（如#5B5FC7），捷帮即时显示RGB(91,95,199)和HSL(238°,48%,57%)。修改任一值，其他格式自动更新。</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-question">可以保存和导出调色板吗？</summary>
+        <p class="faq-answer">可以！点击收藏图标将颜色加入调色板，可导出为CSS变量、JSON或分享链接。调色板保存在浏览器本地，下次访问仍可用。</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-question">HEX、RGB和HSL有什么区别？</summary>
+        <p class="faq-answer">HEX是十六进制色值（#5B5FC7），CSS中常用。RGB表示红绿蓝通道（0-255）。HSL表示色相/饱和度/明度——对设计师更直观，将颜色、强度和亮度分开了。</p>
+      </details>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 捷帮 — 免费在线工具站</p>
+    <div style="margin-top:8px;">
+      <a href="../about.html" style="color:#888;text-decoration:none;margin:0 8px;">关于我们</a>
+      <a href="../privacy.html" style="color:#888;text-decoration:none;margin:0 8px;">隐私政策</a>
+      <a href="../contact.html" style="color:#888;text-decoration:none;margin:0 8px;">联系我们</a>
+    </div>
+  </footer>
+
+  <!-- Export Modal -->
+  <div class="cp-modal" id="cp-export-modal">
+    <div class="cp-modal-content">
+      <div class="cp-modal-header">
+        <h3>导出调色板</h3>
+        <button class="cp-modal-close" onclick="closeExportModal()">&times;</button>
+      </div>
+      <div class="cp-export-tabs">
+        <button class="cp-export-tab active" onclick="switchExportTab('css')">CSS</button>
+        <button class="cp-export-tab" onclick="switchExportTab('json')">JSON</button>
+        <button class="cp-export-tab" onclick="switchExportTab('url')">链接</button>
+      </div>
+      <div class="cp-export-content" id="cp-export-content"></div>
+      <div class="cp-export-actions">
+        <button class="btn-cancel" onclick="closeExportModal()">关闭</button>
+        <button class="btn-submit" onclick="copyExport()">复制到剪贴板</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Feedback FAB -->
+  <div class="feedback-fab">
+    <button class="feedback-btn" onclick="openFeedback()" title="意见反馈">💬</button>
+  </div>
+  <div class="feedback-modal" id="feedbackModal">
+    <div class="feedback-modal-content">
+      <button class="feedback-close" onclick="closeFeedback()">&times;</button>
+      <h3>意见反馈</h3>
+      <p class="feedback-subtitle">告诉我们您需要什么工具，或使用中遇到的问题</p>
+      <textarea id="feedbackText" placeholder="请输入您的反馈..."></textarea>
+      <input type="text" id="feedbackContact" placeholder="联系方式（选填）">
+      <div class="feedback-actions">
+        <button class="btn-cancel" onclick="closeFeedback()">取消</button>
+        <button class="btn-submit" onclick="submitFeedback()">提交</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Color conversion functions
+    function hexToRgb(hex) {
+      hex = hex.replace('#', '');
+      if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+      return {
+        r: parseInt(hex.substr(0, 2), 16),
+        g: parseInt(hex.substr(2, 2), 16),
+        b: parseInt(hex.substr(4, 2), 16)
+      };
+    }
+
+    function rgbToHex(r, g, b) {
+      return '#' + [r, g, b].map(x => Math.max(0, Math.min(255, Math.round(x))).toString(16).padStart(2, '0')).join('');
+    }
+
+    function rgbToHsl(r, g, b) {
+      r /= 255; g /= 255; b /= 255;
+      const max = Math.max(r, g, b), min = Math.min(r, g, b);
+      let h, s, l = (max + min) / 2;
+      if (max === min) {
+        h = s = 0;
+      } else {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+          case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+          case g: h = ((b - r) / d + 2) / 6; break;
+          case b: h = ((r - g) / d + 4) / 6; break;
+        }
+      }
+      return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
+    }
+
+    function hslToRgb(h, s, l) {
+      h /= 360; s /= 100; l /= 100;
+      let r, g, b;
+      if (s === 0) {
+        r = g = b = l;
+      } else {
+        const hue2rgb = (p, q, t) => {
+          if (t < 0) t += 1;
+          if (t > 1) t -= 1;
+          if (t < 1/6) return p + (q - p) * 6 * t;
+          if (t < 1/2) return q;
+          if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+          return p;
+        };
+        const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+        const p = 2 * l - q;
+        r = hue2rgb(p, q, h + 1/3);
+        g = hue2rgb(p, q, h);
+        b = hue2rgb(p, q, h - 1/3);
+      }
+      return { r: Math.round(r * 255), g: Math.round(g * 255), b: Math.round(b * 255) };
+    }
+
+    // WCAG luminance calculation
+    function luminance(r, g, b) {
+      const [rs, gs, bs] = [r, g, b].map(c => {
+        c = c / 255;
+        return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+      });
+      return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+    }
+
+    function contrastRatio(hex1, hex2) {
+      const rgb1 = hexToRgb(hex1);
+      const rgb2 = hexToRgb(hex2);
+      const l1 = luminance(rgb1.r, rgb1.g, rgb1.b);
+      const l2 = luminance(rgb2.r, rgb2.g, rgb2.b);
+      const lighter = Math.max(l1, l2);
+      const darker = Math.min(l1, l2);
+      return (lighter + 0.05) / (darker + 0.05);
+    }
+
+    // State
+    let currentColor = { r: 91, g: 95, b: 199 };
+    let palette = JSON.parse(localStorage.getItem('jiebang_color_palette') || '[]');
+    let currentExportTab = 'css';
+
+    // DOM elements
+    const cpPreview = document.getElementById('cp-preview');
+    const cpHex = document.getElementById('cp-hex');
+    const cpColorPicker = document.getElementById('cp-color-picker');
+    const cpR = document.getElementById('cp-r');
+    const cpG = document.getElementById('cp-g');
+    const cpB = document.getElementById('cp-b');
+    const cpRVal = document.getElementById('cp-r-val');
+    const cpGVal = document.getElementById('cp-g-val');
+    const cpBVal = document.getElementById('cp-b-val');
+    const cpH = document.getElementById('cp-h');
+    const cpS = document.getElementById('cp-s');
+    const cpL = document.getElementById('cp-l');
+    const cpHVal = document.getElementById('cp-h-val');
+    const cpSVal = document.getElementById('cp-s-val');
+    const cpLVal = document.getElementById('cp-l-val');
+    const cpFg = document.getElementById('cp-fg');
+    const cpBg = document.getElementById('cp-bg');
+    const cpPaletteGrid = document.getElementById('cp-palette-grid');
+
+    // Update color from RGB
+    function updateFromRgb() {
+      const r = parseInt(cpR.value);
+      const g = parseInt(cpG.value);
+      const b = parseInt(cpB.value);
+      currentColor = { r, g, b };
+      
+      const hex = rgbToHex(r, g, b);
+      const hsl = rgbToHsl(r, g, b);
+      
+      cpHex.value = hex.toUpperCase();
+      cpColorPicker.value = hex;
+      cpPreview.textContent = hex.toUpperCase();
+      cpPreview.style.backgroundColor = hex;
+      
+      // Update HSL sliders
+      cpH.value = hsl.h;
+      cpS.value = hsl.s;
+      cpL.value = hsl.l;
+      cpHVal.value = hsl.h;
+      cpSVal.value = hsl.s;
+      cpLVal.value = hsl.l;
+      
+      // Update format display
+      document.getElementById('cp-format-hex').textContent = hex.toUpperCase();
+      document.getElementById('cp-format-rgb').textContent = `rgb(${r}, ${g}, ${b})`;
+      document.getElementById('cp-format-hsl').textContent = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+      
+      updateContrast();
+      updateVariants();
+    }
+
+    // Update color from HEX
+    function updateFromHex() {
+      let hex = cpHex.value.trim();
+      if (!/^#?[0-9a-fA-F]{3,6}$/.test(hex)) return;
+      if (!hex.startsWith('#')) hex = '#' + hex;
+      
+      const rgb = hexToRgb(hex);
+      currentColor = rgb;
+      
+      cpR.value = rgb.r;
+      cpG.value = rgb.g;
+      cpB.value = rgb.b;
+      cpRVal.value = rgb.r;
+      cpGVal.value = rgb.g;
+      cpBVal.value = rgb.b;
+      
+      const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+      cpH.value = hsl.h;
+      cpS.value = hsl.s;
+      cpL.value = hsl.l;
+      cpHVal.value = hsl.h;
+      cpSVal.value = hsl.s;
+      cpLVal.value = hsl.l;
+      
+      cpColorPicker.value = hex;
+      cpPreview.textContent = hex.toUpperCase();
+      cpPreview.style.backgroundColor = hex;
+      
+      document.getElementById('cp-format-hex').textContent = hex.toUpperCase();
+      document.getElementById('cp-format-rgb').textContent = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+      document.getElementById('cp-format-hsl').textContent = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+      
+      updateContrast();
+      updateVariants();
+    }
+
+    // Update color from HSL
+    function updateFromHsl() {
+      const h = parseInt(cpH.value);
+      const s = parseInt(cpS.value);
+      const l = parseInt(cpL.value);
+      
+      const rgb = hslToRgb(h, s, l);
+      currentColor = rgb;
+      
+      cpR.value = rgb.r;
+      cpG.value = rgb.g;
+      cpB.value = rgb.b;
+      cpRVal.value = rgb.r;
+      cpGVal.value = rgb.g;
+      cpBVal.value = rgb.b;
+      
+      cpHVal.value = h;
+      cpSVal.value = s;
+      cpLVal.value = l;
+      
+      const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
+      cpHex.value = hex.toUpperCase();
+      cpColorPicker.value = hex;
+      cpPreview.textContent = hex.toUpperCase();
+      cpPreview.style.backgroundColor = hex;
+      
+      document.getElementById('cp-format-hex').textContent = hex.toUpperCase();
+      document.getElementById('cp-format-rgb').textContent = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+      document.getElementById('cp-format-hsl').textContent = `hsl(${h}, ${s}%, ${l}%)`;
+      
+      updateContrast();
+      updateVariants();
+    }
+
+    // Update WCAG contrast
+    function updateContrast() {
+      const fg = cpFg.value;
+      const bg = cpBg.value;
+      
+      document.getElementById('cp-fg-preview').style.backgroundColor = fg;
+      document.getElementById('cp-bg-preview').style.backgroundColor = bg;
+      
+      const ratio = contrastRatio(fg, bg);
+      document.getElementById('cp-contrast-ratio').textContent = ratio.toFixed(2) + ':1';
+      
+      // AA checks
+      const aaNormal = document.getElementById('cp-aa-normal');
+      const aaLarge = document.getElementById('cp-aa-large');
+      aaNormal.className = 'cp-wcag-check ' + (ratio >= 4.5 ? 'pass' : 'fail');
+      aaNormal.querySelector('.icon').textContent = ratio >= 4.5 ? '✓' : '✗';
+      aaNormal.querySelector('span:last-child').textContent = '普通文字 (≥4.5:1)';
+      
+      aaLarge.className = 'cp-wcag-check ' + (ratio >= 3 ? 'pass' : 'fail');
+      aaLarge.querySelector('.icon').textContent = ratio >= 3 ? '✓' : '✗';
+      aaLarge.querySelector('span:last-child').textContent = '大文字 (≥3:1)';
+      
+      // AAA checks
+      const aaaNormal = document.getElementById('cp-aaa-normal');
+      const aaaLarge = document.getElementById('cp-aaa-large');
+      aaaNormal.className = 'cp-wcag-check ' + (ratio >= 7 ? 'pass' : 'fail');
+      aaaNormal.querySelector('.icon').textContent = ratio >= 7 ? '✓' : '✗';
+      aaaNormal.querySelector('span:last-child').textContent = '普通文字 (≥7:1)';
+      
+      aaaLarge.className = 'cp-wcag-check ' + (ratio >= 4.5 ? 'pass' : 'fail');
+      aaaLarge.querySelector('.icon').textContent = ratio >= 4.5 ? '✓' : '✗';
+      aaaLarge.querySelector('span:last-child').textContent = '大文字 (≥4.5:1)';
+      
+      // Preview text
+      const previewText = document.getElementById('cp-preview-text');
+      previewText.style.color = fg;
+      previewText.style.backgroundColor = bg;
+    }
+
+    // Update color variants
+    function updateVariants() {
+      const hsl = rgbToHsl(currentColor.r, currentColor.g, currentColor.b);
+      const container = document.getElementById('cp-variants');
+      container.innerHTML = '';
+      
+      for (let i = -5; i <= 4; i++) {
+        const newL = Math.max(5, Math.min(95, hsl.l + i * 9));
+        const rgb = hslToRgb(hsl.h, hsl.s, newL);
+        const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
+        
+        const variant = document.createElement('div');
+        variant.className = 'cp-variant';
+        variant.style.backgroundColor = hex;
+        variant.title = hex.toUpperCase();
+        variant.onclick = () => {
+          cpHex.value = hex.toUpperCase();
+          updateFromHex();
+        };
+        
+        const label = document.createElement('div');
+        label.className = 'cp-variant-label';
+        label.textContent = (i <= 0 ? (i === 0 ? '=' : '+') : '+') + Math.abs(i * 9) + '%';
+        
+        container.appendChild(variant);
+        container.appendChild(label);
+      }
+    }
+
+    // Copy format
+    function copyFormat(type) {
+      let text = '';
+      if (type === 'hex') text = document.getElementById('cp-format-hex').textContent;
+      else if (type === 'rgb') text = document.getElementById('cp-format-rgb').textContent;
+      else if (type === 'hsl') text = document.getElementById('cp-format-hsl').textContent;
+      
+      navigator.clipboard.writeText(text).then(() => showToast('已复制: ' + text));
+    }
+
+    // EyeDropper API
+    function pickFromScreen() {
+      if ('EyeDropper' in window) {
+        const eyeDropper = new EyeDropper();
+        eyeDropper.open().then(result => {
+          cpHex.value = result.sRGBHex.toUpperCase();
+          updateFromHex();
+        }).catch(() => {});
+      }
+    }
+
+    // Check EyeDropper support
+    if (!('EyeDropper' in window)) {
+      document.getElementById('cp-eyedropper-btn').style.display = 'none';
+      document.getElementById('cp-eyedropper-msg').style.display = 'block';
+    }
+
+    // Palette functions
+    function loadPalette() {
+      renderPalette();
+    }
+
+    function renderPalette() {
+      const count = document.getElementById('cp-palette-count');
+      count.textContent = `(${palette.length}/30)`;
+      
+      if (palette.length === 0) {
+        cpPaletteGrid.innerHTML = '<p style="color:var(--text-light);font-size:14px;grid-column:1/-1;text-align:center;padding:20px;">还没有保存颜色。点击"添加当前颜色"来收藏。</p>';
+        return;
+      }
+      
+      cpPaletteGrid.innerHTML = palette.map((hex, i) => `
+        <div class="cp-palette-item" onclick="selectPaletteColor('${hex}')">
+          <div class="cp-palette-color" style="background:${hex};"></div>
+          <div class="cp-palette-hex">${hex}</div>
+          <button class="cp-palette-delete" onclick="event.stopPropagation();deletePaletteColor(${i})">&times;</button>
+        </div>
+      `).join('');
+    }
+
+    function addToPalette() {
+      if (palette.length >= 30) {
+        showToast('调色板已满（最多30个颜色）');
+        return;
+      }
+      
+      const hex = cpHex.value.toUpperCase();
+      if (palette.includes(hex)) {
+        showToast('颜色已在调色板中');
+        return;
+      }
+      
+      palette.push(hex);
+      localStorage.setItem('jiebang_color_palette', JSON.stringify(palette));
+      renderPalette();
+      showToast('颜色已添加到调色板');
+    }
+
+    function selectPaletteColor(hex) {
+      cpHex.value = hex;
+      updateFromHex();
+    }
+
+    function deletePaletteColor(index) {
+      palette.splice(index, 1);
+      localStorage.setItem('jiebang_color_palette', JSON.stringify(palette));
+      renderPalette();
+    }
+
+    function clearPalette() {
+      if (palette.length === 0) return;
+      if (confirm('确定要清空调色板吗？')) {
+        palette = [];
+        localStorage.setItem('jiebang_color_palette', JSON.stringify(palette));
+        renderPalette();
+        showToast('调色板已清空');
+      }
+    }
+
+    // Export functions
+    function exportPalette(tab) {
+      if (palette.length === 0) {
+        showToast('没有颜色可导出');
+        return;
+      }
+      currentExportTab = tab;
+      updateExportContent();
+      document.getElementById('cp-export-modal').classList.add('active');
+      
+      document.querySelectorAll('.cp-export-tab').forEach(t => t.classList.remove('active'));
+      document.querySelector(`.cp-export-tab[onclick*="${tab}"]`).classList.add('active');
+    }
+
+    function switchExportTab(tab) {
+      currentExportTab = tab;
+      document.querySelectorAll('.cp-export-tab').forEach(t => t.classList.remove('active'));
+      document.querySelector(`.cp-export-tab[onclick*="${tab}"]`).classList.add('active');
+      updateExportContent();
+    }
+
+    function updateExportContent() {
+      const content = document.getElementById('cp-export-content');
+      if (currentExportTab === 'css') {
+        content.textContent = ':root {\n' + palette.map((hex, i) => `  --color-${i + 1}: ${hex};`).join('\n') + '\n}';
+      } else if (currentExportTab === 'json') {
+        content.textContent = JSON.stringify(palette.map(hex => ({ hex, rgb: hexToRgb(hex) })), null, 2);
+      } else if (currentExportTab === 'url') {
+        const encoded = btoa(JSON.stringify(palette));
+        content.textContent = window.location.origin + window.location.pathname + '?palette=' + encoded;
+      }
+    }
+
+    function closeExportModal() {
+      document.getElementById('cp-export-modal').classList.remove('active');
+    }
+
+    function copyExport() {
+      const text = document.getElementById('cp-export-content').textContent;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('已复制到剪贴板');
+        closeExportModal();
+      });
+    }
+
+    // Check URL for palette
+    function checkUrlPalette() {
+      const params = new URLSearchParams(window.location.search);
+      const paletteParam = params.get('palette');
+      if (paletteParam) {
+        try {
+          const decoded = JSON.parse(atob(paletteParam));
+          if (Array.isArray(decoded) && decoded.length > 0) {
+            palette = decoded.filter(h => /^#[0-9a-fA-F]{6}$/.test(h)).slice(0, 30);
+            localStorage.setItem('jiebang_color_palette', JSON.stringify(palette));
+            renderPalette();
+            showToast('已从分享链接加载调色板');
+          }
+        } catch (e) {}
+      }
+    }
+
+    // Toast notification
+    function showToast(msg) {
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.textContent = msg;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.classList.add('show'), 10);
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+      }, 2000);
+    }
+
+    // Feedback functions
+    function openFeedback() {
+      document.getElementById('feedbackModal').classList.add('active');
+      document.getElementById('feedbackText').focus();
+    }
+    function closeFeedback() {
+      document.getElementById('feedbackModal').classList.remove('active');
+    }
+    document.getElementById('feedbackModal').addEventListener('click', function(e) {
+      if (e.target === this) closeFeedback();
+    });
+    function submitFeedback() {
+      const text = document.getElementById('feedbackText').value.trim();
+      if (!text) { alert('请输入反馈内容'); return; }
+      const contact = document.getElementById('feedbackContact').value.trim();
+      const page = location.pathname;
+      if (navigator.sendBeacon) {
+        const blob = new Blob([JSON.stringify({ type: 'feedback', tool: page, text, contact })], { type: 'application/json' });
+        navigator.sendBeacon('/api/telemetry', blob);
+      }
+      closeFeedback();
+      showToast('感谢您的反馈！');
+    }
+
+    // Event listeners
+    cpColorPicker.addEventListener('input', (e) => {
+      cpHex.value = e.target.value.toUpperCase();
+      updateFromHex();
+    });
+
+    [cpR, cpG, cpB].forEach(el => el.addEventListener('input', updateFromRgb));
+    [cpRVal, cpGVal, cpBVal].forEach(el => el.addEventListener('change', updateFromRgb));
+
+    [cpH, cpS, cpL].forEach(el => el.addEventListener('input', updateFromHsl));
+    [cpHVal, cpSVal, cpLVal].forEach(el => el.addEventListener('change', updateFromHsl));
+
+    cpHex.addEventListener('input', updateFromHex);
+    cpHex.addEventListener('blur', updateFromHex);
+
+    cpFg.addEventListener('input', updateContrast);
+    cpBg.addEventListener('input', updateContrast);
+
+    // Initialize
+    loadPalette();
+    checkUrlPalette();
+    updateFromRgb();
+  </script>
+
+  <!-- Baidu Auto Push -->
+  <script>
+  (function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    } else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+  </script>
+
+  <!-- 360 Auto Index -->
+  <script>
+  (function(){
+    var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?07ce40a6f8df17323104dbf0f5c0946f" : "https://jspassport.ssl.qhimg.com/11.0.1.js?07ce40a6f8df17323104dbf0f5c0946f";
+    document.write('<script src="' + src + '" id="sozz"><\/script>');
+  })();
+  </script>
+
+</body>
+</html>
